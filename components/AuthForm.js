@@ -1,13 +1,8 @@
 import React, {useState} from 'react';
-import {
-  StyleSheet,
-  View,
-  SafeAreaView,
-  TextInput,
-} from 'react-native';
+import {StyleSheet, View, SafeAreaView, TextInput} from 'react-native';
 import {responsiveFontSize} from 'react-native-responsive-dimensions';
 import AuthButton from './forAuthForm/Button';
-import SvgComponent from '../images/mainLogo';
+import Icon from '../images/mainLogo';
 
 const AuthForm = () => {
   const [email, setEmail] = useState('');
@@ -15,8 +10,11 @@ const AuthForm = () => {
 
   return (
     <SafeAreaView style={styles.back}>
-      <View style={[{marginTop: '-5%',marginLeft:'5%', alignItems: 'flex-start'}]}>
-        <SvgComponent />
+      <View
+        style={[
+          {marginTop: '-5%', marginHorizontal: '5%', alignItems: 'flex-end'},
+        ]}>
+        <Icon/>
       </View>
       <View>
         <TextInput
@@ -36,7 +34,7 @@ const AuthForm = () => {
           secureTextEntry={true}
         />
 
-        <AuthButton text={'Войти'} />
+        <AuthButton text={'Войти'} font ={2.4} />
       </View>
       <View style={[{marginBottom: '10%'}]}>
         <AuthButton text={'Регистрация'} />

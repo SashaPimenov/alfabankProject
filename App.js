@@ -1,11 +1,12 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import AuthForm from './components/AuthForm';
+import RegistrationForm from "./components/RegistrationForm";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <AuthForm />
+      <RegistrationForm />
     </View>
   );
 }
