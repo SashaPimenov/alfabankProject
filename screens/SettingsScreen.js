@@ -1,13 +1,10 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
-import AuthForm from './components/AuthForm';
-import RegistrationForm from './components/RegistrationForm';
-import Main from './components/Main';
+import {StyleSheet, Text, View} from 'react-native';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Main />
+      <Text>Сеттингс</Text>
     </View>
   );
 }
@@ -19,4 +16,3 @@ const styles = StyleSheet.create({
     height: '100%',
   },
 });
-в
