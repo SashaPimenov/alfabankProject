@@ -40,7 +40,7 @@ const RegistrationForm = () => {
           value={email}
           onChangeText={setEmail}
           placeholder="Введите почту"
-          placeholderTextColor="#a0a0a4"
+          placeholderTextColor="rgb(80, 87, 89)"
           keyboardType="email-address"
         />
         <TextInput
@@ -48,7 +48,7 @@ const RegistrationForm = () => {
           value={password}
           onChangeText={setPassword}
           placeholder="Введите пароль"
-          placeholderTextColor="#a0a0a4"
+          placeholderTextColor="rgb(80, 87, 89)"
           secureTextEntry={true}
         />
         <TextInput
@@ -56,7 +56,7 @@ const RegistrationForm = () => {
           value={secondPassword}
           onChangeText={setSecondPassword}
           placeholder="Повторите пароль"
-          placeholderTextColor="#a0a0a4"
+          placeholderTextColor="rgb(80, 87, 89)"
           secureTextEntry={true}
         />
       </View>
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
   buttonStyle: {
     borderStyle: 'solid',
     borderRadius: 20,
-    backgroundColor: 'rgb(239,49,36)',
+    backgroundColor: '#EF3124',
     justifyContent: 'center',
     alignItems: 'center',
     width: '45%',

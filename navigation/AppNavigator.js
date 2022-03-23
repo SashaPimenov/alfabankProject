@@ -16,7 +16,7 @@ const Tabs = () => {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarShowLabel: false,
+        tabBarShowLabel: true,
         tabBarStyle: [{display: 'flex', height: responsiveHeight(10)}, null],
         tabBarOptions: [{showLabel: false}],
       }}
@@ -27,15 +27,14 @@ const Tabs = () => {
         options={{
           tabBarIcon: ({focused}) => (
             <View>
-              <Image
-                source={require('../images/interpreter_img.png')}
-                style={{
-                  tintColor: focused ? '#ffcc00' : '#000',
-                  width: responsiveWidth(11),
-                  height: responsiveHeight(11),
-                  marginBottom: '5%',
-                }}
-              />
+              {/*<Image*/}
+              {/*  style={{*/}
+              {/*    tintColor: focused ? '#ffcc00' : '#000',*/}
+              {/*    width: responsiveWidth(11),*/}
+              {/*    height: responsiveHeight(11),*/}
+              {/*    marginBottom: '5%',*/}
+              {/*  }}*/}
+              {/*/>*/}
             </View>
           ),
         }}
@@ -46,15 +45,14 @@ const Tabs = () => {
         options={{
           tabBarIcon: ({focused}) => (
             <View>
-              <Image
-                source={require('../images/profile_img.png')}
-                style={{
-                  tintColor: focused ? '#ffcc00' : '#000',
-                  width: responsiveWidth(11.5),
-                  height: responsiveHeight(11.5),
-                  marginBottom: '5%',
-                }}
-              />
+              {/*<Image*/}
+              {/*  style={{*/}
+              {/*    tintColor: focused ? '#ffcc00' : '#000',*/}
+              {/*    width: responsiveWidth(11.5),*/}
+              {/*    height: responsiveHeight(11.5),*/}
+              {/*    marginBottom: '5%',*/}
+              {/*  }}*/}
+              {/*/>*/}
             </View>
           ),
         }}
@@ -65,15 +63,14 @@ const Tabs = () => {
         options={{
           tabBarIcon: ({focused}) => (
             <View>
-              <Image
-                source={require('../images/evaluation_img.png')}
-                style={{
-                  tintColor: focused ? '#ffcc00' : '#000',
-                  width: responsiveWidth(11),
-                  height: responsiveHeight(11),
-                  marginBottom: '5%',
-                }}
-              />
+              {/*<Image*/}
+              {/*  style={{*/}
+              {/*    tintColor: focused ? '#ffcc00' : '#000',*/}
+              {/*    width: responsiveWidth(11),*/}
+              {/*    height: responsiveHeight(11),*/}
+              {/*    marginBottom: '5%',*/}
+              {/*  }}*/}
+              {/*/>*/}
             </View>
           ),
         }}

@@ -14,7 +14,7 @@ const AuthForm = () => {
         style={[
           {marginTop: '-5%', marginHorizontal: '5%', alignItems: 'flex-end'},
         ]}>
-        <Icon/>
+        <Icon />
       </View>
       <View>
         <TextInput
@@ -34,7 +34,7 @@ const AuthForm = () => {
           secureTextEntry={true}
         />
 
-        <AuthButton text={'Войти'} font ={2.4} />
+        <AuthButton text={'Войти'} font={2.4} />
       </View>
       <View style={[{marginBottom: '10%'}]}>
         <AuthButton text={'Регистрация'} />
