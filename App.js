@@ -7,7 +7,7 @@ import Main from './components/Main';
 export default function App() {
   return (
     <View style={styles.container}>
-      <AuthForm />
+      <Main />
     </View>
   );
 }

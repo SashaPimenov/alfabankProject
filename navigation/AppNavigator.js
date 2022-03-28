@@ -1,8 +1,7 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React from 'react';
-import {View, Image, StyleSheet} from 'react-native';
+import {View, Image} from 'react-native';
 import {
-  responsiveFontSize,
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
@@ -17,8 +16,11 @@ const Tabs = () => {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarShowLabel: true,
-        tabBarStyle: [{display: 'flex', height: responsiveHeight(10)}, null],
+        tabBarShowLabel: false,
+        tabBarStyle: [
+          {display: 'flex', height: responsiveHeight(8.5), borderRadius: 10},
+          null,
+        ],
         tabBarOptions: [{showLabel: false}],
       }}
       initialRouteName="MainScreen">
@@ -28,14 +30,14 @@ const Tabs = () => {
         options={{
           tabBarIcon: ({focused}) => (
             <View>
-              {/*<Image*/}
-              {/*  style={{*/}
-              {/*    tintColor: focused ? '#ffcc00' : '#000',*/}
-              {/*    width: responsiveWidth(11),*/}
-              {/*    height: responsiveHeight(11),*/}
-              {/*    marginBottom: '5%',*/}
-              {/*  }}*/}
-              {/*/>*/}
+              <Image
+                source={require('../images/settings.png')}
+                style={{
+                  tintColor: focused ? '#ffcc00' : '#000',
+                  width: responsiveWidth(9),
+                  height: responsiveHeight(5),
+                }}
+              />
             </View>
           ),
         }}
@@ -46,14 +48,14 @@ const Tabs = () => {
         options={{
           tabBarIcon: ({focused}) => (
             <View>
-              {/*<Image*/}
-              {/*  style={{*/}
-              {/*    tintColor: focused ? '#ffcc00' : '#000',*/}
-              {/*    width: responsiveWidth(11.5),*/}
-              {/*    height: responsiveHeight(11.5),*/}
-              {/*    marginBottom: '5%',*/}
-              {/*  }}*/}
-              {/*/>*/}
+              <Image
+                source={require('../images/creditCard.png')}
+                style={{
+                  tintColor: focused ? '#ffcc00' : '#000',
+                  width: responsiveWidth(11),
+                  height: responsiveHeight(6),
+                }}
+              />
             </View>
           ),
         }}
@@ -64,14 +66,14 @@ const Tabs = () => {
         options={{
           tabBarIcon: ({focused}) => (
             <View>
-              {/*<Image*/}
-              {/*  style={{*/}
-              {/*    tintColor: focused ? '#ffcc00' : '#000',*/}
-              {/*    width: responsiveWidth(11),*/}
-              {/*    height: responsiveHeight(11),*/}
-              {/*    marginBottom: '5%',*/}
-              {/*  }}*/}
-              {/*/>*/}
+              <Image
+                source={require('../images/addCard.png')}
+                style={{
+                  tintColor: focused ? '#ffcc00' : '#000',
+                  width: responsiveWidth(9),
+                  height: responsiveHeight(5),
+                }}
+              />
             </View>
           ),
         }}
@@ -79,14 +81,4 @@ const Tabs = () => {
     </Tab.Navigator>
   );
 };
-
-const styles = StyleSheet.create({
-  footerText: {
-    color: '#000',
-    fontSize: responsiveFontSize(1.5),
-    top: -38,
-    textAlign: 'center',
-  },
-});
-
 export default Tabs;

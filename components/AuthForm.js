@@ -45,6 +45,7 @@ const AuthForm = () => {
             <Text style={styles.buttonText}>Войти</Text>
           </TouchableOpacity>
         </TouchableNativeFeedback>
+
         <TouchableNativeFeedback>
           <TouchableOpacity style={[{marginTop: '3%'}]} onPress={() => {}}>
             <Text style={[{fontWeight: 'bold', color: '#C5C5C5'}]}>
@@ -59,8 +60,9 @@ const AuthForm = () => {
 
 const styles = StyleSheet.create({
   buttonText: {
-    color: 'white',
-    fontSize: responsiveFontSize(2.4),
+    color: '#434343',
+    fontWeight: 'bold',
+    fontSize: responsiveFontSize(2.0),
     paddingHorizontal: '15%',
   },
 
