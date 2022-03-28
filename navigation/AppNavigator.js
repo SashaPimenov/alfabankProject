@@ -9,6 +9,7 @@ import {
 import SettingsScreen from '../screens/SettingsScreen';
 import MainScreen from '../screens/MainScreen';
 import AddCartScreen from '../screens/AddCartScreen';
+
 const Tab = createBottomTabNavigator();
 
 const Tabs = () => {

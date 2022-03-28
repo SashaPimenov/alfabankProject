@@ -1,8 +1,15 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, SafeAreaView, TextInput} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  SafeAreaView,
+  TextInput,
+  TouchableOpacity,
+  Text,
+  TouchableNativeFeedback,
+  Image,
+} from 'react-native';
 import {responsiveFontSize} from 'react-native-responsive-dimensions';
-import AuthButton from './forAuthForm/Button';
-import Icon from '../images/mainLogo';
 
 const AuthForm = () => {
   const [email, setEmail] = useState('');
@@ -10,56 +17,82 @@ const AuthForm = () => {
 
   return (
     <SafeAreaView style={styles.back}>
-      <View
-        style={[
-          {marginTop: '-5%', marginHorizontal: '5%', alignItems: 'flex-end'},
-        ]}>
-        <Icon />
+      <View style={[{alignItems: 'center', maxHeight: '40%', marginTop: '5%'}]}>
+        <Image style={styles.logo} source={require('../images/logo.png')} />
       </View>
-      <View>
+      <View style={[{alignItems: 'center'}]}>
         <TextInput
-          style={[styles.default, {marginTop: 80}]}
+          style={styles.default}
           value={email}
           onChangeText={setEmail}
           placeholder="Email.."
-          placeholderTextColor="#a0a0a4"
+          placeholderTextColor="#C5C5C5"
           keyboardType="email-address"
+          color="#ffffff"
         />
         <TextInput
           style={styles.default}
           value={password}
           onChangeText={setPassword}
           placeholder="Password.."
-          placeholderTextColor="#a0a0a4"
+          placeholderTextColor="#C5C5C5"
           secureTextEntry={true}
+          color="#ffffff"
         />
 
-        <AuthButton text={'Войти'} font={2.4} />
-      </View>
-      <View style={[{marginBottom: '10%'}]}>
-        <AuthButton text={'Регистрация'} />
+        <TouchableNativeFeedback>
+          <TouchableOpacity style={styles.buttonStyle} onPress={() => {}}>
+            <Text style={styles.buttonText}>Войти</Text>
+          </TouchableOpacity>
+        </TouchableNativeFeedback>
+        <TouchableNativeFeedback>
+          <TouchableOpacity style={[{marginTop: '3%'}]} onPress={() => {}}>
+            <Text style={[{fontWeight: 'bold', color: '#C5C5C5'}]}>
+              Зарегистрироваться
+            </Text>
+          </TouchableOpacity>
+        </TouchableNativeFeedback>
       </View>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  buttonText: {
+    color: 'white',
+    fontSize: responsiveFontSize(2.4),
+    paddingHorizontal: '15%',
+  },
+
+  buttonStyle: {
+    borderStyle: 'solid',
+    borderRadius: 20,
+    backgroundColor: '#7FDA77',
+    justifyContent: 'center',
+    alignItems: 'center',
+    minHeight: 40,
+    minWidth: '40%',
+    height: '5%',
+    marginTop: '3%',
+  },
+  logo: {
+    width: '85%',
+    height: '85%',
+  },
   default: {
     borderStyle: 'solid',
-    borderColor: 'red',
-    borderBottomWidth: 2,
+    borderColor: '#C5C5C5',
+    borderWidth: 2,
+    borderRadius: 20,
     margin: '2%',
     padding: '2%',
     width: '70%',
-    color: 'rgba(239,49,36,.85)',
     fontSize: responsiveFontSize(2.2),
-    marginLeft: '15%',
   },
 
   back: {
     flex: 1,
-    justifyContent: 'space-between',
-    backgroundColor: '#ffffff',
+    backgroundColor: '#232323',
   },
 });
 

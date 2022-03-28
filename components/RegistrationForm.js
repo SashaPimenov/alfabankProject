@@ -4,7 +4,6 @@ import {
   View,
   SafeAreaView,
   TextInput,
-  Text,
   TouchableNativeFeedback,
   TouchableOpacity,
 } from 'react-native';
@@ -60,12 +59,8 @@ const RegistrationForm = () => {
           secureTextEntry={true}
         />
       </View>
-      <View style={[{marginBottom: '40%'}]}>
-        <TouchableNativeFeedback>
-          <TouchableOpacity style={styles.buttonStyle} onPress={() => {}}>
-            <Text style={styles.buttonText}>Зарегистрироваться</Text>
-          </TouchableOpacity>
-        </TouchableNativeFeedback>
+      <View style={[{marginBottom: '40%'}] }>
+        <AuthButton text={'Зарегистрироваться'} />
       </View>
     </SafeAreaView>
   );
@@ -75,6 +70,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: 'white',
     fontSize: responsiveFontSize(2.1),
+    paddingHorizontal: '5%',
   },
   buttonStyle: {
     borderStyle: 'solid',
@@ -82,11 +78,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#EF3124',
     justifyContent: 'center',
     alignItems: 'center',
-    width: '45%',
     minHeight: 40,
     height: '5%',
     marginTop: '9%',
-    marginLeft: '27%',
   },
   default: {
     borderStyle: 'solid',

@@ -7,7 +7,7 @@ import Main from './components/Main';
 export default function App() {
   return (
     <View style={styles.container}>
-      <Main />
+      <AuthForm />
     </View>
   );
 }
@@ -15,7 +15,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     paddingTop: '13%',
-    backgroundColor: '#ffffff',
+    backgroundColor: '#232323',
     height: '100%',
   },
 });
