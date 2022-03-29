@@ -18,7 +18,10 @@ const AuthForm = () => {
   return (
     <SafeAreaView style={styles.back}>
       <View style={[{alignItems: 'center', maxHeight: '40%', marginTop: '5%'}]}>
-        <Image style={styles.logo} source={require('../images/logo.png')} />
+        <Image
+          style={[{width: '85%', height: '85%'}]}
+          source={require('../images/logo.png')}
+        />
       </View>
       <View style={[{alignItems: 'center'}]}>
         <TextInput
@@ -63,7 +66,7 @@ const styles = StyleSheet.create({
     color: '#434343',
     fontWeight: 'bold',
     fontSize: responsiveFontSize(2.0),
-    paddingHorizontal: '15%',
+    paddingHorizontal: '10%',
   },
 
   buttonStyle: {
@@ -74,13 +77,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     minHeight: 40,
     minWidth: '40%',
+    maxWidth: '60%',
     height: '5%',
     marginTop: '3%',
   },
-  logo: {
-    width: '85%',
-    height: '85%',
-  },
+
   default: {
     borderStyle: 'solid',
     borderColor: '#C5C5C5',
