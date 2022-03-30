@@ -4,17 +4,17 @@ import {
   View,
   SafeAreaView,
   TextInput,
-  TouchableNativeFeedback,
-  TouchableOpacity,
-  Text,
   Image,
 } from 'react-native';
 import {responsiveFontSize} from 'react-native-responsive-dimensions';
+import GlobalButton from "./GlobalButton.js";
 
 const RegistrationForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [secondPassword, setSecondPassword] = useState('');
+
+
   return (
     <SafeAreaView style={styles.back}>
       <View style={[{alignItems: 'center', maxHeight: '40%', marginTop: '5%'}]}>
@@ -51,11 +51,7 @@ const RegistrationForm = () => {
           secureTextEntry={true}
           color="#ffffff"
         />
-        <TouchableNativeFeedback>
-          <TouchableOpacity style={styles.buttonStyle} onPress={() => {}}>
-            <Text style={styles.buttonText}>Зарегистрироваться</Text>
-          </TouchableOpacity>
-        </TouchableNativeFeedback>
+        <GlobalButton color = {'#7FDA77'} text = {'Зарегистрироваться'}/>
       </View>
     </SafeAreaView>
   );

@@ -10,10 +10,13 @@ import {
   Image,
 } from 'react-native';
 import {responsiveFontSize} from 'react-native-responsive-dimensions';
+import GlobalButton from "./GlobalButton.js";
 
 const AuthForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+
 
   return (
     <SafeAreaView style={styles.back}>
@@ -43,11 +46,7 @@ const AuthForm = () => {
           color="#ffffff"
         />
 
-        <TouchableNativeFeedback>
-          <TouchableOpacity style={styles.buttonStyle} onPress={() => {}}>
-            <Text style={styles.buttonText}>Войти</Text>
-          </TouchableOpacity>
-        </TouchableNativeFeedback>
+        <GlobalButton text = {'Войти'} color = {'#7FDA77'} />
 
         <TouchableNativeFeedback>
           <TouchableOpacity style={[{marginTop: '3%'}]} onPress={() => {}}>

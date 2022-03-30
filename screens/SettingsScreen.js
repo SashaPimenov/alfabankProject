@@ -1,6 +1,7 @@
 import React from 'react';
-import {Button, StyleSheet, Text, TextInput, TouchableNativeFeedback, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, Text, TextInput, View} from 'react-native';
 import {responsiveFontSize} from "react-native-responsive-dimensions";
+import GlobalButton from "../components/GlobalButton";
 
 export default function App() {
   return (
@@ -23,19 +24,11 @@ export default function App() {
             secureTextEntry={true}
             color="#ffffff"
         />
-
-        <TouchableNativeFeedback>
-          <TouchableOpacity style={styles.buttonStyle} onPress={() => {}}>
-            <Text style={styles.buttonText}>Сменить пароль</Text>
-          </TouchableOpacity>
-        </TouchableNativeFeedback>
+        <GlobalButton color = {'#7FDA77'} text = {'Сменить пароль'} />
       </View>
-      <View style={[{alignItems: "center"}]}>
-        <TouchableNativeFeedback>
-          <TouchableOpacity style={[styles.buttonStyle,{backgroundColor: '#FF4A4A', marginBottom: 20}]} onPress={() => {}}>
-            <Text style={styles.buttonText}>Выйти из аккаунта</Text>
-          </TouchableOpacity>
-        </TouchableNativeFeedback>
+
+      <View style={[{alignItems: "center", marginBottom:20}]}>
+        <GlobalButton color = {'#FF4A4A'}  text = {'Выйти из аккаунта'} />
       </View>
     </View>
   );
@@ -52,25 +45,6 @@ const styles = StyleSheet.create({
     color: '#C5C5C5',
     fontSize: 18,
     marginTop: 30,
-  },
-
-  buttonText: {
-    color: '#434343',
-    fontWeight: 'bold',
-    fontSize: responsiveFontSize(2.0),
-    paddingHorizontal: '10%',
-  },
-
-  buttonStyle: {
-    borderStyle: 'solid',
-    borderRadius: 20,
-    backgroundColor: '#7FDA77',
-    justifyContent: 'center',
-    alignItems: 'center',
-    minHeight: 40,
-    minWidth: '40%',
-    maxWidth: '60%',
-    marginTop: '10%',
   },
 
   default: {
