@@ -7,14 +7,13 @@ import Main from './components/Main';
 export default function App() {
   return (
     <View style={styles.container}>
-      <RegistrationForm />
+      <Main />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: '13%',
     backgroundColor: '#232323',
     height: '100%',
   },

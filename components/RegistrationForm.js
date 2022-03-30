@@ -5,11 +5,11 @@ import {
   SafeAreaView,
   TextInput,
   TouchableNativeFeedback,
-  TouchableOpacity, Text, Image,
-} from "react-native";
+  TouchableOpacity,
+  Text,
+  Image,
+} from 'react-native';
 import {responsiveFontSize} from 'react-native-responsive-dimensions';
-import BackCIcon from '../images/BackIcon';
-import Logo from '../images/mainLogo';
 
 const RegistrationForm = () => {
   const [email, setEmail] = useState('');
@@ -51,7 +51,7 @@ const RegistrationForm = () => {
           secureTextEntry={true}
           color="#ffffff"
         />
-        <TouchableNativeFeedback >
+        <TouchableNativeFeedback>
           <TouchableOpacity style={styles.buttonStyle} onPress={() => {}}>
             <Text style={styles.buttonText}>Зарегистрироваться</Text>
           </TouchableOpacity>

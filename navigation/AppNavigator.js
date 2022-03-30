@@ -23,7 +23,7 @@ const Tabs = () => {
         ],
         tabBarOptions: [{showLabel: false}],
       }}
-      initialRouteName="MainScreen">
+      initialRouteName="Main">
       <Tab.Screen
         name={'Settings'}
         component={SettingsScreen}
