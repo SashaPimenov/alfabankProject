@@ -1,12 +1,20 @@
 import React from 'react';
-import {StyleSheet, Text, TextInput, View} from 'react-native';
+import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import {responsiveFontSize} from "react-native-responsive-dimensions";
 import GlobalButton from "../components/GlobalButton";
 
-export default function App() {
+export default function SettingsScreen({navigation}) {
+
+  const goBack = () => {
+    navigation.goBack()
+  }
+
   return (
     <View style={styles.container}>
-      <View style={[{alignItems: "center"}]}>
+      <View style={[{alignItems: "center", flexDirection:'row', justifyContent:'space-between'}]}>
+        <TouchableOpacity onPress={goBack}>
+          <Image style={styles.settings} source={require('../images/settings.png')} />
+        </TouchableOpacity>
         <Text style={styles.textSettings}>Настройки</Text>
       </View>
       <View style={[{alignItems: "center"}]}>
@@ -43,8 +51,10 @@ const styles = StyleSheet.create({
 
   textSettings: {
     color: '#C5C5C5',
-    fontSize: 18,
-    marginTop: 30,
+    fontSize: 22,
+    marginTop: 20,
+    fontWeight: 'bold',
+    alignSelf: 'center',
   },
 
   default: {
@@ -55,6 +65,13 @@ const styles = StyleSheet.create({
     padding: '2%',
     width: '70%',
     fontSize: responsiveFontSize(2.2),
+  },
+
+  settings: {
+    width: 30,
+    height: 30,
+    marginLeft: 20,
+    marginTop: 20,
   },
 
 });
