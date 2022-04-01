@@ -12,11 +12,17 @@ import {
 import {responsiveFontSize} from 'react-native-responsive-dimensions';
 import GlobalButton from "./GlobalButton.js";
 
-const AuthForm = () => {
+const AuthForm = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const LoadMain = () => {
+    navigation.navigate('AllCard')
+  }
 
+  const LoadRegistration = () => {
+    navigation.navigate('Registration')
+  }
 
   return (
     <SafeAreaView style={styles.back}>
@@ -46,11 +52,11 @@ const AuthForm = () => {
           color="#ffffff"
         />
 
-        <GlobalButton text = {'Войти'} color = {'#7FDA77'} />
+        <GlobalButton text = {'Войти'} color = {'#7FDA77'} func = {LoadMain} />
 
         <TouchableNativeFeedback>
-          <TouchableOpacity style={[{marginTop: '3%'}]} onPress={() => {}}>
-            <Text style={[{fontWeight: 'bold', color: '#C5C5C5'}]}>
+          <TouchableOpacity style={[{marginTop: '3%'}]} onPress={LoadRegistration}>
+            <Text style={[{fontWeight: 'bold', color: '#C5C5C5'}] }>
               Зарегистрироваться
             </Text>
           </TouchableOpacity>

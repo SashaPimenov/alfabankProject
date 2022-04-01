@@ -10,7 +10,7 @@ import {responsiveFontSize} from 'react-native-responsive-dimensions';
 const GlobalButton = (props) => {
   return (
   <TouchableNativeFeedback>
-    <TouchableOpacity style={[styles.buttonStyle, {backgroundColor: props.color}]} >
+    <TouchableOpacity style={[styles.buttonStyle, {backgroundColor: props.color}]} onPress = {props.func}>
       <Text style={styles.buttonText}>{props.text}</Text>
     </TouchableOpacity>
   </TouchableNativeFeedback>

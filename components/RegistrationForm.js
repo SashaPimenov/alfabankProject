@@ -14,7 +14,6 @@ const RegistrationForm = () => {
   const [password, setPassword] = useState('');
   const [secondPassword, setSecondPassword] = useState('');
 
-
   return (
     <SafeAreaView style={styles.back}>
       <View style={[{alignItems: 'center', maxHeight: '40%', marginTop: '5%'}]}>

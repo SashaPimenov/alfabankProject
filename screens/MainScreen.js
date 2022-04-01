@@ -13,7 +13,7 @@ import {
 import Geolocation from '@react-native-community/geolocation';
 
 export default function MainScreen({navigation}) {
-  const [location, setLocation] = useState(' ')
+  const [location, setLocation] = useState({})
 
   const  findCoordinates = () => {
     Geolocation.getCurrentPosition(
@@ -42,8 +42,8 @@ export default function MainScreen({navigation}) {
 
   return (
     <SafeAreaView style={styles.back}>
-      {/*{location.coords.speed ?*/}
-      {/*  <>*/}
+      {location !== {} ?
+        <>
       <View style={styles.buttons}>
         <TouchableOpacity onPress={LoadSettings}>
           <Image style={styles.settings} source={require('../images/settings.png')} />
@@ -58,9 +58,9 @@ export default function MainScreen({navigation}) {
         <Image style={styles.card2} source={require('../images/card_2.png')} />
         <Image style={styles.card3} source={require('../images/card_3.png')} />
       </View>
-        {/*</>: <View style={[{justifyContent: 'center', alignItems: 'center'}]}>*/}
-        {/*  <ActivityIndicator animating={true} size="large" color="#ffcc00" />*/}
-        {/*</View>}*/}
+        </>: <View style={[{justifyContent: 'center', alignItems: 'center'}]}>
+          <ActivityIndicator animating={true} size="large" color="#ffcc00" />
+        </View>}
     </SafeAreaView>
   );
 }

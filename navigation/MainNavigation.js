@@ -4,6 +4,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import MainScreen from "../screens/MainScreen";
 import AddCardScreen from "../screens/AddCartScreen";
 import SettingsScreen from "../screens/SettingsScreen";
+import AuthForm from "../components/AuthForm";
+import RegistrationForm from "../components/RegistrationForm";
 
 const Stack = createStackNavigator();
 
@@ -12,19 +14,24 @@ export  default  function MainNavigate () {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{
         headerShown: false,
-        initialRouteName: 'AllCard'
+        initialRouteName: 'Auth',
+        animationEnabled: false,
       }}>
         <Stack.Screen
+          name = 'Auth'
+          component={AuthForm} />
+        <Stack.Screen
         name = 'AllCard'
-        component={MainScreen}
-        />
+        component={MainScreen} />
         <Stack.Screen
           name = 'AddCard'
-          component={AddCardScreen}/>
+          component={AddCardScreen} />
         <Stack.Screen
           name = 'Settings'
-          component={SettingsScreen}/>
-
+          component={SettingsScreen} />
+        <Stack.Screen
+          name = 'Registration'
+          component={RegistrationForm} />
       </Stack.Navigator>
     </NavigationContainer>
     )}
