@@ -6,6 +6,7 @@ import AddCardScreen from "../screens/AddCartScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 import AuthForm from "../components/AuthForm";
 import RegistrationForm from "../components/RegistrationForm";
+import CameraScreen from "../components/CameraScreen";
 
 const Stack = createStackNavigator();
 
@@ -32,6 +33,9 @@ export  default  function MainNavigate () {
         <Stack.Screen
           name = 'Registration'
           component={RegistrationForm} />
+        <Stack.Screen
+          name = 'Camera'
+          component={CameraScreen} />
       </Stack.Navigator>
     </NavigationContainer>
     )}

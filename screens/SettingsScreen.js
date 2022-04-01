@@ -3,7 +3,7 @@ import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "reac
 import {responsiveFontSize} from "react-native-responsive-dimensions";
 import GlobalButton from "../components/GlobalButton";
 
-export default function SettingsScreen({navigation}) {
+const SettingsScreen = ({navigation}) => {
 
   const goBack = () => {
     navigation.goBack()
@@ -73,5 +73,6 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginTop: 20,
   },
-
 });
+
+export default SettingsScreen;

@@ -2,17 +2,15 @@ import React, { useEffect, useState } from "react";
 import {
   ActivityIndicator,
   Alert,
-  Button,
   Image,
   SafeAreaView,
   StyleSheet,
-  Text,
   TouchableOpacity,
   View,
 } from "react-native";
 import Geolocation from '@react-native-community/geolocation';
 
-export default function MainScreen({navigation}) {
+const MainScreen = ({navigation}) => {
   const [location, setLocation] = useState({})
 
   const  findCoordinates = () => {
@@ -117,6 +115,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
   }
-
-
 });
+
+export default MainScreen;

@@ -1,16 +1,21 @@
-import React from 'react';
+import React, {PureComponent} from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {RNCamera} from 'react-native-camera';
+import GlobalButton from "../components/GlobalButton";
 
-export default function AddCardScreen({navigation}) {
+const AddCardScreen = ({navigation}) => {
   const goBack = () => {
     navigation.goBack()
+  }
+  const LoadCamera = () => {
+    navigation.navigate('Camera')
   }
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={goBack}>
         <Image style={styles.settings} source={require('../images/settings.png')} />
       </TouchableOpacity>
-      <Text style={[{color: 'white'}]}>Добавить карту</Text>
+      <GlobalButton color = {'#7FDA77'} text = {'Добавить карту'} func = {LoadCamera} />
     </View>
   );
 }
@@ -28,3 +33,5 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
 });
+
+export default AddCardScreen;
