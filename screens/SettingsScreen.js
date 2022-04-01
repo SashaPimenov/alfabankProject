@@ -50,8 +50,7 @@ const styles = StyleSheet.create({
   default: {
     borderStyle: 'solid',
     borderColor: '#C5C5C5',
-    borderWidth: 2,
-    borderRadius: 20,
+    borderBottomWidth: 2,
     margin: '2%',
     padding: '2%',
     width: '70%',

@@ -4,9 +4,15 @@ import {Button, Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View} f
 export default function App() {
   return (
     <SafeAreaView style={styles.back}>
-      <View>
-        <TouchableOpacity>
+      <View style={styles.buttons}>
+        <TouchableOpacity
+          onPress={}
+        >
           <Image style={styles.settings} source={require('../images/settings.png')} />
+        </TouchableOpacity>
+
+        <TouchableOpacity>
+          <Image style={styles.plus} source={require('../images/plus.png')} />
         </TouchableOpacity>
       </View>
       <View>
@@ -52,11 +58,23 @@ const styles = StyleSheet.create({
   },
 
   settings: {
-    position: "absolute",
     width: 30,
     height: 30,
     marginLeft: 20,
     marginTop: 20,
+  },
+
+  plus: {
+    width: 30,
+    height: 30,
+    marginTop: 20,
+    marginRight: 20,
+  },
+
+  buttons: {
+    flexDirection: "row",
+    justifyContent: "space-between",
   }
+
 
 });
