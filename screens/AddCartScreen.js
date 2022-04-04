@@ -13,24 +13,28 @@ const AddCardScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={goBack}>
-        <Image style={styles.settings} source={require('../images/settings.png')} />
+        <Image style={styles.back} source={require('../images/back.png')} />
       </TouchableOpacity>
-      <GlobalButton color = {'#7FDA77'} text = {'Добавить карту'} func = {LoadCamera} />
+      <View style={styles.addButton}>
+        <GlobalButton color = {'#7FDA77'} text = {'Добавить карту'} func = {LoadCamera} />
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: '13%',
+    flex: 1,
     backgroundColor: '#232323',
-    height: '100%',
   },
-  settings: {
-    width: 30,
-    height: 30,
+  back: {
+    width: 35,
+    height: 20,
     marginLeft: 20,
-    marginTop: 20,
+    marginTop: 25,
+  },
+  addButton: {
+    alignSelf: "center"
   },
 });
 

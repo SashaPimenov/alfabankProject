@@ -11,18 +11,19 @@ const SettingsScreen = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <View style={[{alignItems: "center", flexDirection:'row', justifyContent:'space-between'}]}>
-        <TouchableOpacity onPress={goBack}>
-          <Image style={styles.settings} source={require('../images/settings.png')} />
-        </TouchableOpacity>
-        <Text style={styles.textSettings}>Настройки</Text>
+
+      <View>
+          <TouchableOpacity onPress={goBack} style={[{}]}>
+            <Image style={styles.back} source={require('../images/back.png')} />
+          </TouchableOpacity>
+          <Text style={styles.textSettings}>Настройки</Text>
       </View>
+
       <View style={[{alignItems: "center"}]}>
         <TextInput
             style={styles.default}
             placeholder="Старый пароль"
             placeholderTextColor="#C5C5C5"
-            keyboardType="email-address"
             color="#ffffff"
         />
         <TextInput
@@ -54,7 +55,8 @@ const styles = StyleSheet.create({
     fontSize: 22,
     marginTop: 20,
     fontWeight: 'bold',
-    alignSelf: 'center',
+    position: "absolute",
+    alignSelf: "center",
   },
 
   default: {
@@ -67,11 +69,11 @@ const styles = StyleSheet.create({
     fontSize: responsiveFontSize(2.2),
   },
 
-  settings: {
-    width: 30,
-    height: 30,
+  back: {
+    width: 35,
+    height: 20,
     marginLeft: 20,
-    marginTop: 20,
+    marginTop: 25,
   },
 });
 
