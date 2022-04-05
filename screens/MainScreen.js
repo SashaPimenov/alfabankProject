@@ -25,7 +25,7 @@ const MainScreen = ({navigation}) => {
         console.log(loc.coords)
       },
       error => Alert.alert(error.message),
-      {enableHighAccuracy: true, timeout: 20000, maximumAge: 0},
+      {enableHighAccuracy: true, timeout: 20000, maximumAge: 5000},
     );
   };
 
@@ -64,9 +64,9 @@ const MainScreen = ({navigation}) => {
       </View>
 
       <View>
-        <Image style={styles.card} source={require('../images/card_1.png')} />
-        <Image style={styles.card2} source={require('../images/card_2.png')} />
-        <Image style={styles.card3} source={require('../images/card_3.png')} />
+        <Image style={styles.card2} source={require('../images/card_1.png')} />
+        <Image style={styles.card1} source={require('../images/magnit.png')} />
+
       </View>
         </>: <View style={[{marginTop:'50%', alignItems: 'center'}]}>
           <ActivityIndicator animating={true} size="large" color="#C5C5C5" />
@@ -88,31 +88,22 @@ const styles = StyleSheet.create({
     backgroundColor: '#232323',
   },
 
-  card: {
+  card1: {
     position: "absolute",
-    width: 300,
+    width: 310,
     height: 198,
     marginTop: 167,
     alignSelf: 'center',
-    zIndex: 3
+    zIndex: 3,
   },
 
   card2: {
     position: "absolute",
     width: 300,
     height: 198,
-    marginTop: 207,
+    marginTop: 227,
     alignSelf: 'center',
-    zIndex: 2
-  },
-
-  card3: {
-    position: "absolute",
-    width: 300,
-    height: 198,
-    marginTop: 247,
-    alignSelf: 'center',
-    zIndex: 1
+    zIndex: 2,
   },
 
   settings: {
