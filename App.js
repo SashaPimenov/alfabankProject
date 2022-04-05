@@ -6,7 +6,6 @@ import {AuthContext} from "./components/forAuthForm/AuthContext";
 
 export default function App() {
   const [isAuth, setIsAuth] = useState(false)
-
   const checkAuth = async() => {
       const token = await AsyncStorage.getItem('token');
       if (token != null){

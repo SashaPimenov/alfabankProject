@@ -2,16 +2,22 @@ import React from 'react';
 import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import {responsiveFontSize} from "react-native-responsive-dimensions";
 import GlobalButton from "../components/GlobalButton";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useAuth } from "../components/forAuthForm/useAuth";
 
 const SettingsScreen = ({navigation}) => {
-
+  const { isAuth, setIsAuth } = useAuth()
   const goBack = () => {
     navigation.goBack()
   }
 
-  const Exit = () => {
-    navigation.navigate('Auth')
+  async function Exit () {
+    await AsyncStorage.removeItem('token').then(() => {
+      setIsAuth(false)
+      navigation.navigate('Auth')
+    });
   }
+
   return (
     <View style={styles.container}>
       <View>
