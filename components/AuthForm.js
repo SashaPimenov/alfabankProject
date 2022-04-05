@@ -12,6 +12,7 @@ import {
 import {responsiveFontSize} from 'react-native-responsive-dimensions';
 import GlobalButton from "./GlobalButton.js";
 import { useAuth } from "./forAuthForm/useAuth";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const AuthForm = ({navigation}) => {
   const [login, setLogin] = useState('');
@@ -54,9 +55,10 @@ const AuthForm = ({navigation}) => {
   const authHandler = async () => {
     // let a = await req();
       // await AsyncStorage.setItem('token', a.user.token).then(() => {
-      if (password == '123456' && login == 'sasha123') {
-        setIsAuth(true)
-        navigation.navigate('AllCard')
+      if (password == '1' && login == '1') {
+        AsyncStorage.setItem('token', '1').then(() => {
+          setIsAuth(true)
+          navigation.navigate('AllCard')})
       } else {
       Alert.alert("Ошибка", "Введены неверные данные", [
         {text: "OK"},

@@ -12,8 +12,8 @@ import Geolocation from '@react-native-community/geolocation';
 
 const MainScreen = ({navigation}) => {
   const adress = {
-    'longitude': 60.550426,
-    'latitude': 56.802068
+    'longitude': 60.643235,
+    'latitude': 56.838937
   }
 
   const [location, setLocation] = useState({})
@@ -44,9 +44,7 @@ const MainScreen = ({navigation}) => {
 
   const FindDistance = () => {
     let a = (adress.latitude - location.coords.latitude) * 111.111
-    console.log(a)
     let b = (adress.longitude - location.coords.longitude) * Math.cos(Math.min(adress.latitude, location.coords.latitude)) * 64
-    console.log(b)
     let c = Math.sqrt(a*a + b*b)
     console.log(Math.trunc(c*1000))
   }
