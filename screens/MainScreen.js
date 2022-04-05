@@ -4,7 +4,7 @@ import {
   Alert,
   Image,
   SafeAreaView,
-  StyleSheet,
+  StyleSheet, Text,
   TouchableOpacity,
   View,
 } from "react-native";
@@ -46,6 +46,7 @@ const MainScreen = ({navigation}) => {
         <TouchableOpacity onPress={LoadSettings}>
           <Image style={styles.settings} source={require('../images/settings.png')} />
         </TouchableOpacity>
+        <Text style={styles.textMain}>Ваши карты</Text>
         <TouchableOpacity onPress={LoadAddCard}>
           <Image style={styles.plus} source={require('../images/plus.png')} />
         </TouchableOpacity>
@@ -114,7 +115,15 @@ const styles = StyleSheet.create({
   buttons: {
     flexDirection: "row",
     justifyContent: "space-between",
-  }
+  },
+
+  textMain: {
+    color: '#C5C5C5',
+    fontSize: 22,
+    marginTop: 20,
+    fontWeight: 'bold',
+    alignSelf: "center",
+  },
 });
 
 export default MainScreen;

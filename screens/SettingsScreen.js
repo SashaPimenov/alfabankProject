@@ -13,7 +13,7 @@ const SettingsScreen = ({navigation}) => {
     <View style={styles.container}>
 
       <View>
-          <TouchableOpacity onPress={goBack} style={[{}]}>
+          <TouchableOpacity onPress={goBack}>
             <Image style={styles.back} source={require('../images/back.png')} />
           </TouchableOpacity>
           <Text style={styles.textSettings}>Настройки</Text>

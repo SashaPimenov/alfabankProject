@@ -4,24 +4,34 @@ import {
   View,
   SafeAreaView,
   TextInput,
-  Image,
+  Image, TouchableOpacity,
 } from 'react-native';
 import {responsiveFontSize} from 'react-native-responsive-dimensions';
 import GlobalButton from "./GlobalButton.js";
 
-const RegistrationForm = () => {
+const RegistrationForm = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [secondPassword, setSecondPassword] = useState('');
+  const goBack = () => {
+    navigation.goBack()
+  }
 
   return (
-    <SafeAreaView style={styles.back}>
+    <SafeAreaView style={styles.container}>
+      <View style={[{zIndex: 2}]}>
+        <TouchableOpacity onPress={goBack}>
+          <Image style={styles.backButton} source={require('../images/back.png')} />
+        </TouchableOpacity>
+      </View>
+
       <View style={[{alignItems: 'center', maxHeight: '40%', marginTop: '5%'}]}>
         <Image
           style={[{width: '85%', height: '85%'}]}
           source={require('../images/logo.png')}
         />
       </View>
+
       <View style={[{alignItems: 'center'}]}>
         <TextInput
           style={styles.default}
@@ -86,9 +96,17 @@ const styles = StyleSheet.create({
     fontSize: responsiveFontSize(2.2),
   },
 
-  back: {
+  container: {
     flex: 1,
     backgroundColor: '#232323',
+  },
+
+  backButton: {
+    position: 'absolute',
+    width: 35,
+    height: 20,
+    marginLeft: 20,
+    marginTop: 25,
   },
 });
 
