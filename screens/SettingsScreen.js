@@ -9,9 +9,11 @@ const SettingsScreen = ({navigation}) => {
     navigation.goBack()
   }
 
+  const Exit = () => {
+    navigation.navigate('Auth')
+  }
   return (
     <View style={styles.container}>
-
       <View>
           <TouchableOpacity onPress={goBack}>
             <Image style={styles.back} source={require('../images/back.png')} />
@@ -37,7 +39,7 @@ const SettingsScreen = ({navigation}) => {
       </View>
 
       <View style={[{alignItems: "center", marginBottom:20}]}>
-        <GlobalButton color = {'#FF4A4A'}  text = {'Выйти из аккаунта'} />
+        <GlobalButton color = {'#FF4A4A'}  text = {'Выйти из аккаунта'} func = {Exit} />
       </View>
     </View>
   );

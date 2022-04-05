@@ -11,17 +11,21 @@ import {
 import Geolocation from '@react-native-community/geolocation';
 
 const MainScreen = ({navigation}) => {
-  const [location, setLocation] = useState({})
+  const adress = {
+    'longitude': 60.550426,
+    'latitude': 56.802068
+  }
 
+  const [location, setLocation] = useState({})
   const  findCoordinates = () => {
     Geolocation.getCurrentPosition(
       position => {
-        const loc = JSON.stringify(position);
+        const loc = position;
         setLocation(loc);
-        console.log(loc)
+        console.log(loc.coords)
       },
       error => Alert.alert(error.message),
-      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
+      {enableHighAccuracy: true, timeout: 20000, maximumAge: 0},
     );
   };
 
@@ -34,20 +38,29 @@ const MainScreen = ({navigation}) => {
     navigation.navigate('Settings')
   }
 
-  const LoadAddCard = () => {
-    navigation.navigate('AddCard')
+  const LoadCamera = () => {
+    navigation.navigate('Camera')
+  }
+
+  const FindDistance = () => {
+    let a = (adress.latitude - location.coords.latitude) * 111.111
+    console.log(a)
+    let b = (adress.longitude - location.coords.longitude) * Math.cos(Math.min(adress.latitude, location.coords.latitude)) * 64
+    console.log(b)
+    let c = Math.sqrt(a*a + b*b)
+    console.log(Math.trunc(c*1000))
   }
 
   return (
     <SafeAreaView style={styles.back}>
-      {location !== {} ?
+      {location.coords ?
         <>
       <View style={styles.buttons}>
         <TouchableOpacity onPress={LoadSettings}>
           <Image style={styles.settings} source={require('../images/settings.png')} />
         </TouchableOpacity>
-        <Text style={styles.textMain}>Ваши карты</Text>
-        <TouchableOpacity onPress={LoadAddCard}>
+        <Text style={styles.textSettings}>Ваши карты</Text>
+        <TouchableOpacity onPress={LoadCamera}>
           <Image style={styles.plus} source={require('../images/plus.png')} />
         </TouchableOpacity>
       </View>
@@ -57,14 +70,20 @@ const MainScreen = ({navigation}) => {
         <Image style={styles.card2} source={require('../images/card_2.png')} />
         <Image style={styles.card3} source={require('../images/card_3.png')} />
       </View>
-        </>: <View style={[{justifyContent: 'center', alignItems: 'center'}]}>
-          <ActivityIndicator animating={true} size="large" color="#ffcc00" />
+        </>: <View style={[{marginTop:'50%', alignItems: 'center'}]}>
+          <ActivityIndicator animating={true} size="large" color="#C5C5C5" />
         </View>}
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  textSettings: {
+    color: '#C5C5C5',
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginTop:20,
+  },
 
   back: {
     flex: 1,

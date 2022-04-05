@@ -7,21 +7,61 @@ import {
   TouchableOpacity,
   Text,
   TouchableNativeFeedback,
-  Image,
-} from 'react-native';
+  Image, Alert,
+} from "react-native";
 import {responsiveFontSize} from 'react-native-responsive-dimensions';
 import GlobalButton from "./GlobalButton.js";
+import { useAuth } from "./forAuthForm/useAuth";
 
 const AuthForm = ({navigation}) => {
-  const [email, setEmail] = useState('');
+  const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
+  const { isAuth, setIsAuth } = useAuth()
 
-  const LoadMain = () => {
-    navigation.navigate('AllCard')
-  }
+  React.useEffect(() => {
+    console.log('1' + isAuth)
+    if (isAuth)
+      navigation.navigate('AllCard')
+  }, )
 
   const LoadRegistration = () => {
     navigation.navigate('Registration')
+  }
+
+  // async function request() {
+  //   try {
+  //     let url = 'http://studprzi.beget.tech/api/user/login';
+  //     let res = await fetch(url, {
+  //       method: 'POST',
+  //       headers: {
+  //         Accept: 'application/json',
+  //         'Content-Type': 'application/json'
+  //       },
+  //       body: JSON.stringify({
+  //         user: {
+  //           email: email,
+  //           password: password
+  //         }
+  //       })
+  //     });
+  //     return await res.json()
+  //   }catch(e){
+  //     Alert.alert("Ошибка", e.message, [
+  //       {text: "OK"}])    }
+  // }
+
+  // Сохраняет токен в случае удачной попытки входа и перенаправляет на экран main
+  const authHandler = async () => {
+    // let a = await req();
+      // await AsyncStorage.setItem('token', a.user.token).then(() => {
+      if (password == '123456' && login == 'sasha123') {
+        setIsAuth(true)
+        navigation.navigate('AllCard')
+      } else {
+      Alert.alert("Ошибка", "Введены неверные данные", [
+        {text: "OK"},
+      ])
+    }
   }
 
   return (
@@ -35,8 +75,8 @@ const AuthForm = ({navigation}) => {
       <View style={[{alignItems: 'center'}]}>
         <TextInput
           style={styles.default}
-          value={email}
-          onChangeText={setEmail}
+          value={login}
+          onChangeText={setLogin}
           placeholder="Email.."
           placeholderTextColor="#C5C5C5"
           keyboardType="email-address"
@@ -52,7 +92,7 @@ const AuthForm = ({navigation}) => {
           color="#ffffff"
         />
 
-        <GlobalButton text = {'Войти'} color = {'#7FDA77'} func = {LoadMain} />
+        <GlobalButton text = {'Войти'} color = {'#7FDA77'} func = {authHandler} />
 
         <TouchableNativeFeedback>
           <TouchableOpacity style={[{marginTop: '3%'}]} onPress={LoadRegistration}>

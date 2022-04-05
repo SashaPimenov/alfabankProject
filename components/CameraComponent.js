@@ -10,7 +10,7 @@ export default class CameraComponent extends PureComponent {  constructor(props)
           this.camera = ref;
         }}
         captureAudio={false}
-        style={{flex: 1}}
+        style={{flex: 0.9}}
         type={RNCamera.Constants.Type.back}
         androidCameraPermissionOptions={{
           title: 'Permission to use camera',

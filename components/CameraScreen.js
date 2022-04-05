@@ -8,10 +8,10 @@ export default function CameraScreen({navigation}) {
   }
   return (
     <View style={styles.container} >
-      <TouchableOpacity onPress={goBack}>
-        <Text>Отмена</Text>
-      </TouchableOpacity>
       <CameraComponent />
+      <TouchableOpacity onPress={goBack}>
+        <Text style={[{ color:'#7FDA77',fontSize:40, fontWeight:'bold'}]}>Назад</Text>
+      </TouchableOpacity>
     </View>
   )}
 
@@ -19,6 +19,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#232323',
-    justifyContent: "space-between"
   }});
 
