@@ -7,7 +7,7 @@ import {
   Image, TouchableOpacity,
 } from 'react-native';
 import {responsiveFontSize} from 'react-native-responsive-dimensions';
-import GlobalButton from "./GlobalButton.js";
+import GlobalButton from "../GlobalButton.js";
 
 const RegistrationForm = ({navigation}) => {
   const [email, setEmail] = useState('');
@@ -21,14 +21,14 @@ const RegistrationForm = ({navigation}) => {
     <SafeAreaView style={styles.container}>
       <View style={[{zIndex: 2}]}>
         <TouchableOpacity onPress={goBack}>
-          <Image style={styles.backButton} source={require('../images/back.png')} />
+          <Image style={styles.backButton} source={require('../../images/back.png')} />
         </TouchableOpacity>
       </View>
 
       <View style={[{alignItems: 'center', maxHeight: '40%', marginTop: '5%'}]}>
         <Image
           style={[{width: '85%', height: '85%'}]}
-          source={require('../images/logo.png')}
+          source={require('../../images/logo.png')}
         />
       </View>
 

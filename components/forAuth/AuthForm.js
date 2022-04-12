@@ -10,8 +10,8 @@ import {
   Image, Alert,
 } from "react-native";
 import {responsiveFontSize} from 'react-native-responsive-dimensions';
-import GlobalButton from "./GlobalButton.js";
-import { useAuth } from "./forAuthForm/useAuth";
+import GlobalButton from "../GlobalButton.js";
+import { useAuth } from "./useAuth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const AuthForm = ({navigation}) => {
@@ -20,7 +20,6 @@ const AuthForm = ({navigation}) => {
   const { isAuth, setIsAuth } = useAuth()
 
   React.useEffect(() => {
-    console.log('1' + isAuth)
     if (isAuth)
       navigation.navigate('AllCard')
   }, )
@@ -60,7 +59,7 @@ const AuthForm = ({navigation}) => {
           setIsAuth(true)
           navigation.navigate('AllCard')})
       } else {
-      Alert.alert("Ошибка", "Введены неверные данные", [
+      Alert.alert("Ошибка", "Неправильный логин или пароль", [
         {text: "OK"},
       ])
     }
@@ -71,7 +70,7 @@ const AuthForm = ({navigation}) => {
       <View style={[{alignItems: 'center', maxHeight: '40%', marginTop: '5%'}]}>
         <Image
           style={[{width: '85%', height: '85%'}]}
-          source={require('../images/logo.png')}
+          source={require('../../images/logo.png')}
         />
       </View>
       <View style={[{alignItems: 'center'}]}>

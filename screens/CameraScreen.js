@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import CameraComponent from "./CameraComponent";
+import CameraComponent from "../components/forCamera/CameraComponent";
 
 export default function CameraScreen({navigation}) {
   const goBack = () => {

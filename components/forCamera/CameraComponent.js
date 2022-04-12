@@ -2,17 +2,8 @@ import React, {PureComponent} from 'react';
 import {RNCamera} from 'react-native-camera';
 import {Alert, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 
-export default class CameraComponent extends PureComponent {  constructor(props) {
-  super(props);}
-
-    // async savePict() {
-    //     const options = { quality: 0.5, base64: true, pauseAfterCapture:true,doNotSave:true };
-    //     const data = await this.camera.takePictureAsync(options);
-    // }
-    // async cameraRef() {
-    //     cameraRef.resumePreview()
-    // }
-
+export default class CameraComponent extends PureComponent {
+  constructor(props) {super(props);}
     takePicture = async () => {
         if (this.camera) {
             const options = { quality: 0.5, base64: true, pauseAfterCapture:true };
@@ -25,7 +16,6 @@ export default class CameraComponent extends PureComponent {  constructor(props)
             // console.log(data.uri);
         }
     };
-
 
   render() {
     return (

@@ -3,7 +3,7 @@ import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "reac
 import {responsiveFontSize} from "react-native-responsive-dimensions";
 import GlobalButton from "../components/GlobalButton";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useAuth } from "../components/forAuthForm/useAuth";
+import { useAuth } from "../components/forAuth/useAuth";
 
 const SettingsScreen = ({navigation}) => {
   const { isAuth, setIsAuth } = useAuth()

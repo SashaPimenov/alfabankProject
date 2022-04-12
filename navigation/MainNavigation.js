@@ -2,11 +2,10 @@ import React from 'react';
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import MainScreen from "../screens/MainScreen";
-import AddCardScreen from "../screens/AddCartScreen";
 import SettingsScreen from "../screens/SettingsScreen";
-import AuthForm from "../components/AuthForm";
-import RegistrationForm from "../components/RegistrationForm";
-import CameraScreen from "../components/CameraScreen";
+import AuthForm from "../components/forAuth/AuthForm";
+import RegistrationForm from "../components/forRegistration/RegistrationForm";
+import CameraScreen from "../screens/CameraScreen";
 
 const Stack = createStackNavigator();
 
@@ -24,9 +23,6 @@ export  default  function MainNavigate () {
         <Stack.Screen
         name = 'AllCard'
         component={MainScreen} />
-        <Stack.Screen
-          name = 'AddCard'
-          component={AddCardScreen} />
         <Stack.Screen
           name = 'Settings'
           component={SettingsScreen} />
