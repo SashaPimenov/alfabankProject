@@ -46,7 +46,7 @@ const MainScreen = ({navigation}) => {
   }
 
   const LoadCamera = () => {
-    navigation.navigate('Camera')
+    navigation.navigate('Camera',{value})
   }
 
   // const FindDistance = () => {
@@ -107,8 +107,8 @@ const MainScreen = ({navigation}) => {
         </TouchableOpacity>
       </View>
       <View>
-        <CardComponent name = {'пятёрочка'}/>
-        <CardComponent name = {'пятёрочка'}/>
+        <CardComponent/>
+        <CardComponent/>
       </View>
         </>: <View style={[{marginTop:'50%'}]}>
           <ActivityIndicator animating={true} size="large" color="#C5C5C5" />

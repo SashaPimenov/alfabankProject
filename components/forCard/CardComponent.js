@@ -20,9 +20,10 @@ const CardComponent = (props) => {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Image style={[{transform: [{rotate: '90deg'}],marginTop:'25%', height:'60%'}]} source={require('../../images/test.jpg')} />
+            <Image style={[{transform: [{rotate: '90deg'}],marginTop:'25%', height:300,width:500}]} source={require('../../images/test.jpg')}/>
             <TouchableOpacity
               style={styles.button}
+              // source={{uri: 'file:///data/user/0/com.alfabankproject/cache/Camera/121be112-b971-42d9-a6ba-9681d2764351.jpg'}}
               onPress={() => setModalVisible(!modalVisible)}
             >
               <Text>Закрыть</Text>
