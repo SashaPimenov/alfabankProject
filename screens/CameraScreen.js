@@ -10,9 +10,6 @@ export default function CameraScreen({route, navigation}) {
   return (
     <View style={styles.container} >
       <CameraComponent chainStores={route.params.value}/>
-      <TouchableOpacity onPress={goBack}>
-        <Text style={[{ color:'#7FDA77',fontSize:40, fontWeight:'bold'}]}>Назад</Text>
-      </TouchableOpacity>
     </View>
   )}
 

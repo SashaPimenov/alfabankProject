@@ -37,7 +37,7 @@ const RegistrationForm = ({navigation}) => {
           style={styles.default}
           value={email}
           onChangeText={setEmail}
-          placeholder="Введите почту"
+          placeholder="Введите логин"
           placeholderTextColor="#C5C5C5"
           keyboardType="email-address"
           color="#ffffff"

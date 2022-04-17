@@ -3,7 +3,7 @@ import {
   Image,
   StyleSheet, TouchableOpacity,
   View,
-  Modal, Alert, Text,
+  Modal, Text,
 } from "react-native";
 
 const CardComponent = (props) => {
@@ -20,13 +20,13 @@ const CardComponent = (props) => {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Image style={[{transform: [{rotate: '90deg'}],marginTop:'25%', height:300,width:500}]} source={require('../../images/test.jpg')}/>
+            <Image style={[{transform: [{rotate: '90deg'}],marginTop:'32%', height:300,width:520}]} source={require('../../images/test.jpg')}/>
             <TouchableOpacity
               style={styles.button}
               // source={{uri: 'file:///data/user/0/com.alfabankproject/cache/Camera/121be112-b971-42d9-a6ba-9681d2764351.jpg'}}
               onPress={() => setModalVisible(!modalVisible)}
             >
-              <Text>Закрыть</Text>
+              <Text style={[{color:'white', fontWeight:'bold'}]}>Закрыть</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   modalView: {
     width: '90%',
     height:'80%',
-    backgroundColor: "#C5C5C5",
+    backgroundColor: "#403a3a",
     borderRadius: 20,
     padding: 35,
     alignItems: "center",
@@ -58,7 +58,8 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 10,
     elevation: 2,
-    marginTop:'40%'
+    marginTop:'42%',
+    backgroundColor: '#ff4c5b',
   },
 
   card: {

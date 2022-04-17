@@ -19,7 +19,8 @@ export  default  function MainNavigate () {
       }}>
         <Stack.Screen
           name = 'Auth'
-          component={AuthForm} />
+          component={AuthForm}
+        />
         <Stack.Screen
         name = 'AllCard'
         component={MainScreen} />

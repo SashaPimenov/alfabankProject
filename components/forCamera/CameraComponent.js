@@ -34,7 +34,6 @@ export default class CameraComponent extends PureComponent {
           buttonNegative: 'Cancel',
         }} />
 
-
       <View style={{ flex: 0, flexDirection: 'row', justifyContent: 'center' }}>
           <TouchableOpacity onPress={this.takePicture.bind(this)} style={styles.capture}>
               <Text style={{ fontSize: 14 }}> SNAP </Text>
@@ -48,20 +47,20 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'column',
-        backgroundColor: 'black',
+        backgroundColor: '#403a3a',
     },
     preview: {
         flex: 1,
         justifyContent: 'flex-end',
         alignItems: 'center',
     },
-    capture: {
-        flex: 0,
-        backgroundColor: '#fff',
-        borderRadius: 5,
-        padding: 15,
-        paddingHorizontal: 20,
-        alignSelf: 'center',
-        margin: 20,
-    },
+    // capture: {
+    //     flex: 0,
+    //     backgroundColor: '#fff',
+    //     borderRadius: 5,
+    //     padding: 15,
+    //     paddingHorizontal: 20,
+    //     alignSelf: 'center',
+    //     margin: 20,
+    // },7
 });

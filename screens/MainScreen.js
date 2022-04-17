@@ -7,13 +7,18 @@ import {
   StyleSheet, Text,
   TouchableOpacity,
   View,
-  Modal,
+  Modal, BackHandler,
 } from "react-native";
 import Geolocation from '@react-native-community/geolocation';
 import CardComponent from "../components/forCard/CardComponent";
 import { Picker } from "@react-native-picker/picker";
 
 const MainScreen = ({navigation}) => {
+
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', () => true)
+    return () => backHandler.remove()
+  }, [])
 
   // const adress = {
   //   'longitude': 60.643235,
@@ -79,7 +84,7 @@ const MainScreen = ({navigation}) => {
                   mode="dropdown"
                   style={[{fontSize: 10,color: '#C5C5C5',fontWeight: 'bold'}]}
                   dropdownIconColor={'#C5C5C5'}>
-                  <Picker.Item label="Выбери магазин" value={null} style={styles.pickerItemStyle} />
+                  <Picker.Item label="Выберите магазин" value={null} style={styles.pickerItemStyle} />
                   <Picker.Item label="Пятёрочка" value={'p'} style={styles.pickerItemStyle} />
                   <Picker.Item label="Магнит" value={'m'} style={styles.pickerItemStyle} />
                 </Picker>
@@ -88,7 +93,7 @@ const MainScreen = ({navigation}) => {
                 <TouchableOpacity style={[styles.button, {backgroundColor: '#ff4c5b'}]} onPress={() => setModalVisible1(!modalVisible1)}>
                   <Text style={styles.modalButtonText}>Отмена</Text>
                 </TouchableOpacity>
-                  <TouchableOpacity style={[styles.button, {backgroundColor: "#2196F3"}]}
+                  <TouchableOpacity style={[styles.button, {backgroundColor: "#7FDA77"}]}
                                     onPress={() => value !== null ? (setModalVisible1(!modalVisible1), LoadCamera()): Alert.alert( "Ошибка","Сначала выберите торговую сеть", [{text: "Ок"}])}>
                     <Text style={styles.modalButtonText}>Далее</Text>
                   </TouchableOpacity>
@@ -107,7 +112,7 @@ const MainScreen = ({navigation}) => {
         </TouchableOpacity>
       </View>
       <View>
-        <CardComponent/>
+        <CardComponent maket ={' '}/>
         <CardComponent/>
       </View>
         </>: <View style={[{marginTop:'50%'}]}>
@@ -137,7 +142,7 @@ const styles = StyleSheet.create({
   },
   modal1View: {
     margin: 20,
-    backgroundColor: "#C5C5C5",
+    backgroundColor: "#403a3a",
     borderRadius: 20,
     padding: 35,
     alignItems: "center",
@@ -145,14 +150,15 @@ const styles = StyleSheet.create({
     maxWidth:'86%'
   },
   modalButtonText: {
-    color: "white",
     fontWeight: "bold",
-    textAlign: "center"
+    textAlign: "center",
+    color:'#434343',
   },
   inModalText: {
     marginBottom: 15,
     textAlign: "center",
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    color:'white',
   },
   card: {
     width: 310,

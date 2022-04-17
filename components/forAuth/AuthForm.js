@@ -78,7 +78,7 @@ const AuthForm = ({navigation}) => {
           style={styles.default}
           value={login}
           onChangeText={setLogin}
-          placeholder="Email.."
+          placeholder="Login.."
           placeholderTextColor="#C5C5C5"
           keyboardType="email-address"
           color="#ffffff"
