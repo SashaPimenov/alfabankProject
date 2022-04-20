@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: '#232323',
     width: '100%',
-    alignSelf:'center'
+    alignSelf:'center',
   },
   pickerItemStyle : {
     color: '#C5C5C5',
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     padding: 35,
     alignItems: "center",
     width:'85%',
-    maxWidth:'86%'
+    maxWidth:'86%',
   },
   modalButtonText: {
     fontWeight: "bold",
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
   button: {
     borderRadius: 20,
     padding: 10,
-    marginTop:'40%',
+    marginTop:'10%',
     minWidth:'30%'
   },
 
@@ -182,8 +182,8 @@ const styles = StyleSheet.create({
   },
 
   images: {
-    width: 30,
-    height: 30,
+    width: 28,
+    height: 28,
     marginTop: 20,
   },
 

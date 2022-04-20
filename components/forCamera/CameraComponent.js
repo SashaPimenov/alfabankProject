@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react';
 import {RNCamera} from 'react-native-camera';
-import {Alert, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {Alert, Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import BarcodeMask from 'react-native-barcode-mask';
 
 export default class CameraComponent extends PureComponent {
   constructor(props) {super(props);}
@@ -32,35 +33,44 @@ export default class CameraComponent extends PureComponent {
           message: 'We need your permission to use your camera',
           buttonPositive: 'Ok',
           buttonNegative: 'Cancel',
-        }} />
+        }} >
+          <BarcodeMask showAnimatedLine={false} width={350} height={250} edgeColor={'#7FDA77'}/>
+          <View style={{ justifyContent: 'center' }}>
+              <TouchableOpacity onPress={this.takePicture.bind(this)} style={styles.capture}>
+                  <Image style={styles.cameraButton} source={require('../../images/camera.png')} />
+              </TouchableOpacity>
+          </View>
+      </RNCamera>
 
-      <View style={{ flex: 0, flexDirection: 'row', justifyContent: 'center' }}>
-          <TouchableOpacity onPress={this.takePicture.bind(this)} style={styles.capture}>
-              <Text style={{ fontSize: 14 }}> SNAP </Text>
-          </TouchableOpacity>
-      </View>
+
         </View>
     );
   }}
 
 const styles = StyleSheet.create({
+    cameraButton: {
+        position: "absolute",
+        width: 50,
+        height: 50,
+        alignSelf: "center",
+
+    },
+
     container: {
         flex: 1,
         flexDirection: 'column',
         backgroundColor: '#403a3a',
+        zIndex: 2
     },
     preview: {
         flex: 1,
         justifyContent: 'flex-end',
         alignItems: 'center',
     },
-    // capture: {
-    //     flex: 0,
-    //     backgroundColor: '#fff',
-    //     borderRadius: 5,
-    //     padding: 15,
-    //     paddingHorizontal: 20,
-    //     alignSelf: 'center',
-    //     margin: 20,
-    // },7
+    capture: {
+        justifyContent: "center",
+        marginBottom: 40,
+        width: 70,
+        height: 70,
+    },
 });

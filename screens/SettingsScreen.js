@@ -45,7 +45,7 @@ const SettingsScreen = ({navigation}) => {
       </View>
 
       <View style={[{alignItems: "center", marginBottom:20}]}>
-        <GlobalButton color = {'#FF4A4A'}  text = {'Выйти из аккаунта'} func = {Exit} />
+        <GlobalButton color = {'#ff4c5b'}  text = {'Выйти из аккаунта'} func = {Exit} />
       </View>
     </View>
   );
