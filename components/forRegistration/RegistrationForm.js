@@ -4,15 +4,44 @@ import {
   View,
   SafeAreaView,
   TextInput,
-  Image, TouchableOpacity,
-} from 'react-native';
+  Image, TouchableOpacity, Alert,
+} from "react-native";
 import {responsiveFontSize} from 'react-native-responsive-dimensions';
 import GlobalButton from "../GlobalButton.js";
 
 const RegistrationForm = ({navigation}) => {
-  const [email, setEmail] = useState('');
+  const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [secondPassword, setSecondPassword] = useState('');
+
+  const registrationFunc = async () => {
+      if (password !== secondPassword || login === '' || password === '') {
+        Alert.alert("Ошибка", "Пароли не совпадают или не все поля заполнены", [
+          { text: "OK" }])
+      }
+      else {
+        let formData = new FormData();
+        formData.append('username', login);
+        formData.append('password', password);
+        try {
+          // let url = '<host>/login/register';
+            let res = await fetch(url, {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'form/multipart'
+            },
+            body: formData
+          });
+          Alert.alert("Успешно", 'Вы зарегистрированы', [
+            {text: "OK"}])
+        }catch(e){
+          Alert.alert("Ошибка", e.message, [
+            {text: "OK"}])
+        }
+      }
+  }
+
   const goBack = () => {
     navigation.goBack()
   }
@@ -35,11 +64,10 @@ const RegistrationForm = ({navigation}) => {
       <View style={[{alignItems: 'center'}]}>
         <TextInput
           style={styles.default}
-          value={email}
-          onChangeText={setEmail}
+          value={login}
+          onChangeText={setLogin}
           placeholder="Введите логин"
           placeholderTextColor="#C5C5C5"
-          keyboardType="email-address"
           color="#ffffff"
         />
         <TextInput
@@ -60,7 +88,7 @@ const RegistrationForm = ({navigation}) => {
           secureTextEntry={true}
           color="#ffffff"
         />
-        <GlobalButton color = {'#7FDA77'} text = {'Зарегистрироваться'}/>
+        <GlobalButton color = {'#7FDA77'} text = {'Зарегистрироваться'} func = {registrationFunc}/>
       </View>
     </SafeAreaView>
   );

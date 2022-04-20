@@ -28,37 +28,53 @@ const AuthForm = ({navigation}) => {
     navigation.navigate('Registration')
   }
 
-  // async function request() {
-  //   try {
-  //     let url = 'http://studprzi.beget.tech/api/user/login';
-  //     let res = await fetch(url, {
-  //       method: 'POST',
-  //       headers: {
-  //         Accept: 'application/json',
-  //         'Content-Type': 'application/json'
-  //       },
-  //       body: JSON.stringify({
-  //         user: {
-  //           email: email,
-  //           password: password
-  //         }
-  //       })
-  //     });
-  //     return await res.json()
-  //   }catch(e){
-  //     Alert.alert("Ошибка", e.message, [
-  //       {text: "OK"}])    }
-  // }
+  async function request() {
+    try {
+      let formData = new FormData();
+      formData.append('username', login);
+      formData.append('password', password);
+      //let url = '<host>/login/token';
+      let result = await fetch(url, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'form/multipart'
+        },
+        body: formData
+      });
+      return await result.json()
+    }catch(e){
+      Alert.alert("Ошибка", e.message, [
+        {text: "OK"}])    }
+  }
 
-  // Сохраняет токен в случае удачной попытки входа и перенаправляет на экран main
-  const authHandler = async () => {
-    // let a = await req();
-      // await AsyncStorage.setItem('token', a.user.token).then(() => {
-      if (password == '1' && login == '1') {
-        AsyncStorage.setItem('token', '1').then(() => {
+  const authFunction = async () => {
+    if (login === '' || password === '') {
+      Alert.alert("Ошибка", "Не все поля заполнены", [
+        { text: "OK" }])
+    }
+    else{
+    let a = await request();
+      try {
+        await AsyncStorage.setItem('token', a.access_token).then(() => {
           setIsAuth(true)
           navigation.navigate('AllCard')})
-      } else {
+      } catch (e) {
+        Alert.alert("Ошибка", "Неправильный логин или пароль", [
+          {text: "OK"},
+        ])
+      }
+    }
+  }
+
+  const authHandler = async () => {
+    // let a = await req();
+    // await AsyncStorage.setItem('token', a.user.token).then(() => {
+    if (password == '1' && login == '1') {
+      AsyncStorage.setItem('token', '1').then(() => {
+        setIsAuth(true)
+        navigation.navigate('AllCard')})
+    } else {
       Alert.alert("Ошибка", "Неправильный логин или пароль", [
         {text: "OK"},
       ])
