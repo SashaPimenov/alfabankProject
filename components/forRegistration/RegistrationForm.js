@@ -17,27 +17,27 @@ const RegistrationForm = ({navigation}) => {
   const registrationFunc = async () => {
       if (password !== secondPassword || login === '' || password === '') {
         Alert.alert("Ошибка", "Пароли не совпадают или не все поля заполнены", [
-          { text: "OK" }])
+          { text: "OK", onPress: () => (setPassword(''), setSecondPassword('')) }])
       }
       else {
-        let formData = new FormData();
-        formData.append('username', login);
-        formData.append('password', password);
         try {
-          // let url = '<host>/login/register';
-            let res = await fetch(url, {
-            method: 'POST',
-            headers: {
-              Accept: 'application/json',
-              'Content-Type': 'form/multipart'
-            },
-            body: formData
-          });
-          Alert.alert("Успешно", 'Вы зарегистрированы', [
-            {text: "OK"}])
+          let url = 'http://192.248.177.166:8000/login/register';
+            let request = await fetch(url, {
+              method: 'POST',
+              headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                  username: login,
+                  password: password
+              })
+          }).then(response => response.json());
+          Alert.alert(request.detail ? "" : 'Успешно', request.detail ? request.detail : 'Ваш аккаунт успешно зарегистрирован.', [
+            {text: "OK",onPress: request.detail? null : () => navigation.navigate('Auth')} ])
         }catch(e){
           Alert.alert("Ошибка", e.message, [
-            {text: "OK"}])
+            {text: "OK", onPress: () => (setPassword(''), setSecondPassword(''))}])
         }
       }
   }
@@ -74,6 +74,7 @@ const RegistrationForm = ({navigation}) => {
           style={styles.default}
           value={password}
           onChangeText={setPassword}
+          autoCapitalize = 'none'
           placeholder="Введите пароль"
           placeholderTextColor="#C5C5C5"
           secureTextEntry={true}
@@ -83,6 +84,7 @@ const RegistrationForm = ({navigation}) => {
           style={styles.default}
           value={secondPassword}
           onChangeText={setSecondPassword}
+          autoCapitalize = 'none'
           placeholder="Повторите пароль"
           placeholderTextColor="#C5C5C5"
           secureTextEntry={true}

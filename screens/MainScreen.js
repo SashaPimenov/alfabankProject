@@ -20,11 +20,6 @@ const MainScreen = ({navigation}) => {
     return () => backHandler.remove()
   }, [])
 
-  // const adress = {
-  //   'longitude': 60.643235,
-  //   'latitude': 56.838937
-  // }
-
   const [modalVisible1, setModalVisible1] = useState(false);
   const [location, setLocation] = useState({})
   const [value, setValue] = useState(null);
@@ -53,13 +48,6 @@ const MainScreen = ({navigation}) => {
   const LoadCamera = () => {
     navigation.navigate('Camera',{value})
   }
-
-  // const FindDistance = () => {
-  //   let a = (adress.latitude - location.coords.latitude) * 111.111
-  //   let b = (adress.longitude - location.coords.longitude) * Math.cos(Math.min(adress.latitude, location.coords.latitude)) * 64
-  //   let c = Math.sqrt(a*a + b*b)
-  //   console.log(Math.trunc(c*1000))
-  // }
 
   return (
     <SafeAreaView style={[{flex: 1, backgroundColor: '#232323'}]}>
@@ -112,8 +100,8 @@ const MainScreen = ({navigation}) => {
         </TouchableOpacity>
       </View>
       <View>
-        <CardComponent maket ={' '}/>
-        <CardComponent/>
+        <CardComponent maket ='пятёрочка.png'/>
+        <CardComponent  maket ='магнит.png'/>
       </View>
         </>: <View style={[{marginTop:'50%'}]}>
           <ActivityIndicator animating={true} size="large" color="#C5C5C5" />

@@ -31,17 +31,17 @@ const AuthForm = ({navigation}) => {
   async function request() {
     try {
       let formData = new FormData();
-      formData.append('username', login);
-      formData.append('password', password);
-      //let url = '<host>/login/token';
+      formData.append("username", login);
+      formData.append("password", password);
+      let url = 'http://192.248.177.166:8000/login/token';
       let result = await fetch(url, {
         method: 'POST',
         headers: {
           Accept: 'application/json',
-          'Content-Type': 'form/multipart'
+          'Content-Type': 'multipart/form-data'
         },
         body: formData
-      });
+      })
       return await result.json()
     }catch(e){
       Alert.alert("Ошибка", e.message, [
@@ -55,6 +55,7 @@ const AuthForm = ({navigation}) => {
     }
     else{
     let a = await request();
+      if (typeof a !== "undefined"){
       try {
         await AsyncStorage.setItem('token', a.access_token).then(() => {
           setIsAuth(true)
@@ -63,23 +64,23 @@ const AuthForm = ({navigation}) => {
         Alert.alert("Ошибка", "Неправильный логин или пароль", [
           {text: "OK"},
         ])
-      }
+      }}
     }
   }
 
-  const authHandler = async () => {
-    // let a = await req();
-    // await AsyncStorage.setItem('token', a.user.token).then(() => {
-    if (password == '1' && login == '1') {
-      AsyncStorage.setItem('token', '1').then(() => {
-        setIsAuth(true)
-        navigation.navigate('AllCard')})
-    } else {
-      Alert.alert("Ошибка", "Неправильный логин или пароль", [
-        {text: "OK"},
-      ])
-    }
-  }
+  // const authHandler = async () => {
+  //   // let a = await req();
+  //   // await AsyncStorage.setItem('token', a.user.token).then(() => {
+  //   if (password == '1' && login == '1') {
+  //     AsyncStorage.setItem('token', '1').then(() => {
+  //       setIsAuth(true)
+  //       navigation.navigate('AllCard')})
+  //   } else {
+  //     Alert.alert("Ошибка", "Неправильный логин или пароль", [
+  //       {text: "OK"},
+  //     ])
+  //   }
+  // }
 
   return (
     <SafeAreaView style={styles.back}>
@@ -103,13 +104,14 @@ const AuthForm = ({navigation}) => {
           style={styles.default}
           value={password}
           onChangeText={setPassword}
+          autoCapitalize = 'none'
           placeholder="Password.."
           placeholderTextColor="#C5C5C5"
           secureTextEntry={true}
           color="#ffffff"
         />
 
-        <GlobalButton text = {'Войти'} color = {'#7FDA77'} func = {authHandler} />
+        <GlobalButton text = {'Войти'} color = {'#7FDA77'} func = {authFunction} />
 
         <TouchableNativeFeedback>
           <TouchableOpacity style={[{marginTop: '3%'}]} onPress={LoadRegistration}>

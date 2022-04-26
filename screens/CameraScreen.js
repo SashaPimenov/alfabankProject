@@ -15,7 +15,6 @@ export default function CameraScreen({route, navigation}) {
         </TouchableOpacity>
       </View>
 
-
       <CameraComponent chainStores={route.params.value}/>
     </View>
   )}
