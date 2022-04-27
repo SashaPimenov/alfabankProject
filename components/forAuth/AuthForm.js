@@ -60,6 +60,7 @@ const AuthForm = ({navigation}) => {
         await AsyncStorage.setItem('token', a.access_token).then(() => {
           setIsAuth(true)
           navigation.navigate('AllCard')})
+        await AsyncStorage.setItem('password', password)
       } catch (e) {
         Alert.alert("Ошибка", "Неправильный логин или пароль", [
           {text: "OK"},
@@ -67,20 +68,6 @@ const AuthForm = ({navigation}) => {
       }}
     }
   }
-
-  // const authHandler = async () => {
-  //   // let a = await req();
-  //   // await AsyncStorage.setItem('token', a.user.token).then(() => {
-  //   if (password == '1' && login == '1') {
-  //     AsyncStorage.setItem('token', '1').then(() => {
-  //       setIsAuth(true)
-  //       navigation.navigate('AllCard')})
-  //   } else {
-  //     Alert.alert("Ошибка", "Неправильный логин или пароль", [
-  //       {text: "OK"},
-  //     ])
-  //   }
-  // }
 
   return (
     <SafeAreaView style={styles.back}>

@@ -30,7 +30,7 @@ export default function App() {
   return (
     <AuthContext.Provider value={{ isAuth, setIsAuth }}>
       <View style={styles.container}>
-        <Main />
+        <Main/>
       </View>
     </AuthContext.Provider>
   );
