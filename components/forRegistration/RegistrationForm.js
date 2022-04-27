@@ -78,8 +78,8 @@ const RegistrationForm = ({navigation}) => {
           placeholder="Введите пароль"
           placeholderTextColor="#C5C5C5"
           secureTextEntry={true}
-          color="#ffffff"
-        />
+          color="#ffffff" />
+
         <TextInput
           style={styles.default}
           value={secondPassword}

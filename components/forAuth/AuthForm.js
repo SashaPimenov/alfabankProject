@@ -61,6 +61,8 @@ const AuthForm = ({navigation}) => {
           setIsAuth(true)
           navigation.navigate('AllCard')})
         await AsyncStorage.setItem('password', password)
+        setPassword('')
+        setLogin('')
       } catch (e) {
         Alert.alert("Ошибка", "Неправильный логин или пароль", [
           {text: "OK"},
