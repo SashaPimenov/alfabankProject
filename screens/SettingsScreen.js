@@ -36,7 +36,7 @@ const SettingsScreen = ({navigation}) => {
       }
       else {
         try {
-          let url = 'http://192.248.177.166:8000/login/change_password';
+          const url = 'http://192.248.177.166:8000/login/change_password';
           let token = await AsyncStorage.getItem('token')
           let request = await fetch(url, {
             method: 'PUT',

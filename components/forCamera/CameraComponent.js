@@ -2,17 +2,44 @@ import React, {PureComponent} from 'react';
 import {RNCamera} from 'react-native-camera';
 import {Alert, Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import BarcodeMask from 'react-native-barcode-mask';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default class CameraComponent extends PureComponent {
   constructor(props) {super(props);}
+
+    addCard = async (image) => {
+    try {
+      let token = await AsyncStorage.getItem('token')
+      const url = 'http://192.248.177.166:8000/cards/add?store_chain_id='+ this.props.chainStores.toString();
+      let file = {
+        uri: image.uri,
+        type: 'image/jpg',
+        name: 'image',
+      };
+      let formData = new FormData();
+      formData.append('image', file);
+      const data = await fetch(url, {
+        method: 'POST',
+        headers: {
+          Authorization: 'Bearer ' + token,
+          'Content-Type': 'multipart/form-data'
+        },
+        body: formData
+      }).then(response => response.json())
+      Alert.alert(data.id ? "Успешно" : 'Ошибка', data.id ? "Вы добавили карту" : 'Не удалось сохранить карту', [
+        {text: "OK"}])
+    }catch(e){
+      Alert.alert("Ошибка", e.message, [
+        {text: "OK"}])    }
+    }
+
     takePicture = async () => {
         if (this.camera) {
-            const options = { quality: 0.5, base64: true, pauseAfterCapture:true};
+            const options = {quality: 1,pauseAfterCapture:true};
             const data = await this.camera.takePictureAsync(options);
             Alert.alert( "Предупреждение","Вы уверены, что хотите сохранить данное фото?", [
                 {text: "Сохранить",  onPress: () => {
-                    console.log(this.props.chainStores)
-                    console.log(data.uri);
+                    this.addCard(data)
                     this.camera.resumePreview()}},
                 {text: "Переснять",  onPress: () => {this.camera.resumePreview()}}])
         }

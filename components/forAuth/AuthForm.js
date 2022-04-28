@@ -33,7 +33,7 @@ const AuthForm = ({navigation}) => {
       let formData = new FormData();
       formData.append("username", login);
       formData.append("password", password);
-      let url = 'http://192.248.177.166:8000/login/token';
+      const url = 'http://192.248.177.166:8000/login/token';
       let result = await fetch(url, {
         method: 'POST',
         headers: {

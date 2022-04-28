@@ -21,8 +21,8 @@ const RegistrationForm = ({navigation}) => {
       }
       else {
         try {
-          let url = 'http://192.248.177.166:8000/login/register';
-            let request = await fetch(url, {
+          const url = 'http://192.248.177.166:8000/login/register';
+            const request = await fetch(url, {
               method: 'POST',
               headers: {
                 Accept: 'application/json',
