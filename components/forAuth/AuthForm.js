@@ -7,17 +7,19 @@ import {
   TouchableOpacity,
   Text,
   TouchableNativeFeedback,
-  Image, Alert,
+  Image, Alert, TouchableWithoutFeedback,
 } from "react-native";
 import {responsiveFontSize} from 'react-native-responsive-dimensions';
 import GlobalButton from "../GlobalButton.js";
 import { useAuth } from "./useAuth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Icon from 'react-native-vector-icons/Entypo';
 
 const AuthForm = ({navigation}) => {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const { isAuth, setIsAuth } = useAuth()
+  const [hidePass, setHidePass] = useState(true);
 
   React.useEffect(() => {
     if (isAuth)
@@ -91,25 +93,37 @@ const AuthForm = ({navigation}) => {
         />
       </View>
       <View style={[{alignItems: 'center'}]}>
-        <TextInput
-          style={styles.default}
-          value={login}
-          onChangeText={setLogin}
-          placeholder="Login.."
-          placeholderTextColor="#C5C5C5"
-          keyboardType="email-address"
-          color="#ffffff"
-        />
-        <TextInput
-          style={styles.default}
-          value={password}
-          onChangeText={setPassword}
-          autoCapitalize = 'none'
-          placeholder="Password.."
-          placeholderTextColor="#C5C5C5"
-          secureTextEntry={true}
-          color="#ffffff"
-        />
+        <View style={[{flexDirection: 'row', maxWidth: '100%'}]}>
+          <TextInput
+            style={styles.default}
+            value={login}
+            onChangeText={setLogin}
+            placeholder="Login.."
+            placeholderTextColor="#C5C5C5"
+            keyboardType="email-address"
+            color="#ffffff"
+          />
+        </View>
+
+        <View style={[{flexDirection: "row", maxWidth: '90%'}]}>
+          <TextInput
+            style={styles.default}
+            value={password}
+            onChangeText={setPassword}
+            autoCapitalize = 'none'
+            placeholder="Password.."
+            placeholderTextColor="#C5C5C5"
+            secureTextEntry={hidePass ? true : false}
+            color="#ffffff"
+          />
+          <TouchableWithoutFeedback style={[{alignSelf: "center"}]} onPress={() => setHidePass(!hidePass)}>
+            {hidePass ?
+                <Icon name="eye-with-line" size={25} color={'white'} style={[{alignSelf: 'center'}]}/>
+                :
+                <Icon name="eye" size={25} color={'white'} style={[{alignSelf: 'center'}]}/>
+            }
+          </TouchableWithoutFeedback>
+        </View>
 
         <GlobalButton text = {'Войти'} color = {'#7FDA77'} func = {authFunction} />
 
@@ -126,6 +140,11 @@ const AuthForm = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
+  eye: {
+    height: 35,
+    width: 35,
+  },
+
   buttonText: {
     color: '#434343',
     fontWeight: 'bold',

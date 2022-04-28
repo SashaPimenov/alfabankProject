@@ -1,14 +1,26 @@
 import React, { useState } from "react";
-import { Alert, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import {
+  Alert,
+  Image,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View
+} from "react-native";
 import {responsiveFontSize} from "react-native-responsive-dimensions";
 import GlobalButton from "../components/GlobalButton";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useAuth } from "../components/forAuth/useAuth";
+import Icon from 'react-native-vector-icons/AntDesign';
+import IconPass from 'react-native-vector-icons/Entypo';
 
 const SettingsScreen = ({navigation}) => {
 
   const [password, setPassword] = useState('');
   const [secondPassword, setSecondPassword] = useState('');
+  const [hidePass, setHidePass] = useState(true);
 
   const { isAuth, setIsAuth } = useAuth()
   const goBack = () => {
@@ -58,30 +70,49 @@ const SettingsScreen = ({navigation}) => {
 
       <View>
           <TouchableOpacity onPress={goBack}>
-            <Image style={styles.back} source={require('../images/back.png')} />
+            <Icon style={styles.back} name={'arrowleft'} size={35} color={'#7FDA77'} />
           </TouchableOpacity>
           <Text style={styles.textSettings}>Настройки</Text>
       </View>
 
       <View style={[{alignItems: "center"}]}>
-        <TextInput
-            style={styles.default}
-            placeholder="Старый пароль"
-            placeholderTextColor="#C5C5C5"
-            secureTextEntry={true}
-            color="#ffffff"
-            value={password}
-            onChangeText={setPassword}>
-        </TextInput>
-        <TextInput
-            style={styles.default}
-            placeholder="Новый пароль"
-            placeholderTextColor="#C5C5C5"
-            secureTextEntry={true}
-            color="#ffffff"
-            value={secondPassword}
-            onChangeText={setSecondPassword}
-        />
+        <View style={[{flexDirection: "row"}]}>
+          <TextInput
+              style={styles.default}
+              placeholder="Новый пароль"
+              placeholderTextColor="#C5C5C5"
+              secureTextEntry={hidePass ? true : false}
+              color="#ffffff"
+              value={password}
+              onChangeText={setPassword}>
+          </TextInput>
+          <TouchableWithoutFeedback style={[{alignSelf: "center"}]} onPress={() => setHidePass(!hidePass)}>
+            {hidePass ?
+                <IconPass name="eye-with-line" size={25} color={'white'} style={[{alignSelf: 'center'}]}/>
+                :
+                <IconPass name="eye" size={25} color={'white'} style={[{alignSelf: 'center'}]}/>
+            }
+          </TouchableWithoutFeedback>
+        </View>
+
+        <View style={[{flexDirection: "row"}]}>
+          <TextInput
+              style={styles.default}
+              placeholder="Повторите новый пароль"
+              placeholderTextColor="#C5C5C5"
+              secureTextEntry={hidePass ? true : false}
+              color="#ffffff"
+              value={secondPassword}
+              onChangeText={setSecondPassword}
+          />
+          <TouchableWithoutFeedback style={[{alignSelf: "center"}]} onPress={() => setHidePass(!hidePass)}>
+            {hidePass ?
+                <IconPass name="eye-with-line" size={25} color={'white'} style={[{alignSelf: 'center'}]}/>
+                :
+                <IconPass name="eye" size={25} color={'white'} style={[{alignSelf: 'center'}]}/>
+            }
+          </TouchableWithoutFeedback>
+        </View>
         <GlobalButton color = {'#7FDA77'} text = {'Сменить пароль'} func ={updatePassword}/>
       </View>
 
@@ -119,8 +150,6 @@ const styles = StyleSheet.create({
   },
 
   back: {
-    width: 35,
-    height: 20,
     marginLeft: 20,
     marginTop: 25,
   },

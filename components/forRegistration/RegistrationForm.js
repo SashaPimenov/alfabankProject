@@ -4,15 +4,18 @@ import {
   View,
   SafeAreaView,
   TextInput,
-  Image, TouchableOpacity, Alert,
+  Image, TouchableOpacity, Alert, TouchableWithoutFeedback,
 } from "react-native";
 import {responsiveFontSize} from 'react-native-responsive-dimensions';
 import GlobalButton from "../GlobalButton.js";
+import Icon from 'react-native-vector-icons/AntDesign';
+import IconPass from 'react-native-vector-icons/Entypo';
 
 const RegistrationForm = ({navigation}) => {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [secondPassword, setSecondPassword] = useState('');
+  const [hidePass, setHidePass] = useState(true);
 
   const registrationFunc = async () => {
       if (password !== secondPassword || login === '' || password === '') {
@@ -50,7 +53,7 @@ const RegistrationForm = ({navigation}) => {
     <SafeAreaView style={styles.container}>
       <View style={[{zIndex: 2}]}>
         <TouchableOpacity onPress={goBack}>
-          <Image style={styles.backButton} source={require('../../images/back.png')} />
+          <Icon style={styles.backButton} name={'arrowleft'} size={35} color={'#7FDA77'} />
         </TouchableOpacity>
       </View>
 
@@ -62,34 +65,54 @@ const RegistrationForm = ({navigation}) => {
       </View>
 
       <View style={[{alignItems: 'center'}]}>
-        <TextInput
-          style={styles.default}
-          value={login}
-          onChangeText={setLogin}
-          placeholder="Введите логин"
-          placeholderTextColor="#C5C5C5"
-          color="#ffffff"
-        />
-        <TextInput
-          style={styles.default}
-          value={password}
-          onChangeText={setPassword}
-          autoCapitalize = 'none'
-          placeholder="Введите пароль"
-          placeholderTextColor="#C5C5C5"
-          secureTextEntry={true}
-          color="#ffffff"
-        />
-        <TextInput
-          style={styles.default}
-          value={secondPassword}
-          onChangeText={setSecondPassword}
-          autoCapitalize = 'none'
-          placeholder="Повторите пароль"
-          placeholderTextColor="#C5C5C5"
-          secureTextEntry={true}
-          color="#ffffff"
-        />
+        <View style={[{flexDirection: "row", maxWidth: '100%'}]}>
+          <TextInput
+            style={styles.default}
+            value={login}
+            onChangeText={setLogin}
+            placeholder="Введите логин"
+            placeholderTextColor="#C5C5C5"
+            color="#ffffff"
+          />
+        </View>
+        <View style={[{flexDirection: "row", maxWidth: '92%'}]}>
+          <TextInput
+            style={styles.default}
+            value={password}
+            onChangeText={setPassword}
+            autoCapitalize = 'none'
+            placeholder="Введите пароль"
+            placeholderTextColor="#C5C5C5"
+            secureTextEntry={hidePass ? true : false}
+            color="#ffffff"
+          />
+          <TouchableWithoutFeedback style={[{alignSelf: "center"}]} onPress={() => setHidePass(!hidePass)}>
+            {hidePass ?
+                <IconPass name="eye-with-line" size={25} color={'white'} style={[{alignSelf: 'center'}]}/>
+                :
+                <IconPass name="eye" size={25} color={'white'} style={[{alignSelf: 'center'}]}/>
+            }
+          </TouchableWithoutFeedback>
+        </View>
+        <View style={[{flexDirection: "row", maxWidth: '92%'}]}>
+          <TextInput
+            style={styles.default}
+            value={secondPassword}
+            onChangeText={setSecondPassword}
+            autoCapitalize = 'none'
+            placeholder="Повторите пароль"
+            placeholderTextColor="#C5C5C5"
+            secureTextEntry={hidePass ? true : false}
+            color="#ffffff"
+          />
+          <TouchableWithoutFeedback style={[{alignSelf: "center"}]} onPress={() => setHidePass(!hidePass)}>
+            {hidePass ?
+                <IconPass name="eye-with-line" size={25} color={'white'} style={[{alignSelf: 'center'}]}/>
+                :
+                <IconPass name="eye" size={25} color={'white'} style={[{alignSelf: 'center'}]}/>
+            }
+          </TouchableWithoutFeedback>
+        </View>
         <GlobalButton color = {'#7FDA77'} text = {'Зарегистрироваться'} func = {registrationFunc}/>
       </View>
     </SafeAreaView>
@@ -133,8 +156,6 @@ const styles = StyleSheet.create({
 
   backButton: {
     position: 'absolute',
-    width: 35,
-    height: 20,
     marginLeft: 20,
     marginTop: 25,
   },

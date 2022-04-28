@@ -2,6 +2,7 @@ import React, {PureComponent} from 'react';
 import {RNCamera} from 'react-native-camera';
 import {Alert, Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import BarcodeMask from 'react-native-barcode-mask';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 export default class CameraComponent extends PureComponent {
   constructor(props) {super(props);}
@@ -37,7 +38,7 @@ export default class CameraComponent extends PureComponent {
           <BarcodeMask showAnimatedLine={false} width={350} height={250} edgeColor={'#7FDA77'}/>
           <View style={{ justifyContent: 'center' }}>
               <TouchableOpacity onPress={this.takePicture.bind(this)} style={styles.capture}>
-                  <Image style={styles.cameraButton} source={require('../../images/camera.png')} />
+                  <Icon style={styles.cameraButton} name={'camera-outline'} size={60} color={'#C5C5C5'} />
               </TouchableOpacity>
           </View>
       </RNCamera>
@@ -50,8 +51,6 @@ export default class CameraComponent extends PureComponent {
 const styles = StyleSheet.create({
     cameraButton: {
         position: "absolute",
-        width: 50,
-        height: 50,
         alignSelf: "center",
 
     },

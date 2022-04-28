@@ -12,6 +12,7 @@ import {
 import Geolocation from '@react-native-community/geolocation';
 import CardComponent from "../components/forCard/CardComponent";
 import { Picker } from "@react-native-picker/picker";
+import Icon from 'react-native-vector-icons/AntDesign';
 
 const MainScreen = ({navigation}) => {
 
@@ -92,11 +93,11 @@ const MainScreen = ({navigation}) => {
 
       <View style={[{flexDirection: "row", justifyContent: "space-between"}]}>
         <TouchableOpacity onPress={LoadSettings}>
-          <Image style={[styles.images,{marginLeft:20}]} source={require('../images/settings.png')} />
+          <Icon style={[styles.images,{marginLeft:20}]} name={'setting'} size={30} color={'#C5C5C5'} />
         </TouchableOpacity>
         <Text style={styles.textSettings}>Ваши карты</Text>
         <TouchableOpacity onPress={() => setModalVisible1(true)}>
-          <Image style={[styles.images,{marginRight:20}]} source={require('../images/plus.png')} />
+          <Icon style={[styles.images,{marginRight:20}]} name={'pluscircleo'} size={30} color={'#C5C5C5'} />
         </TouchableOpacity>
       </View>
       <View>
@@ -170,8 +171,6 @@ const styles = StyleSheet.create({
   },
 
   images: {
-    width: 28,
-    height: 28,
     marginTop: 20,
   },
 

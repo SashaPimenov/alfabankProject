@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
 import {Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import CameraComponent from "../components/forCamera/CameraComponent";
+import Icon from 'react-native-vector-icons/AntDesign';
+
+
 
 export default function CameraScreen({route, navigation}) {
   const goBack = () => {
@@ -11,7 +14,7 @@ export default function CameraScreen({route, navigation}) {
     <View style={styles.container} >
       <View style={[{position: "absolute", zIndex: 3}]}>
         <TouchableOpacity onPress={goBack}>
-          <Image style={styles.back} source={require('../images/back.png')} />
+          <Icon style={styles.back} name={'arrowleft'} size={35} color={'#7FDA77'} />
         </TouchableOpacity>
       </View>
 
@@ -26,8 +29,6 @@ const styles = StyleSheet.create({
   },
 
   back: {
-    width: 35,
-    height: 20,
     marginLeft: 20,
     marginTop: 25,
   },
