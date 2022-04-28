@@ -36,7 +36,7 @@ const AuthForm = ({navigation}) => {
       formData.append("username", login);
       formData.append("password", password);
       const url = 'http://192.248.177.166:8000/login/token';
-      let result = await fetch(url, {
+      const result = await fetch(url, {
         method: 'POST',
         headers: {
           Accept: 'application/json',

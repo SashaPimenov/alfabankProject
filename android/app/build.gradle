@@ -81,7 +81,9 @@ project.ext.react = [
     enableHermes: false,  // clean and rebuild if changing
 ]
 
-
+android {
+        ndkVersion '21.4.7075529'
+    }
 
 // apply from: "../../node_modules/react-native/react.gradle"
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
