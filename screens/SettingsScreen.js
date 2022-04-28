@@ -18,8 +18,8 @@ import IconPass from 'react-native-vector-icons/Entypo';
 
 const SettingsScreen = ({navigation}) => {
 
-  const [password, setPassword] = useState('');
-  const [secondPassword, setSecondPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [oldPassword, setOldPassword] = useState('');
   const [hidePass, setHidePass] = useState(true);
 
   const { isAuth, setIsAuth } = useAuth()
@@ -35,32 +35,40 @@ const SettingsScreen = ({navigation}) => {
   }
 
   const updatePassword = async () => {
-    if(password !== secondPassword)
+    const rightOldPassword = await AsyncStorage.getItem('password')
+    if(oldPassword !== rightOldPassword)
     {
-      Alert.alert("Ошибка", "Введённые пароли не совпадают", [
+      Alert.alert("Ошибка", "Вы ввели неправильный старый пароль.", [
         { text: "OK" }])
     }
     else {
-      try {
-        const url = 'http://192.248.177.166:8000/login/change_password';
-        let token = await AsyncStorage.getItem('token')
-        let request = await fetch(url, {
-          method: 'PUT',
-          headers: {
-            'Authorization': 'Bearer ' + token,
-            Accept: 'application/json',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            new_password: password
-          })
-        }).then(response => response.json());
-        console.log(request)
-        Alert.alert('Успешно', 'Ваш пароль сменён.', [
-          {text: "OK", onPress: () => (setPassword(''), setSecondPassword(''))}])
-      }catch(e){
-        Alert.alert("Ошибка", e.message, [
-          {text: "OK"}])
+      if(oldPassword === newPassword)
+      {
+        Alert.alert("Ошибка", "Пароли совпадают.", [
+          { text: "OK" }])
+      }
+      else {
+        try {
+          let url = 'http://192.248.177.166:8000/login/change_password';
+          let token = await AsyncStorage.getItem('token')
+          let request = await fetch(url, {
+            method: 'PUT',
+            headers: {
+              'Authorization': 'Bearer ' + token,
+              Accept: 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              new_password: newPassword
+            })
+          }).then(response => response.json());
+          console.log(request)
+          Alert.alert('Успешно', 'Ваш пароль сменён.', [
+            { text: "OK", onPress: () => (setNewPassword(''), setOldPassword('')) }])
+        } catch (e) {
+          Alert.alert("Ошибка", e.message, [
+            { text: "OK" }])
+        }
       }
     }
   }
@@ -83,8 +91,8 @@ const SettingsScreen = ({navigation}) => {
               placeholderTextColor="#C5C5C5"
               secureTextEntry={hidePass ? true : false}
               color="#ffffff"
-              value={password}
-              onChangeText={setPassword}>
+              value={oldPassword}
+              onChangeText={setOldPassword}>
           </TextInput>
           <TouchableWithoutFeedback style={[{alignSelf: "center"}]} onPress={() => setHidePass(!hidePass)}>
             {hidePass ?
@@ -102,8 +110,8 @@ const SettingsScreen = ({navigation}) => {
               placeholderTextColor="#C5C5C5"
               secureTextEntry={hidePass ? true : false}
               color="#ffffff"
-              value={secondPassword}
-              onChangeText={setSecondPassword}
+              value={newPassword}
+              onChangeText={setNewPassword}
           />
           <TouchableWithoutFeedback style={[{alignSelf: "center"}]} onPress={() => setHidePass(!hidePass)}>
             {hidePass ?
