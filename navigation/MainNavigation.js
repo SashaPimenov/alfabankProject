@@ -6,15 +6,16 @@ import SettingsScreen from "../screens/SettingsScreen";
 import AuthForm from "../components/forAuth/AuthForm";
 import RegistrationForm from "../components/forRegistration/RegistrationForm";
 import CameraScreen from "../screens/CameraScreen";
+import { useAuth } from "../components/forAuth/useAuth";
 
 const Stack = createStackNavigator();
 
 export  default  function MainNavigate () {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{
+      <Stack.Navigator
+        screenOptions={{
         headerShown: false,
-        initialRouteName: 'Auth',
         animationEnabled: false,
       }}>
         <Stack.Screen

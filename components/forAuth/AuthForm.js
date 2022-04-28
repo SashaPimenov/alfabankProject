@@ -35,7 +35,7 @@ const AuthForm = ({navigation}) => {
       let formData = new FormData();
       formData.append("username", login);
       formData.append("password", password);
-      let url = 'http://192.248.177.166:8000/login/token';
+      const url = 'http://192.248.177.166:8000/login/token';
       let result = await fetch(url, {
         method: 'POST',
         headers: {
@@ -62,6 +62,9 @@ const AuthForm = ({navigation}) => {
         await AsyncStorage.setItem('token', a.access_token).then(() => {
           setIsAuth(true)
           navigation.navigate('AllCard')})
+        await AsyncStorage.setItem('password', password)
+        setPassword('')
+        setLogin('')
       } catch (e) {
         Alert.alert("Ошибка", "Неправильный логин или пароль", [
           {text: "OK"},
@@ -69,20 +72,6 @@ const AuthForm = ({navigation}) => {
       }}
     }
   }
-
-  // const authHandler = async () => {
-  //   // let a = await req();
-  //   // await AsyncStorage.setItem('token', a.user.token).then(() => {
-  //   if (password == '1' && login == '1') {
-  //     AsyncStorage.setItem('token', '1').then(() => {
-  //       setIsAuth(true)
-  //       navigation.navigate('AllCard')})
-  //   } else {
-  //     Alert.alert("Ошибка", "Неправильный логин или пароль", [
-  //       {text: "OK"},
-  //     ])
-  //   }
-  // }
 
   return (
     <SafeAreaView style={styles.back}>

@@ -74,8 +74,8 @@ const MainScreen = ({navigation}) => {
                   style={[{fontSize: 10,color: '#C5C5C5',fontWeight: 'bold'}]}
                   dropdownIconColor={'#C5C5C5'}>
                   <Picker.Item label="Выберите магазин" value={null} style={styles.pickerItemStyle} />
-                  <Picker.Item label="Пятёрочка" value={'p'} style={styles.pickerItemStyle} />
-                  <Picker.Item label="Магнит" value={'m'} style={styles.pickerItemStyle} />
+                  <Picker.Item label="Пятёрочка" value={1} style={styles.pickerItemStyle} />
+                  <Picker.Item label="Магнит" value={2} style={styles.pickerItemStyle} />
                 </Picker>
                 </View>
                 <View style={[{flexDirection: 'row',justifyContent: 'space-evenly',minWidth: '90%', maxWidth: '100%'}]}>
