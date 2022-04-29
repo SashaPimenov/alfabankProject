@@ -63,7 +63,6 @@ const AuthForm = ({navigation}) => {
           setIsAuth(true)
           navigation.navigate('AllCard')})
         await AsyncStorage.setItem('password', password)
-        await AsyncStorage.setItem('password', password)
         setPassword('')
         setLogin('')
         setHidePass(true)

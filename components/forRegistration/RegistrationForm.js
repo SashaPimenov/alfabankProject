@@ -37,6 +37,7 @@ const RegistrationForm = ({navigation}) => {
                   password: password
               })
           }).then(response => response.json());
+            console.log(data)
           Alert.alert(request.detail ? "" : 'Успешно', request.detail ? request.detail : 'Ваш аккаунт успешно зарегистрирован.', [
             {text: "OK",onPress: request.detail? null : () =>
                 navigation.navigate('Auth')} ])
