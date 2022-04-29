@@ -7,19 +7,18 @@ import {
   TouchableOpacity,
   Text,
   TouchableNativeFeedback,
-  Image, Alert, TouchableWithoutFeedback,
+  Image, Alert
 } from "react-native";
 import {responsiveFontSize} from 'react-native-responsive-dimensions';
 import GlobalButton from "../GlobalButton.js";
 import { useAuth } from "./useAuth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import Icon from 'react-native-vector-icons/Entypo';
+import TextInputHidePassComponent from "../TextInputHidePassComponent";
 
 const AuthForm = ({navigation}) => {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const { isAuth, setIsAuth } = useAuth()
-  const [hidePass, setHidePass] = useState(true);
 
   React.useEffect(() => {
     if (isAuth)
@@ -65,7 +64,6 @@ const AuthForm = ({navigation}) => {
         await AsyncStorage.setItem('password', password)
         setPassword('')
         setLogin('')
-        setHidePass(true)
       } catch (e) {
         Alert.alert("Ошибка", "Неправильный логин или пароль", [
           {text: "OK"},
@@ -96,23 +94,7 @@ const AuthForm = ({navigation}) => {
         </View>
 
         <View style={[{flexDirection: "row", maxWidth: '90%'}]}>
-          <TextInput
-            style={styles.default}
-            value={password}
-            onChangeText={setPassword}
-            autoCapitalize = 'none'
-            placeholder="Password.."
-            placeholderTextColor="#C5C5C5"
-            secureTextEntry={hidePass ? true : false}
-            color="#ffffff"
-          />
-          <TouchableWithoutFeedback style={[{alignSelf: "center"}]} onPress={() => setHidePass(!hidePass)}>
-            {hidePass ?
-                <Icon name="eye-with-line" size={25} color={'white'} style={[{alignSelf: 'center'}]}/>
-                :
-                <Icon name="eye" size={25} color={'white'} style={[{alignSelf: 'center'}]}/>
-            }
-          </TouchableWithoutFeedback>
+          <TextInputHidePassComponent place = {'Password..'} value ={password} func = {setPassword}/>
         </View>
 
         <GlobalButton text = {'Войти'} color = {'#7FDA77'} func = {authFunction} />

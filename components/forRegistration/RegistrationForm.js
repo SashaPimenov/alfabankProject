@@ -4,19 +4,17 @@ import {
   View,
   SafeAreaView,
   TextInput,
-  Image, TouchableOpacity, Alert, TouchableWithoutFeedback,
+  Image, TouchableOpacity, Alert
 } from "react-native";
 import {responsiveFontSize} from 'react-native-responsive-dimensions';
 import GlobalButton from "../GlobalButton.js";
 import Icon from 'react-native-vector-icons/AntDesign';
-import IconPass from 'react-native-vector-icons/Entypo';
+import TextInputHidePassComponent from "../TextInputHidePassComponent";
 
 const RegistrationForm = ({navigation}) => {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [secondPassword, setSecondPassword] = useState('');
-  const [hidePassFirst, setHidePassFirst] = useState(true);
-  const [hidePassSecond, setHidePassSecond] = useState(true);
 
   const registrationFunc = async () => {
       if (password !== secondPassword || login === '' || password === '') {
@@ -50,8 +48,6 @@ const RegistrationForm = ({navigation}) => {
 
   const goBack = () => {
     navigation.goBack()
-    setHidePassFirst(true)
-    setHidePassSecond(true)
   }
 
   return (
@@ -81,42 +77,10 @@ const RegistrationForm = ({navigation}) => {
           />
         </View>
         <View style={[{flexDirection: "row", maxWidth: '92%'}]}>
-          <TextInput
-            style={styles.default}
-            value={password}
-            onChangeText={setPassword}
-            autoCapitalize = 'none'
-            placeholder="Введите пароль"
-            placeholderTextColor="#C5C5C5"
-            secureTextEntry={hidePassFirst ? true : false}
-            color="#ffffff"
-          />
-          <TouchableWithoutFeedback style={[{alignSelf: "center"}]} onPress={() => setHidePassFirst(!hidePassFirst)}>
-            {hidePassFirst ?
-                <IconPass name="eye-with-line" size={25} color={'white'} style={[{alignSelf: 'center'}]}/>
-                :
-                <IconPass name="eye" size={25} color={'white'} style={[{alignSelf: 'center'}]}/>
-            }
-          </TouchableWithoutFeedback>
+          <TextInputHidePassComponent place = {'Введите пароль'} value ={password} func = {setPassword}/>
         </View>
         <View style={[{flexDirection: "row", maxWidth: '92%'}]}>
-          <TextInput
-            style={styles.default}
-            value={secondPassword}
-            onChangeText={setSecondPassword}
-            autoCapitalize = 'none'
-            placeholder="Повторите пароль"
-            placeholderTextColor="#C5C5C5"
-            secureTextEntry={hidePassSecond ? true : false}
-            color="#ffffff"
-          />
-          <TouchableWithoutFeedback style={[{alignSelf: "center"}]} onPress={() => setHidePassSecond(!hidePassSecond)}>
-            {hidePassSecond ?
-                <IconPass name="eye-with-line" size={25} color={'white'} style={[{alignSelf: 'center'}]}/>
-                :
-                <IconPass name="eye" size={25} color={'white'} style={[{alignSelf: 'center'}]}/>
-            }
-          </TouchableWithoutFeedback>
+          <TextInputHidePassComponent place = {'Повторите пароль'} value ={secondPassword} func = {setSecondPassword}/>
         </View>
         <GlobalButton color = {'#7FDA77'} text = {'Зарегистрироваться'} func = {registrationFunc}/>
       </View>
