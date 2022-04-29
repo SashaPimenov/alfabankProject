@@ -27,6 +27,7 @@ export default class CameraComponent extends PureComponent {
         },
         body: formData
       }).then(response => response.json())
+        .then(response => console.log(response))
       Alert.alert(data.id ? "Успешно" : 'Ошибка', data.id ? "Вы добавили карту" : 'Не удалось сохранить карту', [
         {text: "OK", onPress: () => this.props.navigation.navigate('AllCard')}])
     }catch(e){

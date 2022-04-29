@@ -15,7 +15,8 @@ const RegistrationForm = ({navigation}) => {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [secondPassword, setSecondPassword] = useState('');
-  const [hidePass, setHidePass] = useState(true);
+  const [hidePassFirst, setHidePassFirst] = useState(true);
+  const [hidePassSecond, setHidePassSecond] = useState(true);
 
   const registrationFunc = async () => {
       if (password !== secondPassword || login === '' || password === '') {
@@ -37,7 +38,8 @@ const RegistrationForm = ({navigation}) => {
               })
           }).then(response => response.json());
           Alert.alert(request.detail ? "" : 'Успешно', request.detail ? request.detail : 'Ваш аккаунт успешно зарегистрирован.', [
-            {text: "OK",onPress: request.detail? null : () => navigation.navigate('Auth')} ])
+            {text: "OK",onPress: request.detail? null : () =>
+                navigation.navigate('Auth')} ])
         }catch(e){
           Alert.alert("Ошибка", e.message, [
             {text: "OK", onPress: () => (setPassword(''), setSecondPassword(''))}])
@@ -47,6 +49,8 @@ const RegistrationForm = ({navigation}) => {
 
   const goBack = () => {
     navigation.goBack()
+    setHidePassFirst(true)
+    setHidePassSecond(true)
   }
 
   return (
@@ -83,11 +87,11 @@ const RegistrationForm = ({navigation}) => {
             autoCapitalize = 'none'
             placeholder="Введите пароль"
             placeholderTextColor="#C5C5C5"
-            secureTextEntry={hidePass ? true : false}
+            secureTextEntry={hidePassFirst ? true : false}
             color="#ffffff"
           />
-          <TouchableWithoutFeedback style={[{alignSelf: "center"}]} onPress={() => setHidePass(!hidePass)}>
-            {hidePass ?
+          <TouchableWithoutFeedback style={[{alignSelf: "center"}]} onPress={() => setHidePassFirst(!hidePassFirst)}>
+            {hidePassFirst ?
                 <IconPass name="eye-with-line" size={25} color={'white'} style={[{alignSelf: 'center'}]}/>
                 :
                 <IconPass name="eye" size={25} color={'white'} style={[{alignSelf: 'center'}]}/>
@@ -102,11 +106,11 @@ const RegistrationForm = ({navigation}) => {
             autoCapitalize = 'none'
             placeholder="Повторите пароль"
             placeholderTextColor="#C5C5C5"
-            secureTextEntry={hidePass ? true : false}
+            secureTextEntry={hidePassSecond ? true : false}
             color="#ffffff"
           />
-          <TouchableWithoutFeedback style={[{alignSelf: "center"}]} onPress={() => setHidePass(!hidePass)}>
-            {hidePass ?
+          <TouchableWithoutFeedback style={[{alignSelf: "center"}]} onPress={() => setHidePassSecond(!hidePassSecond)}>
+            {hidePassSecond ?
                 <IconPass name="eye-with-line" size={25} color={'white'} style={[{alignSelf: 'center'}]}/>
                 :
                 <IconPass name="eye" size={25} color={'white'} style={[{alignSelf: 'center'}]}/>

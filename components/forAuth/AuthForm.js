@@ -66,6 +66,7 @@ const AuthForm = ({navigation}) => {
         await AsyncStorage.setItem('password', password)
         setPassword('')
         setLogin('')
+        setHidePass(true)
       } catch (e) {
         Alert.alert("Ошибка", "Неправильный логин или пароль", [
           {text: "OK"},

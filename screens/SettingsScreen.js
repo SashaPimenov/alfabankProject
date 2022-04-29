@@ -20,7 +20,8 @@ const SettingsScreen = ({navigation}) => {
 
   const [newPassword, setNewPassword] = useState('');
   const [oldPassword, setOldPassword] = useState('');
-  const [hidePass, setHidePass] = useState(true);
+  const [hidePassFirst, setHidePassFirst] = useState(true);
+  const [hidePassSecond, setHidePassSecond] = useState(true);
 
   const { isAuth, setIsAuth } = useAuth()
   const goBack = () => {
@@ -87,15 +88,15 @@ const SettingsScreen = ({navigation}) => {
         <View style={[{flexDirection: "row"}]}>
           <TextInput
               style={styles.default}
-              placeholder="Новый пароль"
+              placeholder="Старый пароль"
               placeholderTextColor="#C5C5C5"
-              secureTextEntry={hidePass ? true : false}
+              secureTextEntry={hidePassFirst ? true : false}
               color="#ffffff"
               value={oldPassword}
               onChangeText={setOldPassword}>
           </TextInput>
-          <TouchableWithoutFeedback style={[{alignSelf: "center"}]} onPress={() => setHidePass(!hidePass)}>
-            {hidePass ?
+          <TouchableWithoutFeedback style={[{alignSelf: "center"}]} onPress={() => setHidePassFirst(!hidePassFirst)}>
+            {hidePassFirst ?
                 <IconPass name="eye-with-line" size={25} color={'white'} style={[{alignSelf: 'center'}]}/>
                 :
                 <IconPass name="eye" size={25} color={'white'} style={[{alignSelf: 'center'}]}/>
@@ -106,15 +107,15 @@ const SettingsScreen = ({navigation}) => {
         <View style={[{flexDirection: "row"}]}>
           <TextInput
               style={styles.default}
-              placeholder="Повторите новый пароль"
+              placeholder="Новый пароль"
               placeholderTextColor="#C5C5C5"
-              secureTextEntry={hidePass ? true : false}
+              secureTextEntry={hidePassSecond ? true : false}
               color="#ffffff"
               value={newPassword}
               onChangeText={setNewPassword}
           />
-          <TouchableWithoutFeedback style={[{alignSelf: "center"}]} onPress={() => setHidePass(!hidePass)}>
-            {hidePass ?
+          <TouchableWithoutFeedback style={[{alignSelf: "center"}]} onPress={() => setHidePassSecond(!hidePassSecond)}>
+            {hidePassSecond ?
                 <IconPass name="eye-with-line" size={25} color={'white'} style={[{alignSelf: 'center'}]}/>
                 :
                 <IconPass name="eye" size={25} color={'white'} style={[{alignSelf: 'center'}]}/>
