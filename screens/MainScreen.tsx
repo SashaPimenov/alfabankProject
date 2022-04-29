@@ -2,14 +2,15 @@ import React, { useEffect, useState } from "react";
 import {
   ActivityIndicator,
   Alert,
-  Image,
-  SafeAreaView,
-  StyleSheet, Text,
+  StyleSheet,
+  Text,
   TouchableOpacity,
   View,
-  Modal, BackHandler,
+  Modal,
+  BackHandler,
+  ScrollView
 } from "react-native";
-import Geolocation from '@react-native-community/geolocation';
+import Geolocation, { GeolocationResponse } from "@react-native-community/geolocation";
 import CardComponent from "../components/forCard/CardComponent";
 import { Picker } from "@react-native-picker/picker";
 import Icon from 'react-native-vector-icons/AntDesign';
@@ -22,7 +23,7 @@ const MainScreen = ({navigation}) => {
   }, [])
 
   const [modalVisible1, setModalVisible1] = useState(false);
-  const [location, setLocation] = useState({})
+  const [location, setLocation] = useState<GeolocationResponse>()
   const [value, setValue] = useState(null);
 
   const  findCoordinates = () => {
@@ -51,8 +52,8 @@ const MainScreen = ({navigation}) => {
   }
 
   return (
-    <SafeAreaView style={[{flex: 1, backgroundColor: '#232323'}]}>
-      {location.coords ?
+    <ScrollView style={[{flex: 1, backgroundColor: '#232323'}]}>
+      {location?.coords ?
         <>
           <Modal
             animationType="slide"
@@ -83,7 +84,8 @@ const MainScreen = ({navigation}) => {
                   <Text style={styles.modalButtonText}>Отмена</Text>
                 </TouchableOpacity>
                   <TouchableOpacity style={[styles.button, {backgroundColor: "#7FDA77"}]}
-                                    onPress={() => value !== null ? (setModalVisible1(!modalVisible1), LoadCamera()): Alert.alert( "Ошибка","Сначала выберите торговую сеть", [{text: "Ок"}])}>
+                                    onPress={() => value !== null ? (setModalVisible1(!modalVisible1), LoadCamera())
+                                      : Alert.alert( "Ошибка","Сначала выберите торговую сеть", [{text: "Ок"}])}>
                     <Text style={styles.modalButtonText}>Далее</Text>
                   </TouchableOpacity>
                 </View>
@@ -93,21 +95,23 @@ const MainScreen = ({navigation}) => {
 
       <View style={[{flexDirection: "row", justifyContent: "space-between"}]}>
         <TouchableOpacity onPress={LoadSettings}>
-          <Icon style={[styles.images,{marginLeft:20}]} name={'setting'} size={30} color={'#C5C5C5'} />
+          <Icon style={[{marginTop: 20,marginLeft:20}]} name={'setting'} size={30} color={'#C5C5C5'} />
         </TouchableOpacity>
         <Text style={styles.textSettings}>Ваши карты</Text>
         <TouchableOpacity onPress={() => setModalVisible1(true)}>
-          <Icon style={[styles.images,{marginRight:20}]} name={'pluscircleo'} size={30} color={'#C5C5C5'} />
+          <Icon style={[{marginTop: 20,marginRight:20}]} name={'pluscircleo'} size={30} color={'#C5C5C5'} />
         </TouchableOpacity>
       </View>
       <View>
+        <CardComponent maket ='пятёрочка.png'/>
+        <CardComponent  maket ='магнит.png'/>
         <CardComponent maket ='пятёрочка.png'/>
         <CardComponent  maket ='магнит.png'/>
       </View>
         </>: <View style={[{marginTop:'50%'}]}>
           <ActivityIndicator animating={true} size="large" color="#C5C5C5" />
         </View>}
-    </SafeAreaView>
+    </ScrollView>
   );
 }
 
@@ -168,10 +172,6 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: 'bold',
     marginTop:20,
-  },
-
-  images: {
-    marginTop: 20,
   },
 
   textMain: {

@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  StyleSheet,
-  TouchableNativeFeedback,
-  TouchableOpacity,
-  Text,
-} from 'react-native';
+import {StyleSheet, TouchableNativeFeedback, TouchableOpacity, Text} from 'react-native';
 import {responsiveFontSize} from 'react-native-responsive-dimensions';
 
 const GlobalButton = (props) => {

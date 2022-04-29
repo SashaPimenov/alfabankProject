@@ -1,15 +1,10 @@
 import React, {useState} from 'react';
-import {
-  StyleSheet,
-  View,
-  SafeAreaView,
-  TextInput,
-  Image, TouchableOpacity, Alert
-} from "react-native";
+import { StyleSheet, View, SafeAreaView, Image, TouchableOpacity, Alert } from "react-native";
 import {responsiveFontSize} from 'react-native-responsive-dimensions';
-import GlobalButton from "../GlobalButton.js";
 import Icon from 'react-native-vector-icons/AntDesign';
 import TextInputHidePassComponent from "../TextInputHidePassComponent";
+import GlobalButton from "../GlobalButton";
+import TextInputForLogin from "../TextInputForLogin";
 
 const RegistrationForm = ({navigation}) => {
   const [login, setLogin] = useState('');
@@ -35,16 +30,15 @@ const RegistrationForm = ({navigation}) => {
                   password: password
               })
           }).then(response => response.json());
-            console.log(data)
           Alert.alert(request.detail ? "" : 'Успешно', request.detail ? request.detail : 'Ваш аккаунт успешно зарегистрирован.', [
-            {text: "OK",onPress: request.detail? null : () =>
+            {text: "OK", onPress: request.detail? undefined : () =>
                 navigation.navigate('Auth')} ])
         }catch(e){
+          if (e instanceof Error) {
           Alert.alert("Ошибка", e.message, [
-            {text: "OK", onPress: () => (setPassword(''), setSecondPassword(''))}])
+            {text: "OK"}])  }  }
         }
       }
-  }
 
   const goBack = () => {
     navigation.goBack()
@@ -67,14 +61,7 @@ const RegistrationForm = ({navigation}) => {
 
       <View style={[{alignItems: 'center'}]}>
         <View style={[{flexDirection: "row", maxWidth: '100%'}]}>
-          <TextInput
-            style={styles.default}
-            value={login}
-            onChangeText={setLogin}
-            placeholder="Введите логин"
-            placeholderTextColor="#C5C5C5"
-            color="#ffffff"
-          />
+          <TextInputForLogin place = "Введите логин" value = {login} func = {setLogin} />
         </View>
         <View style={[{flexDirection: "row", maxWidth: '92%'}]}>
           <TextInputHidePassComponent place = {'Введите пароль'} value ={password} func = {setPassword}/>
@@ -89,26 +76,8 @@ const RegistrationForm = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
-  buttonText: {
-    color: '#434343',
-    fontWeight: 'bold',
-    fontSize: responsiveFontSize(2.0),
-    paddingHorizontal: '10%',
-  },
-
-  buttonStyle: {
-    borderStyle: 'solid',
-    borderRadius: 20,
-    backgroundColor: '#7FDA77',
-    justifyContent: 'center',
-    alignItems: 'center',
-    minHeight: 40,
-    minWidth: '40%',
-    maxWidth: '60%',
-    height: '5%',
-    marginTop: '10%',
-  },
   default: {
+    color:'#ffffff',
     borderStyle: 'solid',
     borderColor: '#C5C5C5',
     borderBottomWidth: 2,

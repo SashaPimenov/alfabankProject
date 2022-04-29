@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Icon from "react-native-vector-icons/Entypo";
 import { StyleSheet, TextInput, TouchableWithoutFeedback } from "react-native";
 import { responsiveFontSize } from "react-native-responsive-dimensions";
@@ -15,7 +15,7 @@ const TextInputHidePassComponent = (props) => {
       placeholder={props.place}
       placeholderTextColor="#C5C5C5"
       secureTextEntry={hidePass ? true : false}
-      color="#ffffff"
+      autoComplete='off'
     />
   <TouchableWithoutFeedback style={[{alignSelf: "center"}]} onPress={() => setHidePass(!hidePass)}>
     {hidePass ?
@@ -29,6 +29,7 @@ const TextInputHidePassComponent = (props) => {
 }
 const styles = StyleSheet.create({
   default: {
+    color:'#ffffff',
     borderStyle: 'solid',
     borderColor: '#C5C5C5',
     borderBottomWidth: 2,

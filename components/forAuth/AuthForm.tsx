@@ -1,19 +1,11 @@
 import React, {useState} from 'react';
-import {
-  StyleSheet,
-  View,
-  SafeAreaView,
-  TextInput,
-  TouchableOpacity,
-  Text,
-  TouchableNativeFeedback,
-  Image, Alert
-} from "react-native";
+import { StyleSheet, View, SafeAreaView, TouchableOpacity, Text, Image, Alert } from "react-native";
 import {responsiveFontSize} from 'react-native-responsive-dimensions';
-import GlobalButton from "../GlobalButton.js";
+import GlobalButton from "../GlobalButton";
 import { useAuth } from "./useAuth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import TextInputHidePassComponent from "../TextInputHidePassComponent";
+import TextInputForLogin from "../TextInputForLogin";
 
 const AuthForm = ({navigation}) => {
   const [login, setLogin] = useState('');
@@ -27,6 +19,8 @@ const AuthForm = ({navigation}) => {
 
   const LoadRegistration = () => {
     navigation.navigate('Registration')
+    setPassword('')
+    setLogin('')
   }
 
   async function request() {
@@ -45,8 +39,9 @@ const AuthForm = ({navigation}) => {
       })
       return await result.json()
     }catch(e){
+      if (e instanceof Error) {
       Alert.alert("Ошибка", e.message, [
-        {text: "OK"}])    }
+        {text: "OK"}])  }  }
   }
 
   const authFunction = async () => {
@@ -58,10 +53,10 @@ const AuthForm = ({navigation}) => {
     let a = await request();
       if (typeof a !== "undefined"){
       try {
+        await AsyncStorage.setItem('password', password)
         await AsyncStorage.setItem('token', a.access_token).then(() => {
           setIsAuth(true)
           navigation.navigate('AllCard')})
-        await AsyncStorage.setItem('password', password)
         setPassword('')
         setLogin('')
       } catch (e) {
@@ -82,41 +77,24 @@ const AuthForm = ({navigation}) => {
       </View>
       <View style={[{alignItems: 'center'}]}>
         <View style={[{flexDirection: 'row', maxWidth: '100%'}]}>
-          <TextInput
-            style={styles.default}
-            value={login}
-            onChangeText={setLogin}
-            placeholder="Login.."
-            placeholderTextColor="#C5C5C5"
-            keyboardType="email-address"
-            color="#ffffff"
-          />
+          <TextInputForLogin place = "Login.." value = {login} func = {setLogin} />
         </View>
 
         <View style={[{flexDirection: "row", maxWidth: '90%'}]}>
           <TextInputHidePassComponent place = {'Password..'} value ={password} func = {setPassword}/>
         </View>
-
         <GlobalButton text = {'Войти'} color = {'#7FDA77'} func = {authFunction} />
-
-        <TouchableNativeFeedback>
           <TouchableOpacity style={[{marginTop: '3%'}]} onPress={LoadRegistration}>
             <Text style={[{fontWeight: 'bold', color: '#C5C5C5'}] }>
               Зарегистрироваться
             </Text>
           </TouchableOpacity>
-        </TouchableNativeFeedback>
       </View>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  eye: {
-    height: 35,
-    width: 35,
-  },
-
   buttonText: {
     color: '#434343',
     fontWeight: 'bold',
@@ -145,6 +123,7 @@ const styles = StyleSheet.create({
     padding: '2%',
     width: '70%',
     fontSize: responsiveFontSize(2.2),
+    color:'#ffffff',
   },
 
   back: {

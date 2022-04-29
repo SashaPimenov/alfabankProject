@@ -1,11 +1,10 @@
-import React, { useEffect } from "react";
-import {Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import React from "react";
+import { StyleSheet, TouchableOpacity, View} from "react-native";
 import CameraComponent from "../components/forCamera/CameraComponent";
 import Icon from 'react-native-vector-icons/AntDesign';
 
-
-
 export default function CameraScreen({route, navigation}) {
+
   const goBack = () => {
     navigation.goBack()
   }
@@ -18,7 +17,7 @@ export default function CameraScreen({route, navigation}) {
         </TouchableOpacity>
       </View>
 
-      <CameraComponent chainStores={route.params.value} navigation ={navigation}/>
+      <CameraComponent chainStores={route?.params?.value} navigation ={navigation}/>
     </View>
   )}
 

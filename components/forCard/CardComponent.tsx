@@ -23,7 +23,6 @@ const CardComponent = (props) => {
             <Image style={[{transform: [{rotate: '90deg'}],marginTop:'18%', height:300,width:420}]} source={require('../../images/test.jpg')}/>
             <TouchableOpacity
               style={styles.button}
-              // source={{uri: 'file:///data/user/0/com.alfabankproject/cache/Camera/121be112-b971-42d9-a6ba-9681d2764351.jpg'}}
               onPress={() => setModalVisible(!modalVisible)}
             >
               <Text style={[{color:'#434343', fontWeight:'bold'}]}>Закрыть</Text>

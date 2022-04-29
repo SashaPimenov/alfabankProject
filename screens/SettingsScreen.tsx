@@ -8,20 +8,19 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import TextInputHidePassComponent from "../components/TextInputHidePassComponent";
 
 const SettingsScreen = ({navigation}) => {
-
   const [newPassword, setNewPassword] = useState('');
   const [oldPassword, setOldPassword] = useState('');
-
   const { isAuth, setIsAuth } = useAuth()
+
   const goBack = () => {
     navigation.goBack()
   }
 
   async function Exit () {
+    await AsyncStorage.removeItem('password')
     await AsyncStorage.removeItem('token').then(() => {
       setIsAuth(false)
-      navigation.navigate('Auth')
-    });
+      navigation.navigate('Auth')});
   }
 
   const updatePassword = async () => {
@@ -52,43 +51,44 @@ const SettingsScreen = ({navigation}) => {
               new_password: newPassword
             })
           }).then(response => response.json());
-          console.log(request)
+          await AsyncStorage.removeItem('password')
+          await AsyncStorage.setItem('password', newPassword)
           Alert.alert('Успешно', 'Ваш пароль сменён.', [
             { text: "OK", onPress: () => (setNewPassword(''), setOldPassword('')) }])
         } catch (e) {
-          Alert.alert("Ошибка", e.message, [
-            { text: "OK" }])
+          if (e instanceof Error) {
+            Alert.alert("Ошибка", e.message, [
+              {text: "OK"}])
+          }
         }
       }
     }
   }
+return (
+  <View style={styles.container}>
+  <View>
+    <TouchableOpacity onPress={goBack}>
+  <Icon style={[{marginLeft: 20, marginTop: 20}]} name={'arrowleft'} size={35} color={'#7FDA77'} />
+</TouchableOpacity>
+<Text style={styles.textSettings}>Настройки</Text>
+  </View>
 
-  return (
-    <View style={styles.container}>
+  <View style={[{alignItems: "center"}]}>
+<View style={[{flexDirection: "row"}]}>
+<TextInputHidePassComponent place ={'Старый пароль'} value ={oldPassword} func = {setOldPassword}/>
+</View>
 
-      <View>
-          <TouchableOpacity onPress={goBack}>
-            <Icon style={styles.back} name={'arrowleft'} size={35} color={'#7FDA77'} />
-          </TouchableOpacity>
-          <Text style={styles.textSettings}>Настройки</Text>
-      </View>
+<View style={[{flexDirection: "row"}]}>
+<TextInputHidePassComponent place ={'Новый пароль'} value ={newPassword} func = {setNewPassword}/>
+</View>
+<GlobalButton color = {'#7FDA77'} text = {'Сменить пароль'} func ={updatePassword}/>
+</View>
 
-      <View style={[{alignItems: "center"}]}>
-        <View style={[{flexDirection: "row"}]}>
-          <TextInputHidePassComponent place ={'Старый пароль'} value ={newPassword} func = {setNewPassword}/>
-        </View>
-
-        <View style={[{flexDirection: "row"}]}>
-          <TextInputHidePassComponent place ={'Новый пароль'} value ={oldPassword} func = {setOldPassword}/>
-        </View>
-        <GlobalButton color = {'#7FDA77'} text = {'Сменить пароль'} func ={updatePassword}/>
-      </View>
-
-      <View style={[{alignItems: "center", marginBottom:20}]}>
-        <GlobalButton color = {'#ff4c5b'}  text = {'Выйти из аккаунта'} func = {Exit} />
-      </View>
-    </View>
-  );
+<View style={[{alignItems: "center", marginBottom:20}]}>
+<GlobalButton color = {'#ff4c5b'}  text = {'Выйти из аккаунта'} func = {Exit} />
+</View>
+</View>
+);
 }
 
 const styles = StyleSheet.create({
@@ -115,12 +115,7 @@ const styles = StyleSheet.create({
     padding: '2%',
     width: '70%',
     fontSize: responsiveFontSize(2.2),
-  },
-
-  back: {
-    marginLeft: 20,
-    marginTop: 25,
-  },
+  }
 });
 
 export default SettingsScreen;
