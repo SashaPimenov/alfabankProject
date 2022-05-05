@@ -11,6 +11,8 @@ import { useAuth } from "../components/forAuth/useAuth";
 const Stack = createStackNavigator();
 
 export  default  function MainNavigate () {
+  const auth = useAuth()
+  console.log(auth)
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -18,22 +20,11 @@ export  default  function MainNavigate () {
         headerShown: false,
         animationEnabled: false,
       }}>
-        <Stack.Screen
-          name = 'Auth'
-          component={AuthForm}
-        />
-        <Stack.Screen
-        name = 'AllCard'
-        component={MainScreen} />
-        <Stack.Screen
-          name = 'Settings'
-          component={SettingsScreen} />
-        <Stack.Screen
-          name = 'Registration'
-          component={RegistrationForm} />
-        <Stack.Screen
-          name = 'Camera'
-          component={CameraScreen} />
+          <Stack.Screen name= {auth.isAuth? 'AllCard' : 'Auth' } component={auth.isAuth? MainScreen : AuthForm } />
+        <Stack.Screen name= {auth.isAuth? 'Auth' : 'AllCard' } component={auth.isAuth?  AuthForm : MainScreen } />
+          <Stack.Screen name = 'Settings' component={SettingsScreen} />
+          <Stack.Screen name = 'Registration' component={RegistrationForm} />
+          <Stack.Screen name = 'Camera' component={CameraScreen} />
       </Stack.Navigator>
     </NavigationContainer>
     )}

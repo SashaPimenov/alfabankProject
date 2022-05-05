@@ -14,6 +14,9 @@ import Geolocation, { GeolocationResponse } from "@react-native-community/geoloc
 import CardComponent from "../components/forCard/CardComponent";
 import { Picker } from "@react-native-picker/picker";
 import Icon from 'react-native-vector-icons/AntDesign';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from "axios";
+
 
 const MainScreen = ({navigation}) => {
 
@@ -25,6 +28,7 @@ const MainScreen = ({navigation}) => {
   const [modalVisible1, setModalVisible1] = useState(false);
   const [location, setLocation] = useState<GeolocationResponse>()
   const [value, setValue] = useState(null);
+  const [chainsStores, setChainsStores] = useState({})
 
   const  findCoordinates = () => {
     Geolocation.getCurrentPosition(
@@ -37,6 +41,30 @@ const MainScreen = ({navigation}) => {
       {enableHighAccuracy: true, timeout: 20000, maximumAge: 15000},
     );
   };
+
+  const getChainStore = async (coords) => {
+    try{
+      const token = await AsyncStorage.getItem('token');
+      if (token != null){
+        const request = await axios.get('http://192.248.177.166:8000/login/register',
+          {headers: {Authorization: 'Bearer ' + token},
+          data: {
+            // coords
+          }},
+          )
+        let allChainsStores = request.data.map((element, index) =>
+          new Object({label: element.stage_name, value: element.id} ) )
+      }
+    }catch(e){
+      if (e instanceof Error) {
+        Alert.alert("Ошибка", e.message, [
+          {text: "OK"}])}}
+    }
+
+    const allApiRequest = async () => {
+    const coords = await findCoordinates()
+    const chainStores = await getChainStore(coords)
+    }
 
   useEffect(() => {
       findCoordinates()
