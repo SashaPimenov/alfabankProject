@@ -131,10 +131,10 @@ const MainScreen = ({navigation}) => {
         </TouchableOpacity>
       </View>
       <View>
-        <CardComponent maket ='пятёрочка.png'/>
-        <CardComponent  maket ='магнит.png'/>
-        <CardComponent maket ='пятёрочка.png'/>
-        <CardComponent  maket ='магнит.png'/>
+        <CardComponent maket = "пятёрочка"/>
+        <CardComponent maket = "магнит"/>
+        <CardComponent maket = "пятёрочка"/>
+        <CardComponent maket = "магнит"/>
       </View>
         </>: <View style={[{marginTop:'50%'}]}>
           <ActivityIndicator animating={true} size="large" color="#C5C5C5" />

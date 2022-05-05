@@ -7,6 +7,10 @@ import {
 } from "react-native";
 
 const CardComponent = (props) => {
+  const designs={
+    m: require('../../images/магнит.png'),
+    p: require('../../images/пятёрочка.png')
+  }
   const [modalVisible, setModalVisible] = useState(false);
   return (
     <View style={[{backgroundColor: '#232323', marginTop:70}]}>
@@ -32,7 +36,11 @@ const CardComponent = (props) => {
       </Modal>
 
       <TouchableOpacity onPress={() => setModalVisible(true)}>
-      <Image style={styles.card} source={require('../../images/пятёрочка.png')} />
+        {props.maket === "магнит" ?
+          <Image style={styles.card} source = {designs.m} />
+        :
+          <Image style={styles.card} source = {designs.p} />
+        }
       </TouchableOpacity>
     </View>
   );

@@ -64,12 +64,12 @@ const RegistrationForm = ({navigation}) => {
           <TextInputForLogin place = "Введите логин" value = {login} func = {setLogin} />
         </View>
         <View style={[{flexDirection: "row", maxWidth: '92%'}]}>
-          <TextInputHidePassComponent place = {'Введите пароль'} value ={password} func = {setPassword}/>
+          <TextInputHidePassComponent place = 'Введите пароль' value ={password} func = {setPassword}/>
         </View>
         <View style={[{flexDirection: "row", maxWidth: '92%'}]}>
-          <TextInputHidePassComponent place = {'Повторите пароль'} value ={secondPassword} func = {setSecondPassword}/>
+          <TextInputHidePassComponent place = 'Повторите пароль' value ={secondPassword} func = {setSecondPassword}/>
         </View>
-        <GlobalButton color = {'#7FDA77'} text = {'Зарегистрироваться'} func = {registrationFunc}/>
+        <GlobalButton color = {'#7FDA77'} text = 'Зарегистрироваться' func = {registrationFunc}/>
       </View>
     </SafeAreaView>
   );
