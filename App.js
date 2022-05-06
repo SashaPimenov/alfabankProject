@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Alert, StyleSheet, View } from "react-native";
+import { ActivityIndicator, Alert, StyleSheet, View } from "react-native";
 import Main from './components/Main';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {AuthContext} from "./components/forAuth/AuthContext";
@@ -7,6 +7,7 @@ import axios from "axios";
 
 export default function App() {
   const [isAuth, setIsAuth] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const checkAuth = async() => {
     try{
@@ -18,6 +19,7 @@ export default function App() {
             setIsAuth(true);
           })
       }
+      setIsLoading(true)
     }catch(e){
       Alert.alert("Ошибка", e.message, [
         {text: "OK"}])}
@@ -30,7 +32,12 @@ export default function App() {
   return (
     <AuthContext.Provider value={{ isAuth, setIsAuth }}>
       <View style={styles.container}>
-        <Main/>
+        {isLoading ?
+          <Main /> :
+          <View style={[{marginTop:'50%'}]}>
+            <ActivityIndicator animating={true} size="large" color="#C5C5C5" />
+          </View>
+        }
       </View>
     </AuthContext.Provider>
   );

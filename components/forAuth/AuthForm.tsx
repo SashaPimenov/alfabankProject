@@ -12,10 +12,6 @@ const AuthForm = ({navigation}) => {
   const [password, setPassword] = useState('');
   const { isAuth, setIsAuth } = useAuth()
 
-  React.useEffect(() => {
-    if (isAuth)
-      navigation.navigate('AllCard')
-  }, )
 
   const LoadRegistration = () => {
     navigation.navigate('Registration')

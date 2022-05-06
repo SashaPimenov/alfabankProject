@@ -28,7 +28,7 @@ const MainScreen = ({navigation}) => {
   const [modalVisible1, setModalVisible1] = useState(false);
   const [location, setLocation] = useState<GeolocationResponse>()
   const [value, setValue] = useState(null);
-  const [chainsStores, setChainsStores] = useState({})
+  const [chainsStores, setChainsStores] = useState<any[]>([])
 
   const  findCoordinates = () => {
     Geolocation.getCurrentPosition(
@@ -42,18 +42,21 @@ const MainScreen = ({navigation}) => {
     );
   };
 
-  const getChainStore = async (coords) => {
+  const getChainStore = async () => {
     try{
       const token = await AsyncStorage.getItem('token');
       if (token != null){
-        const request = await axios.get('http://192.248.177.166:8000/login/register',
-          {headers: {Authorization: 'Bearer ' + token},
-          data: {
-            // coords
-          }},
-          )
-        let allChainsStores = request.data.map((element, index) =>
-          new Object({label: element.stage_name, value: element.id} ) )
+        const url = 'http://192.248.177.166:8000/store_chains/';
+        const request = await fetch(url, {
+          method: 'GET',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'multipart/form-data'
+          }
+        }).then(request => request.json())
+        const allChainsStores = request.map((element, index) =>
+          new Object({label: element.name, value: element.id} ) )
+        setChainsStores(allChainsStores)
       }
     }catch(e){
       if (e instanceof Error) {
@@ -63,13 +66,14 @@ const MainScreen = ({navigation}) => {
 
     const allApiRequest = async () => {
     const coords = await findCoordinates()
-    const chainStores = await getChainStore(coords)
+    const chainStores = await getChainStore()
     }
 
   useEffect(() => {
-      findCoordinates()
+     allApiRequest()
     },
     []);
+
 
   const LoadSettings = () => {
     navigation.navigate('Settings')
@@ -81,7 +85,7 @@ const MainScreen = ({navigation}) => {
 
   return (
     <ScrollView style={[{flex: 1, backgroundColor: '#232323'}]}>
-      {location?.coords ?
+      {location?.coords && chainsStores[0]?.label ?
         <>
           <Modal
             animationType="slide"
@@ -103,8 +107,8 @@ const MainScreen = ({navigation}) => {
                   style={[{fontSize: 10,color: '#C5C5C5',fontWeight: 'bold'}]}
                   dropdownIconColor={'#C5C5C5'}>
                   <Picker.Item label="Выберите магазин" value={null} style={styles.pickerItemStyle} />
-                  <Picker.Item label="Пятёрочка" value={1} style={styles.pickerItemStyle} />
-                  <Picker.Item label="Магнит" value={2} style={styles.pickerItemStyle} />
+                  {chainsStores.map(store => <Picker.Item label={store.label} value={store.value} key={store.value}
+                                                   style={styles.pickerItemStyle}/>)}
                 </Picker>
                 </View>
                 <View style={[{flexDirection: 'row',justifyContent: 'space-evenly',minWidth: '90%', maxWidth: '100%'}]}>
