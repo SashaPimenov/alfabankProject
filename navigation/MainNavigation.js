@@ -12,7 +12,6 @@ const Stack = createStackNavigator();
 
 export  default  function MainNavigate () {
   const auth = useAuth()
-  console.log(auth)
   return (
     <NavigationContainer>
       <Stack.Navigator

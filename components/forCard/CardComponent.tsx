@@ -8,8 +8,7 @@ import {
 
 const CardComponent = (props) => {
   const designs={
-    m: require('../../images/магнит.png'),
-    p: require('../../images/пятёрочка.png')
+    m: props.storeChain === 2? require('../../images/магнит.png') :  require('../../images/пятёрочка.png'),
   }
   const [modalVisible, setModalVisible] = useState(false);
   return (
@@ -24,7 +23,7 @@ const CardComponent = (props) => {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Image style={[{transform: [{rotate: '90deg'}],marginTop:'18%', height:300,width:420}]} source={require('../../images/test.jpg')}/>
+            <Image style={[{transform: [{rotate: '90deg'}],marginTop:'18%', height:300,width:420}]} source={{uri: props.image}}/>
             <TouchableOpacity
               style={styles.button}
               onPress={() => setModalVisible(!modalVisible)}
@@ -36,11 +35,7 @@ const CardComponent = (props) => {
       </Modal>
 
       <TouchableOpacity onPress={() => setModalVisible(true)}>
-        {props.maket === "магнит" ?
           <Image style={styles.card} source = {designs.m} />
-        :
-          <Image style={styles.card} source = {designs.p} />
-        }
       </TouchableOpacity>
     </View>
   );
