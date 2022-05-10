@@ -43,7 +43,7 @@ const SettingsScreen = ({navigation}) => {
           let request = await fetch(url, {
             method: 'PUT',
             headers: {
-              'Authorization': 'Bearer ' + token,
+              "Authorization": "Bearer " + token,
               Accept: 'application/json',
               'Content-Type': 'application/json'
             },

@@ -29,7 +29,7 @@ const TextInputHidePassComponent = (props) => {
 }
 const styles = StyleSheet.create({
   default: {
-    color:'#ffffff',
+    color: "#ffffff",
     borderStyle: 'solid',
     borderColor: '#C5C5C5',
     borderBottomWidth: 2,

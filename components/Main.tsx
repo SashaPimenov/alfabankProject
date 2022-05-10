@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 import MainNavigate from "../navigation/MainNavigation";
 
 export default function Main() {
   return (
-      <MainNavigate/>
+    <MainNavigate />
   );
 }
