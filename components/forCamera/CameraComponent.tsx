@@ -16,6 +16,13 @@ export default class CameraComponent extends PureComponent<{
 
   camera: any;
 
+  updateStack = () => {
+    this.props.navigation.reset({
+      index: 0,
+      routes: [{ name: 'AllCard' }]
+    })
+  }
+
   addCard = async (image) => {
     try {
       let token = await AsyncStorage.getItem("token");
@@ -37,7 +44,7 @@ export default class CameraComponent extends PureComponent<{
       }).then(response => response.json());
       console.log(data);
       Alert.alert(data.id ? "Успешно" : "Ошибка", data.id ? "Вы добавили карту" : "Не удалось сохранить карту", [
-        { text: "OK", onPress: () => this.props.navigation.navigate("AllCard") }]);
+        { text: "OK", onPress: () => (this.props.navigation.navigate("AllCard"), this.updateStack())}]);
     } catch (e: any) {
       Alert.alert("Ошибка", e.message, [
         { text: "OK" }]);

@@ -10,6 +10,7 @@ const TextInputForLogin = (props) => {
       onChangeText={props.func}
       placeholder={props.place}
       placeholderTextColor="#C5C5C5"
+      autoCapitalize={"none"}
     />
   );
 };

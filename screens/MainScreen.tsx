@@ -57,7 +57,6 @@ const MainScreen = ({ navigation }) => {
         const allChainsStores = request.map((element, index) =>
           new Object({ label: element.name, value: element.id }));
         setChainsStores(allChainsStores);
-        console.log(chainsStores);
       }
     } catch (e) {
       if (e instanceof Error) {
@@ -81,7 +80,6 @@ const MainScreen = ({ navigation }) => {
           }
         }).then(response => response.json());
         setAllCard(request);
-        console.log(allCard);
       }
     } catch (e) {
       if (e instanceof Error) {
@@ -112,8 +110,6 @@ const MainScreen = ({ navigation }) => {
 
   return (
     <ScrollView style={[{ flex: 1, backgroundColor: "#232323" }]}>
-      {location?.coords && chainsStores[0]?.label && allCard !== null ?
-        <>
           <Modal
             animationType="slide"
             transparent={true}
@@ -163,6 +159,8 @@ const MainScreen = ({ navigation }) => {
               <Icon style={[{ marginTop: 20, marginRight: 20 }]} name={"pluscircleo"} size={30} color={"#C5C5C5"} />
             </TouchableOpacity>
           </View>
+          {location?.coords && chainsStores[0]?.label && allCard !== null ?
+            <>
           {
             !allCard.length ?
               <View style={[{ marginTop: "50%" }]}>
@@ -178,9 +176,9 @@ const MainScreen = ({ navigation }) => {
                 {allCard.map(card => <CardComponent image={card.image_url} storeChain={card.store_chain_id}
                                                     key={card.id} />)}
               </View>}
-        </> : <View style={[{ marginTop: "50%" }]}>
-          <ActivityIndicator animating={true} size="large" color="#C5C5C5" />
-        </View>}
+          </> : <View style={[{ marginTop: "50%" }]}>
+              <ActivityIndicator animating={true} size="large" color="#C5C5C5" />
+            </View>}
     </ScrollView>
   );
 };
