@@ -24,8 +24,8 @@ const CardComponent = (props) => {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Image style={[{ transform: [{ rotate: "90deg" }], marginTop: "18%", height: 300, width: 420 }]}
-                   source={{ uri: props.image }} />
+            <Image style={[{height: '97%', width: '100%', borderRadius: 20 }]}
+                   source={{ uri: props.image}} />
             <TouchableOpacity
               style={styles.button}
               onPress={() => setModalVisible(!modalVisible)}
@@ -46,24 +46,25 @@ const CardComponent = (props) => {
 const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
-    justifyContent: "center",
+    marginTop: '4%',
     alignItems: "center"
   },
 
   modalView: {
-    width: "85%",
-    height: "70%",
+    width: "95%",
+    height: "95%",
     backgroundColor: "#403a3a",
     borderRadius: 20,
-    padding: 35,
+    padding: 15,
+    paddingBottom: 25,
     alignItems: "center"
   },
   button: {
     borderRadius: 20,
     paddingVertical: 5,
-    marginTop: "32%",
     backgroundColor: "#ff4c5b",
-    paddingHorizontal: 8
+    paddingHorizontal: 8,
+    marginTop: 7
   },
 
   card: {
