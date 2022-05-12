@@ -4,7 +4,6 @@ import { Alert, StyleSheet, TouchableOpacity, View } from "react-native";
 import BarcodeMask from "react-native-barcode-mask";
 import Icon from "react-native-vector-icons/Ionicons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { NavigationActions, StackActions } from "react-navigation";
 
 export default class CameraComponent extends PureComponent<{
   chainStores: number;
@@ -27,6 +26,7 @@ export default class CameraComponent extends PureComponent<{
     try {
       let token = await AsyncStorage.getItem("token");
       const url = "http://192.248.177.166:8000/cards/add?store_chain_id=" + this.props.chainStores.toString();
+      console.log(url)
       let file = {
         uri: image.uri,
         type: "image/jpg",
@@ -34,6 +34,7 @@ export default class CameraComponent extends PureComponent<{
       };
       let formData = new FormData();
       formData.append("image", file);
+      console.log(formData)
       const data = await fetch(url, {
         method: "POST",
         headers: {
@@ -86,7 +87,7 @@ export default class CameraComponent extends PureComponent<{
             buttonPositive: "Ok",
             buttonNegative: "Cancel"
           }}>
-          <BarcodeMask showAnimatedLine={false} width={350} height={250} edgeColor={"#7FDA77"} />
+          <BarcodeMask showAnimatedLine={false} width={'93%'} height={'80%'} edgeColor={"#7FDA77"} />
           <View style={{ justifyContent: "center" }}>
             <TouchableOpacity onPress={this.takePicture.bind(this)} style={styles.capture}>
               <Icon style={styles.cameraButton} name={"camera-outline"} size={60} color={"#C5C5C5"} />
@@ -120,7 +121,7 @@ const styles = StyleSheet.create({
   },
   capture: {
     justifyContent: "center",
-    marginBottom: 40,
+    marginBottom: 10,
     width: 70,
     height: 70
   }

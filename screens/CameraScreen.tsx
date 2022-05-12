@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View,Text } from "react-native";
 import CameraComponent from "../components/forCamera/CameraComponent";
 import Icon from "react-native-vector-icons/AntDesign";
 
@@ -17,7 +17,7 @@ export default function CameraScreen({ route, navigation }) {
         </TouchableOpacity>
       </View>
 
-      <CameraComponent chainStores={route?.params?.value} navigation={navigation}/>
+      <CameraComponent chainStores={route.params.value} navigation={navigation}/>
     </View>
   );
 }
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
 
   back: {
     marginLeft: 20,
-    marginTop: 25
+    marginTop: 10
   }
 });
 

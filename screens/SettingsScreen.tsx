@@ -12,12 +12,12 @@ const SettingsScreen = ({ navigation }) => {
   const [oldPassword, setOldPassword] = useState("");
   const { isAuth, setIsAuth } = useAuth();
 
-  const updateStack = () => {
-    navigation.reset({
-      index: 0,
-      routes: [{ name: 'Auth' }]
-    })
-  }
+  // const updateStack = () => {
+  //   navigation.reset({
+  //     index: 0,
+  //     routes: [{ name: 'Auth' }]
+  //   })
+  // }
 
   const goBack = () => {
     navigation.goBack();
@@ -27,7 +27,7 @@ const SettingsScreen = ({ navigation }) => {
     await AsyncStorage.removeItem("password");
     await AsyncStorage.removeItem("token").then(() => {
       setIsAuth(false);
-      updateStack()
+      // updateStack()
       navigation.navigate("Auth");
     });
   }
@@ -71,9 +71,9 @@ const SettingsScreen = ({ navigation }) => {
   };
   return (
     <View style={styles.container}>
-      <View>
+      <View  style={[{marginTop:10, marginHorizontal:20 }]}>
         <TouchableOpacity onPress={goBack}>
-          <Icon style={[{ marginLeft: 20, marginTop: 20 }]} name={"arrowleft"} size={35} color={"#7FDA77"} />
+          <Icon  name={"arrowleft"} size={35} color={"#7FDA77"} />
         </TouchableOpacity>
         <Text style={styles.textSettings}>Настройки</Text>
       </View>
@@ -105,8 +105,7 @@ const styles = StyleSheet.create({
 
   textSettings: {
     color: "#C5C5C5",
-    fontSize: 22,
-    marginTop: 20,
+    fontSize: 25,
     fontWeight: "bold",
     position: "absolute",
     alignSelf: "center"

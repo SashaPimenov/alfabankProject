@@ -109,7 +109,7 @@ const MainScreen = ({ navigation }) => {
   };
 
   return (
-    <ScrollView style={[{ flex: 1, backgroundColor: "#232323" }]}>
+    <View style={[{ flex: 1, backgroundColor: "#232323" }]}>
           <Modal
             animationType="slide"
             transparent={true}
@@ -150,15 +150,16 @@ const MainScreen = ({ navigation }) => {
             </View>
           </Modal>
 
-          <View style={[{ flexDirection: "row", justifyContent: "space-between" }]}>
+          <View style={[{ paddingBottom:20,flexDirection: "row", justifyContent: "space-between", marginTop:10, marginHorizontal:20 }]}>
             <TouchableOpacity onPress={LoadSettings}>
-              <Icon style={[{ marginTop: 20, marginLeft: 20 }]} name={"setting"} size={30} color={"#C5C5C5"} />
+              <Icon name={"setting"} size={30} color={"#C5C5C5"} />
             </TouchableOpacity>
             <Text style={styles.textSettings}>Ваши карты</Text>
             <TouchableOpacity onPress={() => setModalVisible1(true)}>
-              <Icon style={[{ marginTop: 20, marginRight: 20 }]} name={"pluscircleo"} size={30} color={"#C5C5C5"} />
+              <Icon name={"pluscircleo"} size={30} color={"#C5C5C5"} />
             </TouchableOpacity>
           </View>
+      <ScrollView style={[{ flex: 1, backgroundColor: "#232323" }]}>
           {location?.coords && chainsStores[0]?.label && allCard !== null ?
             <>
           {
@@ -179,7 +180,8 @@ const MainScreen = ({ navigation }) => {
           </> : <View style={[{ marginTop: "50%" }]}>
               <ActivityIndicator animating={true} size="large" color="#C5C5C5" />
             </View>}
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 };
 
@@ -237,9 +239,8 @@ const styles = StyleSheet.create({
 
   textSettings: {
     color: "#C5C5C5",
-    fontSize: 22,
+    fontSize: 25,
     fontWeight: "bold",
-    marginTop: 20
   },
 
   textMain: {
