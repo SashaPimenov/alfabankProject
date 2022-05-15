@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, View, SafeAreaView, Image, TouchableOpacity, Alert } from "react-native";
+import { StyleSheet, View, SafeAreaView, Image, TouchableOpacity, Alert, Text } from "react-native";
 import { responsiveFontSize } from "react-native-responsive-dimensions";
 import Icon from "react-native-vector-icons/AntDesign";
 import TextInputHidePassComponent from "../TextInputHidePassComponent";
@@ -10,11 +10,15 @@ const RegistrationForm = ({ navigation }) => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [secondPassword, setSecondPassword] = useState("");
+  const [error, setError] = useState(false);
+  const [text, setText] = useState('');
 
   const registrationFunc = async () => {
     if (password !== secondPassword || login === "" || password === "") {
-      Alert.alert("Ошибка", "Пароли не совпадают или не все поля заполнены", [
-        { text: "OK", onPress: () => (setPassword(""), setSecondPassword("")) }]);
+      setError(true)
+      setText("Пароли не совпадают или не все поля заполнены")
+      setPassword('')
+      setSecondPassword('')
     } else {
       try {
         const url = "http://192.248.177.166:8000/login/register";
@@ -36,8 +40,8 @@ const RegistrationForm = ({ navigation }) => {
           }]);
       } catch (e) {
         if (e instanceof Error) {
-          Alert.alert("Ошибка", e.message, [
-            { text: "OK" }]);
+          setError(true)
+          setText(e.message)
         }
       }
     }
@@ -45,7 +49,12 @@ const RegistrationForm = ({ navigation }) => {
 
   const goBack = () => {
     navigation.goBack();
+    setError(false)
   };
+
+  const focus = () => {
+    setError(false)
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -64,16 +73,18 @@ const RegistrationForm = ({ navigation }) => {
 
       <View style={[{ alignItems: "center" }]}>
         <View style={[{ flexDirection: "row", maxWidth: "100%" }]}>
-          <TextInputForLogin place="Введите логин" value={login} func={setLogin} />
+          <TextInputForLogin place="Введите логин" value={login} func={setLogin}  focus = {focus}/>
         </View>
         <View style={[{ flexDirection: "row", maxWidth: "92%" }]}>
-          <TextInputHidePassComponent place="Введите пароль" value={password} func={setPassword} />
+          <TextInputHidePassComponent place="Введите пароль" value={password} func={setPassword}  focus = {focus}/>
         </View>
         <View style={[{ flexDirection: "row", maxWidth: "92%" }]}>
-          <TextInputHidePassComponent place="Повторите пароль" value={secondPassword} func={setSecondPassword} />
+          <TextInputHidePassComponent place="Повторите пароль" value={secondPassword} func={setSecondPassword}  focus = {focus}/>
         </View>
         <GlobalButton color={"#7FDA77"} text="Зарегистрироваться" func={registrationFunc} />
       </View>
+
+      {error && <Text style={[{fontSize: 14,marginTop:'7%' ,color: "#ff4c5b", fontWeight:'bold', alignSelf:'center'}]}>{text}</Text>}
     </SafeAreaView>
   );
 };

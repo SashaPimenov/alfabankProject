@@ -15,6 +15,7 @@ const TextInputHidePassComponent = (props) => {
       placeholder={props.place}
       placeholderTextColor="#C5C5C5"
       secureTextEntry={hidePass ? true : false}
+      onFocus={props.focus}
     />
   <TouchableWithoutFeedback style={[{alignSelf: "center"}]} onPress={() => setHidePass(!hidePass)}>
     {hidePass ?

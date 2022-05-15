@@ -11,12 +11,15 @@ const AuthForm = ({ navigation }) => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const { isAuth, setIsAuth } = useAuth();
+  const [error, setError] = useState(false);
+  const [text, setText] = useState('');
 
 
   const LoadRegistration = () => {
     navigation.navigate("Registration");
     setPassword("");
     setLogin("");
+    setError(false)
   };
 
   async function request() {
@@ -36,16 +39,20 @@ const AuthForm = ({ navigation }) => {
       return await result.json();
     } catch (e) {
       if (e instanceof Error) {
-        Alert.alert("Ошибка", e.message, [
-          { text: "OK" }]);
+        setError(true)
+        setText(e.message)
       }
     }
   }
 
+  const focus = () => {
+    setError(false)
+  }
+
   const authFunction = async () => {
     if (login === "" || password === "") {
-      Alert.alert("Ошибка", "Не все поля заполнены", [
-        { text: "OK" }]);
+      setError(true)
+      setText("Не все поля заполнены")
     } else {
       let a = await request();
       if (typeof a !== "undefined") {
@@ -54,13 +61,14 @@ const AuthForm = ({ navigation }) => {
           await AsyncStorage.setItem("token", a.access_token).then(() => {
             setIsAuth(true);
             navigation.navigate("AllCard");
+            setError(false)
           });
           setPassword("");
           setLogin("");
         } catch (e) {
-          Alert.alert("Ошибка", "Неправильный логин или пароль", [
-            { text: "OK" }
-          ]);
+          setError(true)
+          setText("Неправильный логин или пароль")
+          setPassword('')
         }
       }
     }
@@ -76,11 +84,11 @@ const AuthForm = ({ navigation }) => {
       </View>
       <View style={[{ alignItems: "center" }]}>
         <View style={[{ flexDirection: "row", maxWidth: "100%" }]}>
-          <TextInputForLogin place="Login.." value={login} func={setLogin} />
+          <TextInputForLogin place="Login.." value={login} func={setLogin} focus = {focus}/>
         </View>
 
         <View style={[{ flexDirection: "row", maxWidth: "90%" }]}>
-          <TextInputHidePassComponent place={"Password.."} value={password} func={setPassword} />
+          <TextInputHidePassComponent place={"Password.."} value={password} func={setPassword} focus = {focus} />
         </View>
         <GlobalButton text={"Войти"} color={"#7FDA77"} func={authFunction} />
         <TouchableOpacity style={[{ marginTop: "3%" }]} onPress={LoadRegistration}>
@@ -88,6 +96,8 @@ const AuthForm = ({ navigation }) => {
             Зарегистрироваться
           </Text>
         </TouchableOpacity>
+
+        {error && <Text style={[{fontSize: 15,marginTop:'5%' ,color: "#ff4c5b", fontWeight:'bold', alignSelf:'center'}]}>{text}</Text>}
       </View>
     </SafeAreaView>
   );

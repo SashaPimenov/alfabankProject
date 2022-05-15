@@ -11,13 +11,9 @@ const SettingsScreen = ({ navigation }) => {
   const [newPassword, setNewPassword] = useState("");
   const [oldPassword, setOldPassword] = useState("");
   const { isAuth, setIsAuth } = useAuth();
-
-  // const updateStack = () => {
-  //   navigation.reset({
-  //     index: 0,
-  //     routes: [{ name: 'Auth' }]
-  //   })
-  // }
+  const [error, setError] = useState(false);
+  const [text, setText] = useState('');
+  const [isSucccess, setIsSuccess] = useState(false)
 
   const goBack = () => {
     navigation.goBack();
@@ -27,20 +23,21 @@ const SettingsScreen = ({ navigation }) => {
     await AsyncStorage.removeItem("password");
     await AsyncStorage.removeItem("token").then(() => {
       setIsAuth(false);
-      // updateStack()
       navigation.navigate("Auth");
     });
   }
 
+
   const updatePassword = async () => {
     const rightOldPassword = await AsyncStorage.getItem("password");
-    if (oldPassword !== rightOldPassword) {
-      Alert.alert("Ошибка", "Вы ввели неправильный старый пароль.", [
-        { text: "OK" }]);
+    console.log(rightOldPassword)
+    if (oldPassword !== rightOldPassword || oldPassword === '' || newPassword === '') {
+      setError(true)
+      setText("Вы ввели неправильный старый пароль")
     } else {
       if (oldPassword === newPassword) {
-        Alert.alert("Ошибка", "Пароли совпадают.", [
-          { text: "OK" }]);
+        setError(true)
+        setText("Пароли совпадают")
       } else {
         try {
           let url = "http://192.248.177.166:8000/login/change_password";
@@ -58,17 +55,24 @@ const SettingsScreen = ({ navigation }) => {
           }).then(response => response.json());
           await AsyncStorage.removeItem("password");
           await AsyncStorage.setItem("password", newPassword);
-          Alert.alert("Успешно", "Ваш пароль сменён.", [
-            { text: "OK", onPress: () => (setNewPassword(""), setOldPassword("")) }]);
+          setError(true)
+          setText("Вы сменили пароль")
+          setIsSuccess(true)
         } catch (e) {
           if (e instanceof Error) {
-            Alert.alert("Ошибка", e.message, [
-              { text: "OK" }]);
+            setError(true)
+            setText(e.message)
           }
         }
       }
     }
   };
+
+  const focus = () => {
+    setError(false)
+    setIsSuccess(false)
+  }
+
   return (
     <View style={styles.container}>
       <View  style={[{marginTop:10, marginHorizontal:20 }]}>
@@ -80,13 +84,17 @@ const SettingsScreen = ({ navigation }) => {
 
       <View style={[{ alignItems: "center" }]}>
         <View style={[{ flexDirection: "row" }]}>
-          <TextInputHidePassComponent place={"Старый пароль"} value={oldPassword} func={setOldPassword} />
+          <TextInputHidePassComponent place={"Старый пароль"} value={oldPassword} func={setOldPassword} focus = {focus} />
         </View>
 
         <View style={[{ flexDirection: "row" }]}>
-          <TextInputHidePassComponent place={"Новый пароль"} value={newPassword} func={setNewPassword} />
+          <TextInputHidePassComponent place={"Новый пароль"} value={newPassword} func={setNewPassword} focus = {focus}/>
         </View>
         <GlobalButton color={"#7FDA77"} text={"Сменить пароль"} func={updatePassword} />
+
+        {error && <Text style={[{fontSize: 15,marginTop:'5%' ,color: !isSucccess? "#ff4c5b" : "#7FDA77", fontWeight:'bold', alignSelf:'center'}]}>{text}</Text>}
+
+
       </View>
 
       <View style={[{ alignItems: "center", marginBottom: 20 }]}>

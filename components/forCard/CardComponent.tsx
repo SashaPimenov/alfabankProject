@@ -8,14 +8,20 @@ import {
 import Icon from "react-native-vector-icons/AntDesign";
 
 const CardComponent = (props) => {
-
   const [loadImage, setLoadImage] = useState<boolean>(false)
-  const designs = {
-    m: props.storeChain === 2 ? require("../../images/магнит.png") : require("../../images/пятёрочка.png")
-  };
   const [modalVisible, setModalVisible] = useState(false);
+
+  const designs = GetDesigns(props.storeChain)
+
+  function GetDesigns(x) {
+    switch (x){
+      case 1:  return  require("../../images/пятёрочка.png")
+      case 2:  return require("../../images/магнит.png")
+      case 3:  return require("../../images/перекрёсток.png")
+    }
+  }
   return (
-    <View style={[{ backgroundColor: "#232323", marginTop: 40, marginBottom:15 }]}>
+    <View style={[{ backgroundColor: "#232323", marginTop: 25, marginBottom:30}]}>
       <Modal
         animationType="slide"
         transparent={true}
@@ -26,6 +32,11 @@ const CardComponent = (props) => {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
+            <View style={styles.buttonClose}>
+              <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
+                <Icon  name={"close"} size={25}/>
+              </TouchableOpacity>
+            </View>
             {loadImage ? null :
               <>
                 <View style={[{marginTop:'50%'}]}>
@@ -34,31 +45,17 @@ const CardComponent = (props) => {
               </> }
             <Image style={[{height: '97%', width: '100%', borderRadius: 20 }]}
                    source={{ uri: props.image}} onLoad={() => setLoadImage(true)}/>
-
-            <View style={[{flexDirection: 'row', justifyContent: 'flex-end'}]}>
               <View style={styles.buttonDelete}>
-                <TouchableOpacity
-                    onPress={() => setModalVisible(!modalVisible)}
-                >
+                <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
                   <Text style={[{color: '#434343', fontSize: 15, fontWeight: "bold",}]}>Удалить карту</Text>
                 </TouchableOpacity>
               </View>
-
-              <View style={styles.buttonClose}>
-                <TouchableOpacity
-                    onPress={() => setModalVisible(!modalVisible)}
-                >
-                  <Icon  name={"close"} size={25} color={"#434343"} />
-                </TouchableOpacity>
-              </View>
-            </View>
-
           </View>
         </View>
       </Modal>
         <TouchableOpacity onPress={() => setModalVisible(true)} >
           <View>
-        <Image source={designs.m}  style={styles.card}/>
+        <Image source={designs}  style={styles.card}/>
           </View>
       </TouchableOpacity>
     </View>
@@ -79,16 +76,14 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 15,
     paddingBottom: 25,
-    //alignItems: "center",
 
   },
   buttonClose: {
-    alignSelf: 'flex-end',
+    alignSelf: "flex-end",
     borderRadius: 20,
-    backgroundColor: "#ff4c5b",
-    marginTop: '2%',
-    marginRight: '5%',
-    zIndex: 2
+    backgroundColor: "#C5C5C5",
+    zIndex: 2,
+    position:"absolute"
   },
 
   buttonDelete: {
@@ -96,14 +91,13 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     backgroundColor: "#ff4c5b",
     marginTop: '2%',
-    marginRight: '20%',
     zIndex: 2,
     paddingHorizontal: 10,
-    paddingVertical: 3
+    paddingVertical: 3,
     },
 
   card: {
-    width: '80%',
+    width: '83%',
     height: 210,
     alignSelf: "center",
   }
