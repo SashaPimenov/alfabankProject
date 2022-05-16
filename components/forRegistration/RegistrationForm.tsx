@@ -12,6 +12,8 @@ const RegistrationForm = ({ navigation }) => {
   const [secondPassword, setSecondPassword] = useState("");
   const [error, setError] = useState(false);
   const [text, setText] = useState('');
+  const [isSuccess, setIsSuccess] = useState(false)
+
 
   const registrationFunc = async () => {
     if (password !== secondPassword || login === "" || password === "") {
@@ -33,11 +35,18 @@ const RegistrationForm = ({ navigation }) => {
             password: password
           })
         }).then(response => response.json());
-        Alert.alert(request.detail ? "" : "Успешно", request.detail ? request.detail : "Ваш аккаунт успешно зарегистрирован.", [
-          {
-            text: "OK", onPress: request.detail ? undefined : () =>
-              navigation.navigate("Auth")
-          }]);
+        if (request.detail) {
+          setError(true)
+          setText('Пользователь с таким логином уже существует')
+          setPassword('')
+          setSecondPassword('')
+        } else {
+          setIsSuccess(true)
+          setError(true)
+          setText('Вы успешно зарегистрировались')
+          setTimeout(
+            () => navigation.navigate('Auth'),1000)
+        }
       } catch (e) {
         if (e instanceof Error) {
           setError(true)
@@ -84,7 +93,7 @@ const RegistrationForm = ({ navigation }) => {
         <GlobalButton color={"#7FDA77"} text="Зарегистрироваться" func={registrationFunc} />
       </View>
 
-      {error && <Text style={[{fontSize: 14,marginTop:'7%' ,color: "#ff4c5b", fontWeight:'bold', alignSelf:'center'}]}>{text}</Text>}
+      {error && <Text style={[{fontSize: 14,marginTop:'7%' ,color: !isSuccess? "#ff4c5b" : "#7FDA77", fontWeight:'bold', alignSelf:'center'}]}>{text}</Text>}
     </SafeAreaView>
   );
 };

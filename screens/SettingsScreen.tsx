@@ -13,7 +13,7 @@ const SettingsScreen = ({ navigation }) => {
   const { isAuth, setIsAuth } = useAuth();
   const [error, setError] = useState(false);
   const [text, setText] = useState('');
-  const [isSucccess, setIsSuccess] = useState(false)
+  const [isSuccess, setIsSuccess] = useState(false)
 
   const goBack = () => {
     navigation.goBack();
@@ -30,7 +30,6 @@ const SettingsScreen = ({ navigation }) => {
 
   const updatePassword = async () => {
     const rightOldPassword = await AsyncStorage.getItem("password");
-    console.log(rightOldPassword)
     if (oldPassword !== rightOldPassword || oldPassword === '' || newPassword === '') {
       setError(true)
       setText("Вы ввели неправильный старый пароль")
@@ -92,7 +91,7 @@ const SettingsScreen = ({ navigation }) => {
         </View>
         <GlobalButton color={"#7FDA77"} text={"Сменить пароль"} func={updatePassword} />
 
-        {error && <Text style={[{fontSize: 15,marginTop:'5%' ,color: !isSucccess? "#ff4c5b" : "#7FDA77", fontWeight:'bold', alignSelf:'center'}]}>{text}</Text>}
+        {error && <Text style={[{fontSize: 15,marginTop:'5%' ,color: !isSuccess? "#ff4c5b" : "#7FDA77", fontWeight:'bold', alignSelf:'center'}]}>{text}</Text>}
 
 
       </View>
