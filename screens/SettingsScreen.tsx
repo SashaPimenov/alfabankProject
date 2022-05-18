@@ -15,6 +15,7 @@ const SettingsScreen = ({ navigation }) => {
   const [text, setText] = useState('');
   const [isSuccess, setIsSuccess] = useState(false)
 
+
   const goBack = () => {
     navigation.goBack();
   };

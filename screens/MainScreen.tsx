@@ -90,8 +90,8 @@ const MainScreen = ({ navigation }) => {
   };
   const allApiRequest = async () => {
     const coords = await findCoordinates();
-    const allCard = await getAllCard(coords);
-    const chainStores = await getChainStore();
+    await getAllCard(coords);
+    await getChainStore();
   };
 
   useEffect(() => {

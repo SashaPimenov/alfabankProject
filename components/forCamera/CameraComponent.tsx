@@ -25,8 +25,8 @@ export default class CameraComponent extends PureComponent<{
   addCard = async (image) => {
     try {
       let token = await AsyncStorage.getItem("token");
+      console.log(image.uri)
       const url = "http://192.248.177.166:8000/cards/add?store_chain_id=" + this.props.chainStores.toString();
-      console.log(url)
       let file = {
         uri: image.uri,
         type: "image/jpg",

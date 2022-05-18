@@ -11,6 +11,7 @@ const TextInputForLogin = (props) => {
       placeholder={props.place}
       placeholderTextColor="#C5C5C5"
       autoCapitalize={"none"}
+      autoComplete={'off'}
       onFocus={props.focus}
     />
   );

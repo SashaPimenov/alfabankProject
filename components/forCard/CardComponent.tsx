@@ -20,6 +20,7 @@ const CardComponent = (props) => {
       case 3:  return require("../../images/перекрёсток.png")
     }
   }
+
   return (
     <View style={[{ backgroundColor: "#232323", marginTop: 25, marginBottom:30}]}>
       <Modal
