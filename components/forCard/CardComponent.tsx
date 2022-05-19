@@ -35,7 +35,8 @@ const CardComponent = (props) => {
           <View style={styles.modalView}>
             <View style={styles.buttonClose}>
               <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
-                <Icon  name={"close"} size={25}/>
+                {/*<Icon  name={"close"} size={25}/>*/}
+                <Text style={[{color: '#434343', fontSize: 13, fontWeight: "bold",}]}>Закрыть</Text>
               </TouchableOpacity>
             </View>
             {loadImage ? null :
@@ -44,19 +45,19 @@ const CardComponent = (props) => {
                   <ActivityIndicator animating={true} size="large" color="#C5C5C5" />
                 </View>
               </> }
-            <Image style={[{height: '97%', width: '100%', borderRadius: 20 }]}
+            <Image style={[{height: '100%', width: '100%', borderRadius: 20 }]}
                    source={{ uri: props.image}} onLoad={() => setLoadImage(true)}/>
-              <View style={styles.buttonDelete}>
-                <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
-                  <Text style={[{color: '#434343', fontSize: 15, fontWeight: "bold",}]}>Удалить карту</Text>
-                </TouchableOpacity>
-              </View>
+            <View style={styles.buttonDelete}>
+              <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
+                <Text style={[{color: '#434343', fontSize: 15, fontWeight: "bold",}]}>Удалить карту</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </Modal>
         <TouchableOpacity onPress={() => setModalVisible(true)} >
           <View>
-        <Image source={designs}  style={styles.card}/>
+            <Image source={designs}  style={styles.card}/>
           </View>
       </TouchableOpacity>
     </View>
@@ -65,26 +66,29 @@ const CardComponent = (props) => {
 
 const styles = StyleSheet.create({
   centeredView: {
-    flex: 1,
     marginTop: '2%',
     alignItems: "center",
   },
 
   modalView: {
     width: "95%",
-    height: "95%",
+    height: "97%",
     backgroundColor: "#403a3a",
     borderRadius: 20,
-    padding: 15,
-    paddingBottom: 25,
-
+    padding: 10,
+    paddingBottom: 40,
   },
+
   buttonClose: {
-    alignSelf: "flex-end",
-    borderRadius: 20,
-    backgroundColor: "#C5C5C5",
     zIndex: 2,
-    position:"absolute"
+    position:"absolute",
+    alignSelf: 'flex-start',
+    marginLeft: '82%',
+    backgroundColor: '#ff4c5b',
+    borderRadius: 20,
+    padding: 3,
+    marginTop: '5%',
+    alignItems: 'center',
   },
 
   buttonDelete: {
