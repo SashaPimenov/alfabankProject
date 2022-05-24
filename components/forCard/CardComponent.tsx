@@ -16,9 +16,9 @@ const CardComponent = (props) => {
 
   function GetDesigns(x) {
     switch (x){
-      case 1:  return  require("../../images/пятёрочка.png")
-      case 2:  return require("../../images/магнит.png")
-      case 3:  return require("../../images/перекрёсток.png")
+      case 1:  return  require("../../images/pyatyorochka.png")
+      case 2:  return require("../../images/magnit.png")
+      case 3:  return require("../../images/perekrestok.png")
     }
   }
 
@@ -43,7 +43,6 @@ const CardComponent = (props) => {
             "Content-Type": "application/json"
           }
         }).then(response => response.json());
-        console.log(request)
         props.func()
       }
     } catch (e) {
@@ -55,7 +54,7 @@ const CardComponent = (props) => {
   };
 
   return (
-    <View style={[{ backgroundColor: "#232323", marginTop: 25, marginBottom:30}]}>
+    <View style={[{ backgroundColor: "#232323", marginTop: '3%', marginBottom:'6%'}]}>
       <Modal
         animationType="slide"
         transparent={true}
@@ -81,22 +80,33 @@ const CardComponent = (props) => {
                    source={{ uri: props.image}} onLoad={() => setLoadImage(true)}/>
             <View style={styles.buttonDelete}>
               <TouchableOpacity onPress={deleteCard}>
-                <Text style={[{color: '#434343', fontSize: responsiveFontSize(1.7), fontWeight: "bold",}]}>Удалить карту</Text>
+                <Text style={[{color: '#434343', fontSize: responsiveFontSize(1.7), fontWeight: "bold"}]}>Удалить карту</Text>
               </TouchableOpacity>
             </View>
           </View>
         </View>
       </Modal>
+      <View>
         <TouchableOpacity onPress={() => setModalVisible(true)} >
           <View>
             <Image source={designs}  style={styles.card}/>
           </View>
-      </TouchableOpacity>
+        </TouchableOpacity>
+        <Text style={styles.textUnderCard}> <Text>До ближайшего магазина: </Text> <Text style={[{textDecorationLine:'underline'}]}>{props.distance} м.</Text></Text>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  textUnderCard : {
+    marginTop: '3%',
+    fontWeight:'bold',
+    alignSelf:'center',
+    color: "#C5C5C5",
+    fontSize: responsiveFontSize(1.8)
+  },
+
   centeredView: {
     marginTop: '2%',
     alignItems: "center",

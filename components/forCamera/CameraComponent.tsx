@@ -26,14 +26,11 @@ export default class CameraComponent extends PureComponent<{
     try {
       let token = await AsyncStorage.getItem("token");
       const url = "http://192.248.177.166:8000/cards/add?store_chain_id=" + this.props.chainStores.toString();
-      console.log(image.uri)
-      console.log(url)
       let file = {
         uri: image.uri,
         type: "image/jpg",
         name: "image"
       };
-      console.log(file)
       let formData = new FormData();
       formData.append("image", file);
       const data = await fetch(url, {
@@ -44,7 +41,6 @@ export default class CameraComponent extends PureComponent<{
         },
         body: formData
       }).then(response => response.json());
-      console.log(data);
       Alert.alert(data.id ? "Успешно" : "Ошибка", data.id ? "Вы добавили карту" : "Не удалось сохранить карту", [
         { text: "OK", onPress: () => (this.props.navigation.navigate("AllCard"), this.updateStack())}]);
     } catch (e: any) {
@@ -55,7 +51,7 @@ export default class CameraComponent extends PureComponent<{
 
   takePicture = async () => {
     if (this.camera) {
-      const options = { quality: 1, pauseAfterCapture: true };
+      const options = { quality: 1, pauseAfterCapture: true, fixOrientation: true, orientation: "portrait" };
       const data = await this.camera.takePictureAsync(options);
       Alert.alert("Предупреждение", "Вы уверены, что хотите сохранить данное фото?", [
         {

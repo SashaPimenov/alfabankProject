@@ -16,6 +16,7 @@ import { Picker } from "@react-native-picker/picker";
 import Icon from "react-native-vector-icons/AntDesign";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {responsiveFontSize} from "react-native-responsive-dimensions";
+import GlobalButton from "../components/GlobalButton";
 
 const MainScreen = ({ navigation }) => {
 
@@ -39,7 +40,7 @@ const MainScreen = ({ navigation }) => {
           resolve(loc);
         },
         error => Alert.alert('Включите геолокацию'),
-        { enableHighAccuracy: true, timeout: 20000, maximumAge: 15000 }
+        { enableHighAccuracy: true, timeout: 20000}
       );
     });
   };
@@ -175,15 +176,14 @@ const MainScreen = ({ navigation }) => {
               <View style={[{ marginTop: "50%" }]}>
                 <Text style={[styles.textSettings, { fontSize: responsiveFontSize(2.5), alignSelf: "center" }]}>У вас нет добавленных
                   карт</Text>
-                <TouchableOpacity style={[{ marginTop: "3%", alignSelf: "center" }]}
-                                  onPress={() => setModalVisible1(!modalVisible1)}>
-                  <Text style={[{ fontSize: responsiveFontSize(2), color: "#7FDA77" }]}>Добавить карту</Text>
-                </TouchableOpacity>
+                <View style={[{ marginTop: "-5%", alignSelf: "center" }]}>
+                  <GlobalButton color={"#7FDA77"} text={"Добавить карту"} func={() => setModalVisible1(!modalVisible1)} />
+                </View>
               </View>
               :
               <View>
                 {allCard.map(card => <CardComponent image={card.image_url} storeChain={card.store_chain_id}
-                                                    key={card.id} id = {card.id} func = {updateStack} />)}
+                                                    distance = {card.distance} key={card.id} id = {card.id} func = {updateStack} />)}
               </View>}
           </> : <View style={[{ marginTop: "50%" }]}>
               <ActivityIndicator animating={true} size="large" color="#C5C5C5" />

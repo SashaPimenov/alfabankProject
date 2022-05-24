@@ -17,7 +17,7 @@ export default function CameraScreen({ route, navigation }) {
           <Icon style={styles.back} name={"arrowleft"} size={35} color={"#7FDA77"} />
         </TouchableOpacity>
       </View>
-      <Text style={styles.textStyle}>Сделайте горизонтальное фото карты</Text>
+      <Text style={styles.textStyle}>Поместите штрихкод карты в квадрат</Text>
 
       <CameraComponent chainStores={route.params.value} navigation={navigation}/>
     </View>
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     fontSize: responsiveFontSize(1.8),
     fontWeight: "bold",
     alignSelf: "center",
-    marginTop: '9%',
+    marginTop: '11%',
     position: 'absolute',
     zIndex: 3
   },
