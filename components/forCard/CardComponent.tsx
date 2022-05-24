@@ -6,6 +6,7 @@ import {
   Modal, Text, ActivityIndicator, Alert
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import {responsiveFontSize} from "react-native-responsive-dimensions";
 
 const CardComponent = (props) => {
   const [loadImage, setLoadImage] = useState<boolean>(false)
@@ -67,7 +68,7 @@ const CardComponent = (props) => {
           <View style={styles.modalView}>
             <View style={styles.buttonClose}>
               <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
-                <Text style={[{color: '#434343', fontSize: 13, fontWeight: "bold",}]}>Закрыть</Text>
+                <Text style={[{color: '#434343', fontSize: responsiveFontSize(1.6), fontWeight: "bold",}]}>Закрыть</Text>
               </TouchableOpacity>
             </View>
             {loadImage ? null :
@@ -80,7 +81,7 @@ const CardComponent = (props) => {
                    source={{ uri: props.image}} onLoad={() => setLoadImage(true)}/>
             <View style={styles.buttonDelete}>
               <TouchableOpacity onPress={deleteCard}>
-                <Text style={[{color: '#434343', fontSize: 15, fontWeight: "bold",}]}>Удалить карту</Text>
+                <Text style={[{color: '#434343', fontSize: responsiveFontSize(1.7), fontWeight: "bold",}]}>Удалить карту</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -106,8 +107,8 @@ const styles = StyleSheet.create({
     height: "97%",
     backgroundColor: "#403a3a",
     borderRadius: 20,
-    padding: 10,
-    paddingBottom: 40,
+    padding: 8,
+    paddingBottom: '10%',
   },
 
   buttonClose: {
@@ -117,7 +118,7 @@ const styles = StyleSheet.create({
     marginLeft: '82%',
     backgroundColor: '#ff4c5b',
     borderRadius: 20,
-    padding: 3,
+    padding: '1%',
     marginTop: '5%',
     alignItems: 'center',
   },
@@ -128,8 +129,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#ff4c5b",
     marginTop: '2%',
     zIndex: 2,
-    paddingHorizontal: 10,
-    paddingVertical: 3,
+    paddingHorizontal: '3%',
+    paddingVertical: '1%',
     },
 
   card: {

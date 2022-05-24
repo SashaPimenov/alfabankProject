@@ -15,6 +15,7 @@ import CardComponent from "../components/forCard/CardComponent";
 import { Picker } from "@react-native-picker/picker";
 import Icon from "react-native-vector-icons/AntDesign";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import {responsiveFontSize} from "react-native-responsive-dimensions";
 
 const MainScreen = ({ navigation }) => {
 
@@ -172,11 +173,11 @@ const MainScreen = ({ navigation }) => {
           {
             !allCard.length ?
               <View style={[{ marginTop: "50%" }]}>
-                <Text style={[styles.textSettings, { fontSize: 20, alignSelf: "center" }]}>У вас нет добавленных
+                <Text style={[styles.textSettings, { fontSize: responsiveFontSize(2.5), alignSelf: "center" }]}>У вас нет добавленных
                   карт</Text>
                 <TouchableOpacity style={[{ marginTop: "3%", alignSelf: "center" }]}
                                   onPress={() => setModalVisible1(!modalVisible1)}>
-                  <Text style={[{ fontSize: 15, color: "#7FDA77" }]}>Добавить карту</Text>
+                  <Text style={[{ fontSize: responsiveFontSize(2), color: "#7FDA77" }]}>Добавить карту</Text>
                 </TouchableOpacity>
               </View>
               :
@@ -214,7 +215,7 @@ const styles = StyleSheet.create({
     margin: 20,
     backgroundColor: "#403a3a",
     borderRadius: 20,
-    padding: 35,
+    padding: '9%',
     alignItems: "center",
     width: "85%",
     maxWidth: "86%"
@@ -225,7 +226,7 @@ const styles = StyleSheet.create({
     color: "#434343"
   },
   inModalText: {
-    marginBottom: 15,
+    marginBottom: '5%',
     textAlign: "center",
     fontWeight: "bold",
     color: "white"
@@ -239,24 +240,16 @@ const styles = StyleSheet.create({
 
   button: {
     borderRadius: 20,
-    padding: 10,
+    padding: '3%',
     marginTop: "10%",
     minWidth: "30%"
   },
 
   textSettings: {
     color: "#C5C5C5",
-    fontSize: 25,
+    fontSize: responsiveFontSize(3),
     fontWeight: "bold",
   },
-
-  textMain: {
-    color: "#C5C5C5",
-    fontSize: 22,
-    marginTop: 20,
-    fontWeight: "bold",
-    alignSelf: "center"
-  }
 });
 
 export default MainScreen;

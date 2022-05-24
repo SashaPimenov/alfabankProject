@@ -75,7 +75,7 @@ const SettingsScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <View  style={[{marginTop:10, marginHorizontal:20 }]}>
+      <View  style={[{marginTop:'3%', marginHorizontal:'5%' }]}>
         <TouchableOpacity onPress={goBack}>
           <Icon  name={"arrowleft"} size={35} color={"#7FDA77"} />
         </TouchableOpacity>
@@ -97,7 +97,7 @@ const SettingsScreen = ({ navigation }) => {
 
       </View>
 
-      <View style={[{ alignItems: "center", marginBottom: 20 }]}>
+      <View style={[{ alignItems: "center", marginBottom: '5%' }]}>
         <GlobalButton color={"#ff4c5b"} text={"Выйти из аккаунта"} func={Exit} />
       </View>
     </View>
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
 
   textSettings: {
     color: "#C5C5C5",
-    fontSize: 25,
+    fontSize: responsiveFontSize(3),
     fontWeight: "bold",
     position: "absolute",
     alignSelf: "center"

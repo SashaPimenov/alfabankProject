@@ -122,8 +122,8 @@ const styles = StyleSheet.create({
   },
   capture: {
     justifyContent: "center",
-    marginBottom: 10,
-    width: 70,
-    height: 70
+    marginBottom: '2%',
+    width: '10%',
+    height: '10%',
   }
 });

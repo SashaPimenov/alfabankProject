@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, TouchableOpacity, View,Text } from "react-native";
 import CameraComponent from "../components/forCamera/CameraComponent";
 import Icon from "react-native-vector-icons/AntDesign";
+import {responsiveFontSize} from "react-native-responsive-dimensions";
 
 export default function CameraScreen({ route, navigation }) {
 
@@ -16,6 +17,7 @@ export default function CameraScreen({ route, navigation }) {
           <Icon style={styles.back} name={"arrowleft"} size={35} color={"#7FDA77"} />
         </TouchableOpacity>
       </View>
+      <Text style={styles.textStyle}>Сделайте горизонтальное фото карты</Text>
 
       <CameraComponent chainStores={route.params.value} navigation={navigation}/>
     </View>
@@ -29,8 +31,18 @@ const styles = StyleSheet.create({
   },
 
   back: {
-    marginLeft: 20,
-    marginTop: 10
-  }
+    marginLeft: '20%',
+    marginTop: '10%'
+  },
+
+  textStyle: {
+    color: "#C5C5C5",
+    fontSize: responsiveFontSize(1.8),
+    fontWeight: "bold",
+    alignSelf: "center",
+    marginTop: '9%',
+    position: 'absolute',
+    zIndex: 3
+  },
 });
 
