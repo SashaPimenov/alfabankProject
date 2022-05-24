@@ -3,9 +3,9 @@ import {
   Image,
   StyleSheet, TouchableOpacity,
   View,
-  Modal, Text, ActivityIndicator
+  Modal, Text, ActivityIndicator, Alert
 } from "react-native";
-import Icon from "react-native-vector-icons/AntDesign";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const CardComponent = (props) => {
   const [loadImage, setLoadImage] = useState<boolean>(false)
@@ -21,6 +21,38 @@ const CardComponent = (props) => {
     }
   }
 
+  const deleteCard = async () => {
+    Alert.alert("", "Вы действительно хотите удалить данную карту?", [
+      { text: "Удалить",
+        onPress: deleteCardAPI},
+      { text: "Отмена"}
+    ]);
+  }
+
+  const deleteCardAPI = async () => {
+    try {
+      const token = await AsyncStorage.getItem("token");
+      if (token != null) {
+        const url = "http://192.248.177.166:8000/cards/" + props.id.toString();
+        const request = await fetch(url, {
+          method: "DELETE",
+          headers: {
+            "Authorization": "Bearer " + token,
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          }
+        }).then(response => response.json());
+        console.log(request)
+        props.func()
+      }
+    } catch (e) {
+      if (e instanceof Error) {
+        Alert.alert("Ошибка", e.message, [
+          { text: "OK" }]);
+      }
+    }
+  };
+
   return (
     <View style={[{ backgroundColor: "#232323", marginTop: 25, marginBottom:30}]}>
       <Modal
@@ -35,7 +67,6 @@ const CardComponent = (props) => {
           <View style={styles.modalView}>
             <View style={styles.buttonClose}>
               <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
-                {/*<Icon  name={"close"} size={25}/>*/}
                 <Text style={[{color: '#434343', fontSize: 13, fontWeight: "bold",}]}>Закрыть</Text>
               </TouchableOpacity>
             </View>
@@ -48,7 +79,7 @@ const CardComponent = (props) => {
             <Image style={[{height: '100%', width: '100%', borderRadius: 20 }]}
                    source={{ uri: props.image}} onLoad={() => setLoadImage(true)}/>
             <View style={styles.buttonDelete}>
-              <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
+              <TouchableOpacity onPress={deleteCard}>
                 <Text style={[{color: '#434343', fontSize: 15, fontWeight: "bold",}]}>Удалить карту</Text>
               </TouchableOpacity>
             </View>

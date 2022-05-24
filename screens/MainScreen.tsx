@@ -37,7 +37,7 @@ const MainScreen = ({ navigation }) => {
           setLocation(loc);
           resolve(loc);
         },
-        error => Alert.alert(error.message),
+        error => Alert.alert('Включите геолокацию'),
         { enableHighAccuracy: true, timeout: 20000, maximumAge: 15000 }
       );
     });
@@ -108,6 +108,13 @@ const MainScreen = ({ navigation }) => {
     navigation.navigate("Camera", { value });
   };
 
+  const updateStack = () => {
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'AllCard' }]
+    })
+  }
+
   return (
     <View style={[{ flex: 1, backgroundColor: "#232323" }]}>
           <Modal
@@ -175,7 +182,7 @@ const MainScreen = ({ navigation }) => {
               :
               <View>
                 {allCard.map(card => <CardComponent image={card.image_url} storeChain={card.store_chain_id}
-                                                    key={card.id} />)}
+                                                    key={card.id} id = {card.id} func = {updateStack} />)}
               </View>}
           </> : <View style={[{ marginTop: "50%" }]}>
               <ActivityIndicator animating={true} size="large" color="#C5C5C5" />
