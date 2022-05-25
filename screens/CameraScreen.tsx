@@ -5,11 +5,11 @@ import Icon from "react-native-vector-icons/AntDesign";
 import {responsiveFontSize} from "react-native-responsive-dimensions";
 
 export default function CameraScreen({ route, navigation }) {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const goBack = () => {
     navigation.goBack();
   };
-  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const LoadScreenFuncTrue = () => {
     setIsLoading(true)

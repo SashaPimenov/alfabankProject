@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { PureComponent, useState } from "react";
 import { RNCamera } from "react-native-camera";
 import { Alert, StyleSheet, TouchableOpacity, View } from "react-native";
 import BarcodeMask from "react-native-barcode-mask";

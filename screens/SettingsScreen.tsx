@@ -25,6 +25,7 @@ const SettingsScreen = ({ navigation }) => {
     await AsyncStorage.removeItem("token").then(() => {
       setIsAuth(false);
       navigation.navigate("Auth");
+      updateStack();
     });
   }
 
@@ -71,6 +72,13 @@ const SettingsScreen = ({ navigation }) => {
   const focus = () => {
     setError(false)
     setIsSuccess(false)
+  }
+
+  const updateStack = () => {
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'Auth' }]
+    })
   }
 
   return (
