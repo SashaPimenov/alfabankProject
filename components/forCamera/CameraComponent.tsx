@@ -8,6 +8,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export default class CameraComponent extends PureComponent<{
   chainStores: number;
   navigation: any;
+  funcFalse: any;
+  funcTrue: any;
 }> {
   constructor(props) {
     super(props);
@@ -41,9 +43,11 @@ export default class CameraComponent extends PureComponent<{
         },
         body: formData
       }).then(response => response.json());
+      this.props.funcFalse()
       Alert.alert(data.id ? "Успешно" : "Ошибка", data.id ? "Вы добавили карту" : "Не удалось сохранить карту", [
         { text: "OK", onPress: () => (this.props.navigation.navigate("AllCard"), this.updateStack())}]);
     } catch (e: any) {
+      this.props.funcFalse()
       Alert.alert("Ошибка", "Не удалось сохранить карту", [
         { text: "OK" }]);
     }
@@ -58,6 +62,7 @@ export default class CameraComponent extends PureComponent<{
           text: "Сохранить", onPress: () => {
             this.addCard(data);
             this.camera.resumePreview();
+            this.props.funcTrue()
           }
         },
         {

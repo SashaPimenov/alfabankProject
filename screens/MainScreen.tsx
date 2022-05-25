@@ -70,6 +70,7 @@ const MainScreen = ({ navigation }) => {
 
   const getAllCard = async (coords) => {
     try {
+      console.log(coords)
       const token = await AsyncStorage.getItem("token");
       if (token != null) {
         const url = "http://192.248.177.166:8000/cards/?latitude=" + coords.coords.latitude + "&longitude=" + coords.coords.longitude;
