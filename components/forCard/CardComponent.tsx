@@ -67,7 +67,7 @@ const CardComponent = (props) => {
           <View style={styles.modalView}>
             <View style={styles.buttonClose}>
               <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
-                <Text style={[{color: '#434343', fontSize: responsiveFontSize(1.6), fontWeight: "bold",}]}>Закрыть</Text>
+                <Text style={[{color: '#434343', fontSize: responsiveFontSize(2), fontWeight: "bold",}]}>Закрыть</Text>
               </TouchableOpacity>
             </View>
             {loadImage ? null :
@@ -76,11 +76,11 @@ const CardComponent = (props) => {
                   <ActivityIndicator animating={true} size="large" color="#C5C5C5" />
                 </View>
               </> }
-            <Image style={[{height: '100%', width: '100%', borderRadius: 20 }]}
+            <Image style={[{height: '99%', width: '100%', borderRadius: 20 }]}
                    source={{ uri: props.image}} onLoad={() => setLoadImage(true)}/>
             <View style={styles.buttonDelete}>
               <TouchableOpacity onPress={deleteCard}>
-                <Text style={[{color: '#434343', fontSize: responsiveFontSize(1.7), fontWeight: "bold"}]}>Удалить карту</Text>
+                <Text style={[{color: '#C5C5C5', fontSize: responsiveFontSize(2), fontWeight: "bold"}]}>Удалить карту</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -123,21 +123,22 @@ const styles = StyleSheet.create({
 
   buttonClose: {
     zIndex: 2,
+    flexWrap: 'nowrap',
     position:"absolute",
     alignSelf: 'flex-start',
-    marginLeft: '82%',
-    backgroundColor: '#ff4c5b',
+    marginLeft: '78%',
     borderRadius: 20,
     padding: '1%',
-    marginTop: '5%',
+    marginTop: '3%',
     alignItems: 'center',
+    minWidth: '10%'
   },
 
   buttonDelete: {
+    backgroundColor: "#ff4c5b",
     alignSelf: 'center',
     borderRadius: 20,
-    backgroundColor: "#ff4c5b",
-    marginTop: '2%',
+    marginTop: '2.5%',
     zIndex: 2,
     paddingHorizontal: '3%',
     paddingVertical: '1%',

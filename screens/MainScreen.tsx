@@ -10,7 +10,7 @@ import {
   BackHandler,
   ScrollView
 } from "react-native";
-import Geolocation, { GeolocationResponse } from "@react-native-community/geolocation";
+import Geolocation from 'react-native-geolocation-service';
 import CardComponent from "../components/forCard/CardComponent";
 import { Picker } from "@react-native-picker/picker";
 import Icon from "react-native-vector-icons/AntDesign";
@@ -26,7 +26,7 @@ const MainScreen = ({ navigation }) => {
   }, []);
 
   const [modalVisible1, setModalVisible1] = useState(false);
-  const [location, setLocation] = useState<GeolocationResponse>();
+  const [location, setLocation] = useState<any>();
   const [value, setValue] = useState(null);
   const [chainsStores, setChainsStores] = useState<any[]>([]);
   const [allCard, setAllCard] = useState<any[] | null>(null);
@@ -39,8 +39,8 @@ const MainScreen = ({ navigation }) => {
           setLocation(loc);
           resolve(loc);
         },
-        error => Alert.alert('Включите геолокацию'),
-        { enableHighAccuracy: true, timeout: 20000}
+        error => Alert.alert(error.code.toString(), error.message),
+        { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000, forceRequestLocation: true }
       );
     });
   };

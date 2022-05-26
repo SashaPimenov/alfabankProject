@@ -33,7 +33,7 @@ export default function App() {
     <AuthContext.Provider value={{ isAuth, setIsAuth }}>
       <View style={styles.container}>
         <StatusBar
-          backgroundColor="#232323" />
+          backgroundColor="#232323"  />
         {isLoading ?
           <Main /> :
           <View style={[{marginTop:'50%'}]}>
