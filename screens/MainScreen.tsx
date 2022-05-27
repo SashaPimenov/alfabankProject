@@ -32,6 +32,10 @@ const MainScreen = ({ navigation }) => {
   const [chainsStores, setChainsStores] = useState<any[]>([]);
   const [allCard, setAllCard] = useState<any[] | null>(null);
   const [granted, setGranted] = useState<boolean | null>(null);
+  const [error, setError] = useState<boolean>(false);
+  const [text, setText] = useState<string>('')
+const [addedStoresID,setAddedStoresID] = useState<number[] | null>(null);
+
 
   const findCoordinates = () => {
     return new Promise(function(resolve) {
@@ -84,7 +88,9 @@ const MainScreen = ({ navigation }) => {
           }
         }).then(response => response.json());
         setAllCard(request);
-        console.log(request)
+        let storesID:number[] = []
+        storesID = request.map((element,index) => storesID[index] = element.store_chain_id)
+        setAddedStoresID(storesID)
       }
     } catch (e) {
       if (e instanceof Error) {
@@ -142,6 +148,20 @@ const MainScreen = ({ navigation }) => {
     })
   }
 
+  const isCorrectChainStore = (value) => {
+    console.log(value)
+    console.log(addedStoresID)
+    if (!addedStoresID?.includes(value)){
+      setModalVisible1(!modalVisible1)
+      LoadCamera()
+      setError(false)
+      setText('')
+    }else {
+      setError(true)
+      setText('У вас уже есть карта этого магазина')
+    }
+  }
+
   return (
     <View style={[{ flex: 1, backgroundColor: "#232323" }]}>
           <Modal
@@ -160,6 +180,7 @@ const MainScreen = ({ navigation }) => {
                     selectedValue={value}
                     onValueChange={(value) =>
                       setValue(value)}
+                    onFocus={() => (setError(false), setText(''))}
                     mode="dropdown"
                     style={[{ fontSize: 10, color: "#C5C5C5", fontWeight: "bold" }]}
                     dropdownIconColor={"#C5C5C5"}>
@@ -168,15 +189,15 @@ const MainScreen = ({ navigation }) => {
                                                             style={styles.pickerItemStyle} />)}
                   </Picker>
                 </View>
-                <View
-                  style={[{ flexDirection: "row", justifyContent: "space-evenly", minWidth: "90%", maxWidth: "100%" }]}>
+                {error && <Text style={[{alignSelf:'center', color:"#ff4c5b",fontWeight:'bold',position:'absolute', marginTop:'53%' }]}>{text}</Text>}
+                <View style={[{ flexDirection: "row", justifyContent: "space-evenly", minWidth: "90%", maxWidth: "100%" }]}>
                   <TouchableOpacity style={[styles.button, { backgroundColor: "#ff4c5b" }]}
-                                    onPress={() => setModalVisible1(!modalVisible1)}>
+                                    onPress={() => (setModalVisible1(!modalVisible1), setText(''),setError(false), setValue(null))}>
                     <Text style={styles.modalButtonText}>Отмена</Text>
                   </TouchableOpacity>
                   <TouchableOpacity style={[styles.button, { backgroundColor: "#7FDA77" }]}
-                                    onPress={() => value !== null ? (setModalVisible1(!modalVisible1), LoadCamera())
-                                      : Alert.alert("Ошибка", "Сначала выберите торговую сеть", [{ text: "Ок" }])}>
+                                    onPress={() => value !== null ? (isCorrectChainStore(value))
+                                      : (setError(true), setText('Сначала выберите торговую сеть'))}>
                     <Text style={styles.modalButtonText}>Далее</Text>
                   </TouchableOpacity>
                 </View>
@@ -248,12 +269,15 @@ const styles = StyleSheet.create({
     padding: '9%',
     alignItems: "center",
     width: "85%",
-    maxWidth: "86%"
+    maxWidth: "86%",
+    height: '32%'
   },
   modalButtonText: {
+    fontSize: responsiveFontSize(1.8),
     fontWeight: "bold",
     textAlign: "center",
-    color: "#434343"
+    color: "#434343",
+    paddingHorizontal:'5%',
   },
   inModalText: {
     marginBottom: '5%',
@@ -265,8 +289,9 @@ const styles = StyleSheet.create({
   button: {
     borderRadius: 20,
     padding: '3%',
-    marginTop: "10%",
-    minWidth: "30%"
+    marginTop: "20%",
+    minWidth: "35%",
+    marginHorizontal:'7%',
   },
 
   textSettings: {

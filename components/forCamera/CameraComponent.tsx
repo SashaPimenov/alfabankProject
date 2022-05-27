@@ -44,7 +44,7 @@ export default class CameraComponent extends PureComponent<{
         body: formData
       }).then(response => response.json());
       this.props.funcFalse()
-      Alert.alert(data.id ? "Успешно" : "Ошибка", data.id ? "Вы добавили карту" : "Не удалось сохранить карту", [
+      Alert.alert(data.id ? "Успешно" : "Ошибка", data.id ? "Вы добавили карту" : "У вас уже есть карта данного магазина", [
         { text: "OK", onPress: () => (this.props.navigation.navigate("AllCard"), this.updateStack())}]);
     } catch (e: any) {
       this.props.funcFalse()

@@ -16,41 +16,48 @@ const RegistrationForm = ({ navigation }) => {
 
 
   const registrationFunc = async () => {
-    if (password !== secondPassword || login === "" || password === "") {
+    if (login.length < 8 || password.length < 8) {
       setError(true)
-      setText("Пароли не совпадают или не все поля заполнены")
+      setText('Логин и пароль должны содержать 8 и более символов')
       setPassword('')
       setSecondPassword('')
     } else {
-      try {
-        const url = "http://192.248.177.166:8000/login/register";
-        const request = await fetch(url, {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            username: login,
-            password: password
-          })
-        }).then(response => response.json());
-        if (request.detail) {
-          setError(true)
-          setText('Пользователь с таким логином уже существует')
-          setPassword('')
-          setSecondPassword('')
-        } else {
-          setIsSuccess(true)
-          setError(true)
-          setText('Вы успешно зарегистрировались')
-          setTimeout(
-            () => navigation.navigate('Auth'),1000)
-        }
-      } catch (e) {
-        if (e instanceof Error) {
-          setError(true)
-          setText(e.message)
+      if (password !== secondPassword || login === "" || password === "") {
+        setError(true)
+        setText("Пароли не совпадают или не все поля заполнены")
+        setPassword('')
+        setSecondPassword('')
+      } else {
+        try {
+          const url = "http://192.248.177.166:8000/login/register";
+          const request = await fetch(url, {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              username: login,
+              password: password
+            })
+          }).then(response => response.json());
+          if (request.detail) {
+            setError(true)
+            setText('Пользователь с таким логином уже существует')
+            setPassword('')
+            setSecondPassword('')
+          } else {
+            setIsSuccess(true)
+            setError(true)
+            setText('Вы успешно зарегистрировались')
+            setTimeout(
+              () => navigation.navigate('Auth'), 1000)
+          }
+        } catch (e) {
+          if (e instanceof Error) {
+            setError(true)
+            setText(e.message)
+          }
         }
       }
     }
