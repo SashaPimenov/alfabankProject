@@ -52,10 +52,10 @@ const styles = StyleSheet.create({
 
   textStyle: {
     color: "#C5C5C5",
-    fontSize: responsiveFontSize(1.8),
+    fontSize: responsiveFontSize(2),
     fontWeight: "bold",
     alignSelf: "center",
-    marginTop: '11%',
+    marginTop: '14%',
     position: 'absolute',
     zIndex: 3
   },

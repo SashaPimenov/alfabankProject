@@ -92,7 +92,7 @@ const CardComponent = (props) => {
             <Image source={designs}  style={styles.card}/>
           </View>
         </TouchableOpacity>
-        <Text style={styles.textUnderCard}> <Text>До ближайшего магазина: </Text> <Text style={[{textDecorationLine:'underline'}]}>{props.distance} м.</Text></Text>
+        {props.granted == true && <Text style={styles.textUnderCard}> <Text>До ближайшего магазина: </Text> <Text style={[{textDecorationLine:'underline'}]}>{props.distance} м.</Text></Text>}
       </View>
     </View>
   );
@@ -110,6 +110,7 @@ const styles = StyleSheet.create({
   centeredView: {
     marginTop: '2%',
     alignItems: "center",
+    marginBottom:'-8%',
   },
 
   modalView: {
@@ -126,12 +127,12 @@ const styles = StyleSheet.create({
     flexWrap: 'nowrap',
     position:"absolute",
     alignSelf: 'flex-start',
-    marginLeft: '78%',
+    marginLeft: '73%',
     borderRadius: 20,
     padding: '1%',
     marginTop: '3%',
     alignItems: 'center',
-    minWidth: '10%'
+    minWidth: '15%'
   },
 
   buttonDelete: {

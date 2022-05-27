@@ -92,7 +92,7 @@ const AuthForm = ({ navigation }) => {
         </View>
         <GlobalButton text={"Войти"} color={"#7FDA77"} func={authFunction} />
         <TouchableOpacity style={[{ marginTop: "3%" }]} onPress={LoadRegistration}>
-          <Text style={[{ fontWeight: "bold", color: "#C5C5C5" }]}>
+          <Text style={[{ fontWeight: "bold", color: "#C5C5C5", fontSize: responsiveFontSize(1.8) }]}>
             Зарегистрироваться
           </Text>
         </TouchableOpacity>

@@ -89,7 +89,7 @@ export default class CameraComponent extends PureComponent<{
             buttonPositive: "Ok",
             buttonNegative: "Cancel"
           }}>
-          <BarcodeMask showAnimatedLine={false} width={'93%'} height={'70%'} edgeColor={"#7FDA77"} />
+          <BarcodeMask showAnimatedLine={false} width={'87%'} height={'70%'} edgeColor={"#7FDA77"} />
           <View style={{ justifyContent: "center" }}>
             <TouchableOpacity onPress={this.takePicture.bind(this)} style={styles.capture}>
               <Icon style={styles.cameraButton} name={"camera-outline"} size={60} color={"#C5C5C5"} />
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
   },
   capture: {
     justifyContent: "center",
-    marginBottom: '2%',
+    marginBottom: '4.5%',
     width: '10%',
     height: '10%',
   }

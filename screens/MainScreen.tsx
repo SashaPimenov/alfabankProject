@@ -17,6 +17,7 @@ import Icon from "react-native-vector-icons/AntDesign";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {responsiveFontSize} from "react-native-responsive-dimensions";
 import GlobalButton from "../components/GlobalButton";
+import { PermissionsAndroid } from 'react-native';
 
 const MainScreen = ({ navigation }) => {
 
@@ -30,6 +31,7 @@ const MainScreen = ({ navigation }) => {
   const [value, setValue] = useState(null);
   const [chainsStores, setChainsStores] = useState<any[]>([]);
   const [allCard, setAllCard] = useState<any[] | null>(null);
+  const [granted, setGranted] = useState<boolean | null>(null);
 
   const findCoordinates = () => {
     return new Promise(function(resolve) {
@@ -39,7 +41,7 @@ const MainScreen = ({ navigation }) => {
           setLocation(loc);
           resolve(loc);
         },
-        error => Alert.alert(error.code.toString(), error.message),
+        error => console.log(error),
         { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000, forceRequestLocation: true }
       );
     });
@@ -70,10 +72,9 @@ const MainScreen = ({ navigation }) => {
 
   const getAllCard = async (coords) => {
     try {
-      console.log(coords)
       const token = await AsyncStorage.getItem("token");
       if (token != null) {
-        const url = "http://192.248.177.166:8000/cards/?latitude=" + coords.coords.latitude + "&longitude=" + coords.coords.longitude;
+        const url = coords !== null ? "http://192.248.177.166:8000/cards/?latitude=" + coords.coords.latitude + "&longitude=" + coords.coords.longitude : "http://192.248.177.166:8000/cards/";
         const request = await fetch(url, {
           method: "GET",
           headers: {
@@ -83,6 +84,7 @@ const MainScreen = ({ navigation }) => {
           }
         }).then(response => response.json());
         setAllCard(request);
+        console.log(request)
       }
     } catch (e) {
       if (e instanceof Error) {
@@ -92,10 +94,32 @@ const MainScreen = ({ navigation }) => {
     }
   };
   const allApiRequest = async () => {
-    const coords = await findCoordinates();
-    await getAllCard(coords);
+    await locPermission();
     await getChainStore();
   };
+
+  const locPermission = async () => {
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+      )
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        const coords = await findCoordinates()
+        await getAllCard(coords)
+        setGranted(true)
+      } else {
+        let coords = null
+        await getAllCard(coords)
+        setGranted(false)
+      }
+    } catch (e) {
+      if (e instanceof Error) {
+        Alert.alert("Ошибка", e.message, [
+          { text: "OK" }]);
+      }
+    }
+  }
+
 
   useEffect(() => {
       allApiRequest();
@@ -170,7 +194,9 @@ const MainScreen = ({ navigation }) => {
             </TouchableOpacity>
           </View>
       <ScrollView style={[{ flex: 1, backgroundColor: "#232323" }]}>
-          {location?.coords && chainsStores[0]?.label && allCard !== null ?
+        {granted !== null ?
+          <>
+          {chainsStores[0]?.label && allCard !== null ?
             <>
           {
             !allCard.length ?
@@ -184,11 +210,14 @@ const MainScreen = ({ navigation }) => {
               :
               <View>
                 {allCard.map(card => <CardComponent image={card.image_url} storeChain={card.store_chain_id}
-                                                    distance = {card.distance} key={card.id} id = {card.id} func = {updateStack} />)}
+                                                     distance = {card.distance} key={card.id} id = {card.id} func = {updateStack} granted = {granted}/>)}
               </View>}
           </> : <View style={[{ marginTop: "50%" }]}>
               <ActivityIndicator animating={true} size="large" color="#C5C5C5" />
             </View>}
+          </>: <View style={[{ marginTop: "50%" }]}>
+          <ActivityIndicator animating={true} size="large" color="#C5C5C5" />
+          </View>}
       </ScrollView>
     </View>
   );
@@ -231,12 +260,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontWeight: "bold",
     color: "white"
-  },
-  card: {
-    width: 310,
-    height: 198,
-    marginTop: 70,
-    alignSelf: "center"
   },
 
   button: {
