@@ -13,6 +13,7 @@ const CardComponent = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   const designs = GetDesigns(props.storeChain)
+  let address = props.address.split(', ')
 
   function GetDesigns(x) {
     switch (x){
@@ -92,19 +93,22 @@ const CardComponent = (props) => {
             <Image source={designs}  style={styles.card}/>
           </View>
         </TouchableOpacity>
-        {props.granted == true && <Text style={styles.textUnderCard}> <Text>До ближайшего магазина: </Text> <Text style={[{textDecorationLine:'underline'}]}>{props.distance} м.</Text></Text>}
-      </View>
+        {props.granted == true && <>
+        <Text style={[styles.textUnderCard,{marginTop: '3%'}]}> Ближайший магазин:</Text>
+          <Text style={[styles.textUnderCard,{marginTop: '-0.5%', marginBottom:'-3%', color:"#7FDA77"}]}>{address[1]} {address[2]} ({props.distance} м.)</Text>
+      </>}
+        </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   textUnderCard : {
-    marginTop: '3%',
+    marginTop: '1%',
     fontWeight:'bold',
     alignSelf:'center',
     color: "#C5C5C5",
-    fontSize: responsiveFontSize(1.8)
+    fontSize: responsiveFontSize(2)
   },
 
   centeredView: {

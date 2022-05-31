@@ -16,9 +16,9 @@ const RegistrationForm = ({ navigation }) => {
 
 
   const registrationFunc = async () => {
-    if (login.length < 8 || password.length < 8) {
+    if (login.length < 5 || password.length < 7) {
       setError(true)
-      setText('Логин и пароль должны содержать 8 и более символов')
+      setText('Минимальная длина логина 5, пароля - 7 символов')
       setPassword('')
       setSecondPassword('')
     } else {

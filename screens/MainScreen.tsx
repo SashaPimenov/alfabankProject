@@ -91,6 +91,7 @@ const [addedStoresID,setAddedStoresID] = useState<number[] | null>(null);
         let storesID:number[] = []
         storesID = request.map((element,index) => storesID[index] = element.store_chain_id)
         setAddedStoresID(storesID)
+        console.log(request)
       }
     } catch (e) {
       if (e instanceof Error) {
@@ -231,7 +232,7 @@ const [addedStoresID,setAddedStoresID] = useState<number[] | null>(null);
               :
               <View>
                 {allCard.map(card => <CardComponent image={card.image_url} storeChain={card.store_chain_id}
-                                                     distance = {card.distance} key={card.id} id = {card.id} func = {updateStack} granted = {granted}/>)}
+                                                    address = {card.address} distance = {card.distance} key={card.id} id = {card.id} func = {updateStack} granted = {granted}/>)}
               </View>}
           </> : <View style={[{ marginTop: "50%" }]}>
               <ActivityIndicator animating={true} size="large" color="#C5C5C5" />

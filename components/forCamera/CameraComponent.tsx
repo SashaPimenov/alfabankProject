@@ -48,14 +48,14 @@ export default class CameraComponent extends PureComponent<{
         { text: "OK", onPress: () => (this.props.navigation.navigate("AllCard"), this.updateStack())}]);
     } catch (e: any) {
       this.props.funcFalse()
-      Alert.alert("Ошибка", "Не удалось сохранить карту", [
+      Alert.alert("Ошибка", "Произошла ошибка, попробуйте ещё раз", [
         { text: "OK" }]);
     }
   };
 
   takePicture = async () => {
     if (this.camera) {
-      const options = { quality: 1, pauseAfterCapture: true, fixOrientation: true, orientation: "portrait" };
+      const options = {imageType: 'jpg' ,quality: 0.8, pauseAfterCapture: true, fixOrientation: true, orientation: "portrait" };
       const data = await this.camera.takePictureAsync(options);
       Alert.alert("Предупреждение", "Вы уверены, что хотите сохранить данное фото?", [
         {
